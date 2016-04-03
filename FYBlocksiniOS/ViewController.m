@@ -8,6 +8,9 @@
 
 #import "ViewController.h"
 
+// 定义Block类型
+typedef int (^newBlock)(int);
+
 @interface ViewController ()
 
 @end
@@ -17,6 +20,29 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    int (^myNum)(int);
+    myNum = ^(int num){
+        NSLog(@"参数：%d", num);
+        return 8;
+    };
+    
+    int newNum = myNum(88);
+    NSLog(@"新参数：%d", newNum);
+    
+    newBlock block = ^(int myNum) {
+        NSLog(@"参数：%d", myNum);
+        return 6;
+    };
+    block(7);
+    
+}
+
+/**
+ *  参数传递
+ */
+- (void)objMethod:(newBlock)block {
+
 }
 
 - (void)didReceiveMemoryWarning {
