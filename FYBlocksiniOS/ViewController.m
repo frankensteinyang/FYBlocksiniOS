@@ -36,13 +36,22 @@ typedef int (^newBlock)(int);
     };
     block(7);
     
+    // Block作为参数
+    newBlock paraBlock = ^(int newNum) {
+        NSLog(@"参数传递：newNum = %d", newNum);
+        return 7;
+    };
+    
+    [self objMethod:paraBlock];
+    
 }
 
 /**
  *  参数传递
  */
 - (void)objMethod:(newBlock)block {
-
+    // Block回调
+    block(1);
 }
 
 - (void)didReceiveMemoryWarning {
