@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 
-// 定义Block类型
+// 定义block类型
 typedef int (^newBlock)(int);
 
 @interface ViewController ()
@@ -36,7 +36,7 @@ typedef int (^newBlock)(int);
     };
     block(7);
     
-    // Block作为参数
+    // block作为参数
     newBlock paraBlock = ^(int newNum) {
         NSLog(@"参数传递：newNum = %d", newNum);
         return 7;
@@ -44,14 +44,27 @@ typedef int (^newBlock)(int);
     
     [self objMethod:paraBlock];
     
+    // 回调
+    [self objectMethod:^int(int a, int b) {
+        NSLog(@"回调的block，a + b = %d", a + b);
+        return a + b;
+    }];
+    
 }
 
 /**
  *  参数传递
  */
 - (void)objMethod:(newBlock)block {
-    // Block回调
+    // block回调
     block(1);
+}
+
+// block作为参数
+- (void)objectMethod:(int (^)(int, int))callback {
+    
+    // 调用block
+    callback(11, 13);
 }
 
 - (void)didReceiveMemoryWarning {
