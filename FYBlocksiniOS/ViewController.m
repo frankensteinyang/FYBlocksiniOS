@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "FYSecondController.h"
 
 // 定义Block类型
 typedef int (^newBlock)(int);
@@ -20,6 +21,8 @@ typedef int (^newBlock)(int);
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    self.view.backgroundColor = [UIColor blueColor];
     
     int (^myNum)(int);
     myNum = ^(int num){
@@ -44,6 +47,23 @@ typedef int (^newBlock)(int);
     
     [self objMethod:paraBlock];
     
+    // block的循环引用(Circular reference)
+    newBlock crBlock = ^(int num) {
+//        [self GoToNext];
+        return 0;
+    };
+    
+    [self objMethod:crBlock];
+    
+    UIButton *goToNextBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    goToNextBtn.frame = CGRectMake(20, 100, 100, 50);
+    goToNextBtn.backgroundColor = [UIColor redColor];
+    [goToNextBtn setTitle:@"Go To Next" forState:UIControlStateNormal];
+    [goToNextBtn addTarget:self
+                    action:@selector(GoToNext)
+          forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:goToNextBtn];
+    
 }
 
 /**
@@ -54,9 +74,20 @@ typedef int (^newBlock)(int);
     block(1);
 }
 
+- (void)GoToNext {
+    
+    FYSecondController *controller = [[FYSecondController alloc] init];
+    [self presentViewController:controller animated:YES completion:nil];
+    
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc {
+    NSLog(@"The object gets dealloced.");
 }
 
 @end
