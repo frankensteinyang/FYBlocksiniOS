@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		EF0B8BCC1CB7FCB700BD696D /* FYSecondController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0B8BCB1CB7FCB700BD696D /* FYSecondController.m */; };
+		EF0ED3D91CB95D8C0022E050 /* FYFirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0ED3D81CB95D8C0022E050 /* FYFirstViewController.m */; };
 		EFDD1F5D1CAEC89D00AC09B1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDD1F5C1CAEC89D00AC09B1 /* main.m */; };
 		EFDD1F601CAEC89D00AC09B1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDD1F5F1CAEC89D00AC09B1 /* AppDelegate.m */; };
 		EFDD1F631CAEC89D00AC09B1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDD1F621CAEC89D00AC09B1 /* ViewController.m */; };
@@ -38,6 +39,8 @@
 /* Begin PBXFileReference section */
 		EF0B8BCA1CB7FCB700BD696D /* FYSecondController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYSecondController.h; sourceTree = "<group>"; };
 		EF0B8BCB1CB7FCB700BD696D /* FYSecondController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYSecondController.m; sourceTree = "<group>"; };
+		EF0ED3D71CB95D8C0022E050 /* FYFirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYFirstViewController.h; sourceTree = "<group>"; };
+		EF0ED3D81CB95D8C0022E050 /* FYFirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYFirstViewController.m; sourceTree = "<group>"; };
 		EFDD1F581CAEC89D00AC09B1 /* FYBlocksiniOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FYBlocksiniOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFDD1F5C1CAEC89D00AC09B1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		EFDD1F5E1CAEC89D00AC09B1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -108,6 +111,8 @@
 				EFDD1F5F1CAEC89D00AC09B1 /* AppDelegate.m */,
 				EFDD1F611CAEC89D00AC09B1 /* ViewController.h */,
 				EFDD1F621CAEC89D00AC09B1 /* ViewController.m */,
+				EF0ED3D71CB95D8C0022E050 /* FYFirstViewController.h */,
+				EF0ED3D81CB95D8C0022E050 /* FYFirstViewController.m */,
 				EF0B8BCA1CB7FCB700BD696D /* FYSecondController.h */,
 				EF0B8BCB1CB7FCB700BD696D /* FYSecondController.m */,
 				EFDD1F641CAEC89D00AC09B1 /* Main.storyboard */,
@@ -279,6 +284,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EFDD1F631CAEC89D00AC09B1 /* ViewController.m in Sources */,
+				EF0ED3D91CB95D8C0022E050 /* FYFirstViewController.m in Sources */,
 				EFDD1F601CAEC89D00AC09B1 /* AppDelegate.m in Sources */,
 				EF0B8BCC1CB7FCB700BD696D /* FYSecondController.m in Sources */,
 				EFDD1F5D1CAEC89D00AC09B1 /* main.m in Sources */,
