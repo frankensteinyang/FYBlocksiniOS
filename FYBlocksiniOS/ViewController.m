@@ -7,7 +7,8 @@
 //
 
 #import "ViewController.h"
-#import "FYSecondController.h"
+#import "FYFirstViewController.h"
+#import "FYSecondViewController.h"
 
 // 定义block类型
 typedef int (^newBlock)(int);
@@ -55,14 +56,23 @@ typedef int (^newBlock)(int);
     
     [self objMethod:crBlock];
     
-    UIButton *goToNextBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    goToNextBtn.frame = CGRectMake(20, 100, 100, 50);
-    goToNextBtn.backgroundColor = [UIColor redColor];
-    [goToNextBtn setTitle:@"Go To Next" forState:UIControlStateNormal];
-    [goToNextBtn addTarget:self
-                    action:@selector(GoToNext)
+    UIButton *goToFirstBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    goToFirstBtn.frame = CGRectMake(20, 100, 100, 50);
+    goToFirstBtn.backgroundColor = [UIColor redColor];
+    [goToFirstBtn setTitle:@"Go To Next" forState:UIControlStateNormal];
+    [goToFirstBtn addTarget:self
+                    action:@selector(goToFirst)
           forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:goToNextBtn];
+    [self.view addSubview:goToFirstBtn];
+    
+    UIButton *goToSecondBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    goToSecondBtn.frame = CGRectMake(130, 100, 100, 50);
+    goToSecondBtn.backgroundColor = [UIColor redColor];
+    [goToSecondBtn setTitle:@"Go To Next" forState:UIControlStateNormal];
+    [goToSecondBtn addTarget:self
+                    action:@selector(goToSecond)
+          forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:goToSecondBtn];
     
     // 回调
     [self objectMethod:^int(int a, int b) {
@@ -80,10 +90,16 @@ typedef int (^newBlock)(int);
     block(1);
 }
 
-- (void)GoToNext {
+- (void)goToFirst {
     
-    FYSecondController *controller = [[FYSecondController alloc] init];
-    [self presentViewController:controller animated:YES completion:nil];
+    FYFirstViewController *firstController = [[FYFirstViewController alloc] init];
+    [self presentViewController:firstController animated:YES completion:nil];
+}
+
+- (void)goToSecond {
+
+    FYSecondViewController *secondController = [[FYSecondViewController alloc] init];
+    [self presentViewController:secondController animated:YES completion:nil];
 }
 
 // block作为参数
