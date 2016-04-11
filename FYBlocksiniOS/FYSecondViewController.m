@@ -1,14 +1,14 @@
 //
-//  FYSecondController.m
+//  FYSecondViewController.m
 //  FYBlocksiniOS
 //
 //  Created by Frankenstein Yang on 4/8/16.
 //  Copyright © 2016 Frankenstein Yang. All rights reserved.
 //
 
-#import "FYSecondController.h"
+#import "FYSecondViewController.h"
 
-@implementation FYSecondController
+@implementation FYSecondViewController
 
 - (void)viewDidLoad {
     
@@ -29,7 +29,7 @@
 
 - (void)dealloc {
 
-    NSLog(@"Oh my God!");
+    NSLog(@"FYSecondViewController gets dealloced!");
 }
 
 @end

@@ -1,5 +1,5 @@
 //
-//  FYSecondController.h
+//  FYSecondViewController.h
 //  FYBlocksiniOS
 //
 //  Created by Frankenstein Yang on 4/8/16.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FYSecondController : UIViewController
+@interface FYSecondViewController : UIViewController
 
 @end
