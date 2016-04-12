@@ -62,7 +62,7 @@ typedef int (^newBlock)(int);
     @weakify(self);
     UIButton *goToFirstBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     goToFirstBtn.backgroundColor = [UIColor redColor];
-    [goToFirstBtn setTitle:@"Go To Next" forState:UIControlStateNormal];
+    [goToFirstBtn setTitle:@"Go To First Controller" forState:UIControlStateNormal];
     [goToFirstBtn addTarget:self
                     action:@selector(goToFirst)
           forControlEvents:UIControlEventTouchUpInside];
@@ -71,12 +71,12 @@ typedef int (^newBlock)(int);
         @strongify(self);
         make.centerX.mas_equalTo(self.view.mas_centerX);
         make.top.mas_equalTo(80);
-        make.size.mas_equalTo(CGSizeMake(100, 50));
+        make.size.mas_equalTo(CGSizeMake(150, 50));
     }];
     
     UIButton *goToSecondBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     goToSecondBtn.backgroundColor = [UIColor redColor];
-    [goToSecondBtn setTitle:@"Go To Next" forState:UIControlStateNormal];
+    [goToSecondBtn setTitle:@"Go To Second Controller" forState:UIControlStateNormal];
     [goToSecondBtn addTarget:self
                     action:@selector(goToSecond)
           forControlEvents:UIControlEventTouchUpInside];
@@ -85,7 +85,7 @@ typedef int (^newBlock)(int);
         @strongify(self);
         make.centerX.mas_equalTo(self.view.mas_centerX);
         make.top.mas_equalTo(goToFirstBtn.mas_bottom).with.offset(10);
-        make.size.mas_equalTo(CGSizeMake(100, 50));
+        make.size.mas_equalTo(CGSizeMake(150, 50));
     }];
     
     // 回调
