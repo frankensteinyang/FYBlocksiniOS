@@ -6,6 +6,9 @@
 //  Copyright © 2016 Frankenstein Yang. All rights reserved.
 //
 
+#import <Masonry/Masonry.h>
+#import <libextobjc/EXTScope.h>
+
 #import "ViewController.h"
 #import "FYFirstViewController.h"
 #import "FYSecondViewController.h"
@@ -56,23 +59,34 @@ typedef int (^newBlock)(int);
     
     [self objMethod:crBlock];
     
+    @weakify(self);
     UIButton *goToFirstBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    goToFirstBtn.frame = CGRectMake(20, 100, 100, 50);
     goToFirstBtn.backgroundColor = [UIColor redColor];
-    [goToFirstBtn setTitle:@"Go To Next" forState:UIControlStateNormal];
+    [goToFirstBtn setTitle:@"Go To First Controller" forState:UIControlStateNormal];
     [goToFirstBtn addTarget:self
                     action:@selector(goToFirst)
           forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:goToFirstBtn];
+    [goToFirstBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        @strongify(self);
+        make.centerX.mas_equalTo(self.view.mas_centerX);
+        make.top.mas_equalTo(80);
+        make.size.mas_equalTo(CGSizeMake(150, 50));
+    }];
     
     UIButton *goToSecondBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    goToSecondBtn.frame = CGRectMake(130, 100, 100, 50);
     goToSecondBtn.backgroundColor = [UIColor redColor];
-    [goToSecondBtn setTitle:@"Go To Next" forState:UIControlStateNormal];
+    [goToSecondBtn setTitle:@"Go To Second Controller" forState:UIControlStateNormal];
     [goToSecondBtn addTarget:self
                     action:@selector(goToSecond)
           forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:goToSecondBtn];
+    [goToSecondBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        @strongify(self);
+        make.centerX.mas_equalTo(self.view.mas_centerX);
+        make.top.mas_equalTo(goToFirstBtn.mas_bottom).with.offset(10);
+        make.size.mas_equalTo(CGSizeMake(150, 50));
+    }];
     
     // 回调
     [self objectMethod:^int(int a, int b) {
