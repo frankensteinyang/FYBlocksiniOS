@@ -10,4 +10,8 @@
 
 @implementation FYParametricClass
 
+- (void)doSomething {
+    NSLog(@"I did something wrong!");
+}
+
 @end

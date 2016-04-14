@@ -16,9 +16,11 @@
 
 - (void)viewDidLoad {
 
+    [self.view setBackgroundColor:[UIColor brownColor]];
+    
     @weakify(self);
     UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    backBtn.backgroundColor = [UIColor redColor];
+    backBtn.backgroundColor = [UIColor whiteColor];
     [backBtn setTitle:@"Back" forState:UIControlStateNormal];
     [backBtn addTarget:self
                 action:@selector(backBtnClicked)
@@ -30,10 +32,10 @@
         make.size.mas_equalTo(CGSizeMake(100, 50));
     }];
     
-    //*****Tips*****
+    // *****TIPS*****
     // 怎么使用block: 如一个对象在运行，而需要知道另一个对象什么时候运行完成，就需要设一个
     // 回调函数，代理和block的使用要根据情况，有的地方用代理有点大材小用
-    //*****Tips*****
+    // *****TIPS*****
     
     // 深入探究block循环引用(Circular reference)
     // http://blog.oneiv.com/blog/Block-4.html
@@ -41,11 +43,21 @@
     
     FYParametricClass *class = [[FYParametricClass alloc] init];
     __weak FYParametricClass *weakClass = class;
+    
+    // @weakify 和 @strongify
+    // http://www.jianshu.com/p/3d6c4416db5e
+//    @weakify(class);
     class.classBlock = ^{
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        __strong FYParametricClass *strongClass = weakClass;
+//        @strongify(class);
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW,
+                                     (int64_t)(3 * NSEC_PER_SEC)),
+                       dispatch_get_main_queue(), ^{
             [weakClass doSomething];
+            NSLog(@"Does the object become nil - %@", weakClass);
         });
     };
+    NSLog(@"Does the object become nil - %@", weakClass);
     class.classBlock();
 }
 

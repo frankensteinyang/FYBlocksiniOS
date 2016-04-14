@@ -15,9 +15,11 @@
 
 - (void)viewDidLoad {
     
+    [self.view setBackgroundColor:[UIColor grayColor]];
+    
     @weakify(self);
     UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    backBtn.backgroundColor = [UIColor redColor];
+    backBtn.backgroundColor = [UIColor whiteColor];
     [backBtn setTitle:@"Back" forState:UIControlStateNormal];
     [backBtn addTarget:self
                     action:@selector(backBtnClicked)

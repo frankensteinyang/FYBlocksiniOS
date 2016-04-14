@@ -1,3 +1,3 @@
 # FYBlocksiniOS
 
-# 一天精通iOS Block。
+# iOS block循序渐进

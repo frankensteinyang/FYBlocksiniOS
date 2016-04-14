@@ -26,7 +26,7 @@ typedef int (^newBlock)(int);
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    self.view.backgroundColor = [UIColor blueColor];
+    self.view.backgroundColor = [UIColor blackColor];
     
     int (^myNum)(int);
     myNum = ^(int num){
@@ -61,8 +61,9 @@ typedef int (^newBlock)(int);
     
     @weakify(self);
     UIButton *goToFirstBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    goToFirstBtn.backgroundColor = [UIColor redColor];
-    [goToFirstBtn setTitle:@"Go To First Controller" forState:UIControlStateNormal];
+    goToFirstBtn.backgroundColor = [UIColor whiteColor];
+    [goToFirstBtn setTitle:@"Go To First Controller"
+                  forState:UIControlStateNormal];
     [goToFirstBtn addTarget:self
                     action:@selector(goToFirst)
           forControlEvents:UIControlEventTouchUpInside];
@@ -71,12 +72,13 @@ typedef int (^newBlock)(int);
         @strongify(self);
         make.centerX.mas_equalTo(self.view.mas_centerX);
         make.top.mas_equalTo(80);
-        make.size.mas_equalTo(CGSizeMake(150, 50));
+        make.size.mas_equalTo(CGSizeMake(200, 50));
     }];
     
     UIButton *goToSecondBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    goToSecondBtn.backgroundColor = [UIColor redColor];
-    [goToSecondBtn setTitle:@"Go To Second Controller" forState:UIControlStateNormal];
+    goToSecondBtn.backgroundColor = [UIColor whiteColor];
+    [goToSecondBtn setTitle:@"Go To Second Controller"
+                   forState:UIControlStateNormal];
     [goToSecondBtn addTarget:self
                     action:@selector(goToSecond)
           forControlEvents:UIControlEventTouchUpInside];
@@ -85,7 +87,7 @@ typedef int (^newBlock)(int);
         @strongify(self);
         make.centerX.mas_equalTo(self.view.mas_centerX);
         make.top.mas_equalTo(goToFirstBtn.mas_bottom).with.offset(10);
-        make.size.mas_equalTo(CGSizeMake(150, 50));
+        make.size.mas_equalTo(CGSizeMake(200, 50));
     }];
     
     // 回调
@@ -106,14 +108,14 @@ typedef int (^newBlock)(int);
 
 - (void)goToFirst {
     
-    FYFirstViewController *firstController = [[FYFirstViewController alloc] init];
-    [self presentViewController:firstController animated:YES completion:nil];
+    FYFirstViewController *firstCon = [[FYFirstViewController alloc] init];
+    [self presentViewController:firstCon animated:YES completion:nil];
 }
 
 - (void)goToSecond {
 
-    FYSecondViewController *secondController = [[FYSecondViewController alloc] init];
-    [self presentViewController:secondController animated:YES completion:nil];
+    FYSecondViewController *secondCon = [[FYSecondViewController alloc] init];
+    [self presentViewController:secondCon animated:YES completion:nil];
 }
 
 // block作为参数
