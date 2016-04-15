@@ -10,6 +10,8 @@
 #import <libextobjc/EXTScope.h>
 
 #import "FYSecondViewController.h"
+#import "FYMRCBlockClass.h"
+#import "FYARCBlockClass.h"
 
 @implementation FYSecondViewController
 
@@ -27,7 +29,34 @@
     [self.view addSubview:backBtn];
     [backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         @strongify(self);
-        make.center.equalTo(self.view);
+        make.top.mas_equalTo(60);
+        make.centerX.mas_equalTo(self.view.mas_centerX);
+        make.size.mas_equalTo(CGSizeMake(100, 50));
+    }];
+    
+    UIButton *mrcBlocksBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    mrcBlocksBtn.backgroundColor = [UIColor whiteColor];
+    [mrcBlocksBtn setTitle:@"MRCBlocks" forState:UIControlStateNormal];
+    [mrcBlocksBtn addTarget:self
+                  action:@selector(mrcBlocksBtnClicked)
+        forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:mrcBlocksBtn];
+    [mrcBlocksBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(backBtn.mas_bottom).with.offset(10);
+        make.centerX.mas_equalTo(self.view.mas_centerX);
+        make.size.mas_equalTo(CGSizeMake(100, 50));
+    }];
+    
+    UIButton *arcBlocksBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    arcBlocksBtn.backgroundColor = [UIColor whiteColor];
+    [arcBlocksBtn setTitle:@"ARCBlocks" forState:UIControlStateNormal];
+    [arcBlocksBtn addTarget:self
+                  action:@selector(arcBlocksBtnClicked)
+        forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:arcBlocksBtn];
+    [arcBlocksBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(mrcBlocksBtn.mas_bottom).with.offset(10);
+        make.centerX.mas_equalTo(self.view.mas_centerX);
         make.size.mas_equalTo(CGSizeMake(100, 50));
     }];
     
@@ -59,6 +88,18 @@
     };
     printStr();
     
+}
+
+- (void)mrcBlocksBtnClicked {
+    
+    FYMRCBlockClass *mrcClass = [[FYMRCBlockClass alloc] init];
+    NSLog(@"%@", mrcClass);
+}
+
+- (void)arcBlocksBtnClicked {
+    
+    FYARCBlockClass *arcClass = [[FYARCBlockClass alloc] init];
+    NSLog(@"%@", arcClass);
 }
 
 - (void)backBtnClicked {

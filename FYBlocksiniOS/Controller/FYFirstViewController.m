@@ -77,6 +77,9 @@
     class.classBlock();
 }
 
+/**
+ *  block循环引用探究
+ */
 - (void)circularReferenceBlock {
     
     FYParametricClass *paraClass = [[FYParametricClass alloc] init];

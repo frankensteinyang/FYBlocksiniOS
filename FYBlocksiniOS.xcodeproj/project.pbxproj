@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0AA669F552F0A392176A7A0E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 64958671C7C753AAC492E3F5 /* libPods.a */; };
+		EF0CF6B31CC0F53F00BA94C6 /* FYMRCBlockClass.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0CF6B21CC0F53F00BA94C6 /* FYMRCBlockClass.m */; };
+		EF0CF6B61CC0F56400BA94C6 /* FYARCBlockClass.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0CF6B51CC0F56400BA94C6 /* FYARCBlockClass.m */; };
 		EF4ADD911CBEAF4900948A3F /* FYFirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4ADD8C1CBEAF4900948A3F /* FYFirstViewController.m */; };
 		EF4ADD921CBEAF4900948A3F /* FYSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4ADD8E1CBEAF4900948A3F /* FYSecondViewController.m */; };
 		EF4ADD931CBEAF4900948A3F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4ADD901CBEAF4900948A3F /* ViewController.m */; };
@@ -43,6 +45,10 @@
 		0236F843FA8B51FA994E77F4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		64958671C7C753AAC492E3F5 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B697AE03AA05C7BA7B6A4E93 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		EF0CF6B11CC0F53F00BA94C6 /* FYMRCBlockClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYMRCBlockClass.h; sourceTree = "<group>"; };
+		EF0CF6B21CC0F53F00BA94C6 /* FYMRCBlockClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYMRCBlockClass.m; sourceTree = "<group>"; };
+		EF0CF6B41CC0F56400BA94C6 /* FYARCBlockClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYARCBlockClass.h; sourceTree = "<group>"; };
+		EF0CF6B51CC0F56400BA94C6 /* FYARCBlockClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYARCBlockClass.m; sourceTree = "<group>"; };
 		EF4ADD8B1CBEAF4900948A3F /* FYFirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYFirstViewController.h; sourceTree = "<group>"; };
 		EF4ADD8C1CBEAF4900948A3F /* FYFirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYFirstViewController.m; sourceTree = "<group>"; };
 		EF4ADD8D1CBEAF4900948A3F /* FYSecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYSecondViewController.h; sourceTree = "<group>"; };
@@ -114,6 +120,10 @@
 			children = (
 				EF4ADD9E1CBEB0DD00948A3F /* FYParametricClass.h */,
 				EF4ADD9F1CBEB0DD00948A3F /* FYParametricClass.m */,
+				EF0CF6B11CC0F53F00BA94C6 /* FYMRCBlockClass.h */,
+				EF0CF6B21CC0F53F00BA94C6 /* FYMRCBlockClass.m */,
+				EF0CF6B41CC0F56400BA94C6 /* FYARCBlockClass.h */,
+				EF0CF6B51CC0F56400BA94C6 /* FYARCBlockClass.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -400,10 +410,12 @@
 			files = (
 				EF4ADD9B1CBEAF5200948A3F /* main.m in Sources */,
 				EF4ADD991CBEAF5200948A3F /* AppDelegate.m in Sources */,
+				EF0CF6B61CC0F56400BA94C6 /* FYARCBlockClass.m in Sources */,
 				EF4ADD931CBEAF4900948A3F /* ViewController.m in Sources */,
 				EF4ADD911CBEAF4900948A3F /* FYFirstViewController.m in Sources */,
 				EF4ADD921CBEAF4900948A3F /* FYSecondViewController.m in Sources */,
 				EF4ADDA01CBEB0DD00948A3F /* FYParametricClass.m in Sources */,
+				EF0CF6B31CC0F53F00BA94C6 /* FYMRCBlockClass.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
