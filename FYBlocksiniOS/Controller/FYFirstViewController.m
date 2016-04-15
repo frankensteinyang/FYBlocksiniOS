@@ -46,18 +46,19 @@
     
     // @weakify 和 @strongify
     // http://www.jianshu.com/p/3d6c4416db5e
-//    @weakify(class);
+    @weakify(class);
     class.classBlock = ^{
 //        __strong FYParametricClass *strongClass = weakClass;
-//        @strongify(class);
+        @strongify(class);
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW,
                                      (int64_t)(3 * NSEC_PER_SEC)),
                        dispatch_get_main_queue(), ^{
-            [weakClass doSomething];
-            NSLog(@"Does the object become nil - %@", weakClass);
+//                           [weakClass doSomething];
+                           [class doSomething];
+                           NSLog(@"Does the object become nil? %@", weakClass);
         });
     };
-    NSLog(@"Does the object become nil - %@", weakClass);
+    NSLog(@"Does the object become nil? %@", weakClass);
     class.classBlock();
 }
 
