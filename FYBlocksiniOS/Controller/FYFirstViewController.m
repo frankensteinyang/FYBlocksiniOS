@@ -28,8 +28,23 @@
     [self.view addSubview:backBtn];
     [backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         @strongify(self);
-        make.center.equalTo(self.view);
-        make.size.mas_equalTo(CGSizeMake(100, 50));
+        make.top.mas_equalTo(60);
+        make.centerX.equalTo(self.view.mas_centerX);
+        make.size.mas_equalTo(CGSizeMake(150, 50));
+    }];
+    
+    UIButton *crBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    crBtn.backgroundColor = [UIColor whiteColor];
+    [crBtn setTitle:@"Circular Reference" forState:UIControlStateNormal];
+    [crBtn addTarget:self
+              action:@selector(circularReferenceBlock)
+    forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:crBtn];
+    [crBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        @strongify(self);
+        make.top.equalTo(backBtn.mas_bottom).with.offset(10);
+        make.centerX.equalTo(self.view.mas_centerX);
+        make.size.mas_equalTo(CGSizeMake(150, 50));
     }];
     
     // *****TIPS*****
@@ -62,8 +77,15 @@
     class.classBlock();
 }
 
+- (void)circularReferenceBlock {
+    
+    FYParametricClass *paraClass = [[FYParametricClass alloc] init];
+    NSLog(@"%@", paraClass);
+    
+}
+
 - (void)backBtnClicked {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:NO completion:nil];
 }
 
 - (void)dealloc {

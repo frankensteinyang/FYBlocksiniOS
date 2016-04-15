@@ -109,13 +109,13 @@ typedef int (^newBlock)(int);
 - (void)goToFirst {
     
     FYFirstViewController *firstCon = [[FYFirstViewController alloc] init];
-    [self presentViewController:firstCon animated:YES completion:nil];
+    [self presentViewController:firstCon animated:NO completion:nil];
 }
 
 - (void)goToSecond {
 
     FYSecondViewController *secondCon = [[FYSecondViewController alloc] init];
-    [self presentViewController:secondCon animated:YES completion:nil];
+    [self presentViewController:secondCon animated:NO completion:nil];
 }
 
 // block作为参数

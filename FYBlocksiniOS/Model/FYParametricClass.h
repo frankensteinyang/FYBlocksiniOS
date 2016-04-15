@@ -9,8 +9,12 @@
 #import <Foundation/Foundation.h>
 
 typedef void (^classBlock)();
+typedef void (^crBlock)(void);
 
-@interface FYParametricClass : NSObject
+@interface FYParametricClass : NSObject {
+
+    crBlock block;
+}
 
 /**
  *  1、默认情况下，block 是放在栈里面的
