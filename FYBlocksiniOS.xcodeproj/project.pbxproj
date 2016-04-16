@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0AA669F552F0A392176A7A0E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 64958671C7C753AAC492E3F5 /* libPods.a */; };
-		EF0CF6B31CC0F53F00BA94C6 /* FYMRCBlockClass.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0CF6B21CC0F53F00BA94C6 /* FYMRCBlockClass.m */; };
+		EF0CF6B31CC0F53F00BA94C6 /* FYMRCBlockClass.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0CF6B21CC0F53F00BA94C6 /* FYMRCBlockClass.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		EF0CF6B61CC0F56400BA94C6 /* FYARCBlockClass.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0CF6B51CC0F56400BA94C6 /* FYARCBlockClass.m */; };
 		EF4ADD911CBEAF4900948A3F /* FYFirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4ADD8C1CBEAF4900948A3F /* FYFirstViewController.m */; };
 		EF4ADD921CBEAF4900948A3F /* FYSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4ADD8E1CBEAF4900948A3F /* FYSecondViewController.m */; };
