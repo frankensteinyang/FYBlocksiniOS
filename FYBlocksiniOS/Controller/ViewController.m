@@ -12,6 +12,7 @@
 #import "ViewController.h"
 #import "FYFirstViewController.h"
 #import "FYSecondViewController.h"
+#import "FYBannerViewController.h"
 
 // 定义block类型
 typedef int (^newBlock)(int);
@@ -71,7 +72,7 @@ typedef int (^newBlock)(int);
     [goToFirstBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         @strongify(self);
         make.centerX.mas_equalTo(self.view.mas_centerX);
-        make.top.mas_equalTo(80);
+        make.top.mas_equalTo(60);
         make.size.mas_equalTo(CGSizeMake(200, 50));
     }];
     
@@ -87,6 +88,20 @@ typedef int (^newBlock)(int);
         @strongify(self);
         make.centerX.mas_equalTo(self.view.mas_centerX);
         make.top.mas_equalTo(goToFirstBtn.mas_bottom).with.offset(10);
+        make.size.mas_equalTo(CGSizeMake(200, 50));
+    }];
+    
+    UIButton *bannerBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    bannerBtn.backgroundColor = [UIColor whiteColor];
+    [bannerBtn setTitle:@"Go To Banner View" forState:UIControlStateNormal];
+    [bannerBtn addTarget:self
+                  action:@selector(goToBannerView)
+        forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:bannerBtn];
+    [bannerBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        @strongify(self);
+        make.centerX.mas_equalTo(self.view.mas_centerX);
+        make.top.mas_equalTo(goToSecondBtn.mas_bottom).with.offset(10);
         make.size.mas_equalTo(CGSizeMake(200, 50));
     }];
     
@@ -116,6 +131,12 @@ typedef int (^newBlock)(int);
 
     FYSecondViewController *secondCon = [[FYSecondViewController alloc] init];
     [self presentViewController:secondCon animated:NO completion:nil];
+}
+
+- (void)goToBannerView {
+    
+    FYBannerViewController *bannerCon = [[FYBannerViewController alloc] init];
+    [self presentViewController:bannerCon animated:NO completion:nil];
 }
 
 // block作为参数
