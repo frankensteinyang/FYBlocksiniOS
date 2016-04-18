@@ -11,6 +11,9 @@
 		EF09BC9D1CC4807700EC4619 /* FYFareCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = EF09BC9C1CC4807700EC4619 /* FYFareCalendar.m */; };
 		EF09BCA11CC4827E00EC4619 /* FYBannerViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = EF09BCA01CC4827E00EC4619 /* FYBannerViewItem.m */; };
 		EF09BCA41CC485F200EC4619 /* FYBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF09BCA31CC485F200EC4619 /* FYBannerView.m */; };
+		EF09BCA71CC48B2D00EC4619 /* FYCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = EF09BCA61CC48B2D00EC4619 /* FYCollectionViewFlowLayout.m */; };
+		EF09BCAA1CC4936800EC4619 /* FYCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EF09BCA91CC4936800EC4619 /* FYCollectionViewCell.m */; };
+		EF09BCAD1CC4C08E00EC4619 /* UIColor+FYImageAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = EF09BCAC1CC4C08E00EC4619 /* UIColor+FYImageAdditions.m */; };
 		EF0CF6B31CC0F53F00BA94C6 /* FYMRCBlockClass.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0CF6B21CC0F53F00BA94C6 /* FYMRCBlockClass.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		EF0CF6B61CC0F56400BA94C6 /* FYARCBlockClass.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0CF6B51CC0F56400BA94C6 /* FYARCBlockClass.m */; };
 		EF39AB9B1CC3E829001A6395 /* FYBannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF39AB9A1CC3E829001A6395 /* FYBannerViewController.m */; };
@@ -55,6 +58,12 @@
 		EF09BCA01CC4827E00EC4619 /* FYBannerViewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYBannerViewItem.m; sourceTree = "<group>"; };
 		EF09BCA21CC485F200EC4619 /* FYBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYBannerView.h; sourceTree = "<group>"; };
 		EF09BCA31CC485F200EC4619 /* FYBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYBannerView.m; sourceTree = "<group>"; };
+		EF09BCA51CC48B2D00EC4619 /* FYCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYCollectionViewFlowLayout.h; sourceTree = "<group>"; };
+		EF09BCA61CC48B2D00EC4619 /* FYCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYCollectionViewFlowLayout.m; sourceTree = "<group>"; };
+		EF09BCA81CC4936800EC4619 /* FYCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYCollectionViewCell.h; sourceTree = "<group>"; };
+		EF09BCA91CC4936800EC4619 /* FYCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYCollectionViewCell.m; sourceTree = "<group>"; };
+		EF09BCAB1CC4C08E00EC4619 /* UIColor+FYImageAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+FYImageAdditions.h"; sourceTree = "<group>"; };
+		EF09BCAC1CC4C08E00EC4619 /* UIColor+FYImageAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+FYImageAdditions.m"; sourceTree = "<group>"; };
 		EF0CF6B11CC0F53F00BA94C6 /* FYMRCBlockClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYMRCBlockClass.h; sourceTree = "<group>"; };
 		EF0CF6B21CC0F53F00BA94C6 /* FYMRCBlockClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYMRCBlockClass.m; sourceTree = "<group>"; };
 		EF0CF6B41CC0F56400BA94C6 /* FYARCBlockClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYARCBlockClass.h; sourceTree = "<group>"; };
@@ -145,6 +154,12 @@
 				EF09BCA01CC4827E00EC4619 /* FYBannerViewItem.m */,
 				EF09BCA21CC485F200EC4619 /* FYBannerView.h */,
 				EF09BCA31CC485F200EC4619 /* FYBannerView.m */,
+				EF09BCA51CC48B2D00EC4619 /* FYCollectionViewFlowLayout.h */,
+				EF09BCA61CC48B2D00EC4619 /* FYCollectionViewFlowLayout.m */,
+				EF09BCA81CC4936800EC4619 /* FYCollectionViewCell.h */,
+				EF09BCA91CC4936800EC4619 /* FYCollectionViewCell.m */,
+				EF09BCAB1CC4C08E00EC4619 /* UIColor+FYImageAdditions.h */,
+				EF09BCAC1CC4C08E00EC4619 /* UIColor+FYImageAdditions.m */,
 			);
 			path = FYBannerView;
 			sourceTree = "<group>";
@@ -452,10 +467,13 @@
 				EF4ADD931CBEAF4900948A3F /* ViewController.m in Sources */,
 				EF4ADD911CBEAF4900948A3F /* FYFirstViewController.m in Sources */,
 				EF4ADD921CBEAF4900948A3F /* FYSecondViewController.m in Sources */,
+				EF09BCA71CC48B2D00EC4619 /* FYCollectionViewFlowLayout.m in Sources */,
 				EF4ADDA01CBEB0DD00948A3F /* FYParametricClass.m in Sources */,
 				EF39AB9B1CC3E829001A6395 /* FYBannerViewController.m in Sources */,
 				EF09BCA41CC485F200EC4619 /* FYBannerView.m in Sources */,
 				EF0CF6B31CC0F53F00BA94C6 /* FYMRCBlockClass.m in Sources */,
+				EF09BCAD1CC4C08E00EC4619 /* UIColor+FYImageAdditions.m in Sources */,
+				EF09BCAA1CC4936800EC4619 /* FYCollectionViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

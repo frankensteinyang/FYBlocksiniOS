@@ -7,7 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FYBannerViewItem.h"
 
 @interface FYBannerView : UIView
+
+@property (nonatomic, copy) NSArray<FYBannerViewItem *> *items;
+@property (nonatomic, assign) CGSize itemSize;
+@property (nonatomic, assign) CGFloat itemSpacing;
+@property (nonatomic, assign) BOOL isAutoScroll;
+@property (nonatomic, assign) NSTimeInterval timeInterval;
+@property (nonatomic, strong) UIImage *placeholderImage;
+@property (nonatomic, copy) void (^didSelectItemAtIndex)(NSUInteger index);
 
 @end
