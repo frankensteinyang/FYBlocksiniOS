@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		0AA669F552F0A392176A7A0E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 64958671C7C753AAC492E3F5 /* libPods.a */; };
+		EF09BC9D1CC4807700EC4619 /* FYFareCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = EF09BC9C1CC4807700EC4619 /* FYFareCalendar.m */; };
+		EF09BCA11CC4827E00EC4619 /* FYBannerViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = EF09BCA01CC4827E00EC4619 /* FYBannerViewItem.m */; };
+		EF09BCA41CC485F200EC4619 /* FYBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF09BCA31CC485F200EC4619 /* FYBannerView.m */; };
 		EF0CF6B31CC0F53F00BA94C6 /* FYMRCBlockClass.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0CF6B21CC0F53F00BA94C6 /* FYMRCBlockClass.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		EF0CF6B61CC0F56400BA94C6 /* FYARCBlockClass.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0CF6B51CC0F56400BA94C6 /* FYARCBlockClass.m */; };
 		EF39AB9B1CC3E829001A6395 /* FYBannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF39AB9A1CC3E829001A6395 /* FYBannerViewController.m */; };
@@ -46,6 +49,12 @@
 		0236F843FA8B51FA994E77F4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		64958671C7C753AAC492E3F5 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B697AE03AA05C7BA7B6A4E93 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		EF09BC9B1CC4807700EC4619 /* FYFareCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYFareCalendar.h; sourceTree = "<group>"; };
+		EF09BC9C1CC4807700EC4619 /* FYFareCalendar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYFareCalendar.m; sourceTree = "<group>"; };
+		EF09BC9F1CC4827E00EC4619 /* FYBannerViewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYBannerViewItem.h; sourceTree = "<group>"; };
+		EF09BCA01CC4827E00EC4619 /* FYBannerViewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYBannerViewItem.m; sourceTree = "<group>"; };
+		EF09BCA21CC485F200EC4619 /* FYBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYBannerView.h; sourceTree = "<group>"; };
+		EF09BCA31CC485F200EC4619 /* FYBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYBannerView.m; sourceTree = "<group>"; };
 		EF0CF6B11CC0F53F00BA94C6 /* FYMRCBlockClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYMRCBlockClass.h; sourceTree = "<group>"; };
 		EF0CF6B21CC0F53F00BA94C6 /* FYMRCBlockClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYMRCBlockClass.m; sourceTree = "<group>"; };
 		EF0CF6B41CC0F56400BA94C6 /* FYARCBlockClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYARCBlockClass.h; sourceTree = "<group>"; };
@@ -111,11 +120,33 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		EF4ADD881CBEAF3B00948A3F /* View */ = {
+		EF09BC991CC4807700EC4619 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				EF09BC9E1CC4812600EC4619 /* FYBannerView */,
+				EF09BC9A1CC4807700EC4619 /* FYFareCalendar */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		EF09BC9A1CC4807700EC4619 /* FYFareCalendar */ = {
+			isa = PBXGroup;
+			children = (
+				EF09BC9B1CC4807700EC4619 /* FYFareCalendar.h */,
+				EF09BC9C1CC4807700EC4619 /* FYFareCalendar.m */,
+			);
+			path = FYFareCalendar;
+			sourceTree = "<group>";
+		};
+		EF09BC9E1CC4812600EC4619 /* FYBannerView */ = {
+			isa = PBXGroup;
+			children = (
+				EF09BC9F1CC4827E00EC4619 /* FYBannerViewItem.h */,
+				EF09BCA01CC4827E00EC4619 /* FYBannerViewItem.m */,
+				EF09BCA21CC485F200EC4619 /* FYBannerView.h */,
+				EF09BCA31CC485F200EC4619 /* FYBannerView.m */,
+			);
+			path = FYBannerView;
 			sourceTree = "<group>";
 		};
 		EF4ADD891CBEAF4200948A3F /* Model */ = {
@@ -186,7 +217,7 @@
 			isa = PBXGroup;
 			children = (
 				EF4ADD891CBEAF4200948A3F /* Model */,
-				EF4ADD881CBEAF3B00948A3F /* View */,
+				EF09BC991CC4807700EC4619 /* View */,
 				EF4ADD8A1CBEAF4900948A3F /* Controller */,
 				EF4ADD941CBEAF5200948A3F /* Other */,
 				EFDD1F5B1CAEC89D00AC09B1 /* Supporting Files */,
@@ -415,12 +446,15 @@
 			files = (
 				EF4ADD9B1CBEAF5200948A3F /* main.m in Sources */,
 				EF4ADD991CBEAF5200948A3F /* AppDelegate.m in Sources */,
+				EF09BC9D1CC4807700EC4619 /* FYFareCalendar.m in Sources */,
 				EF0CF6B61CC0F56400BA94C6 /* FYARCBlockClass.m in Sources */,
+				EF09BCA11CC4827E00EC4619 /* FYBannerViewItem.m in Sources */,
 				EF4ADD931CBEAF4900948A3F /* ViewController.m in Sources */,
 				EF4ADD911CBEAF4900948A3F /* FYFirstViewController.m in Sources */,
 				EF4ADD921CBEAF4900948A3F /* FYSecondViewController.m in Sources */,
 				EF4ADDA01CBEB0DD00948A3F /* FYParametricClass.m in Sources */,
 				EF39AB9B1CC3E829001A6395 /* FYBannerViewController.m in Sources */,
+				EF09BCA41CC485F200EC4619 /* FYBannerView.m in Sources */,
 				EF0CF6B31CC0F53F00BA94C6 /* FYMRCBlockClass.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
