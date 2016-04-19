@@ -77,7 +77,7 @@
     imgURLs = @[
                 @"http://file11.zk71.com/File/CorpProductImages/2015/10/14/3_bianpinqi_5120_1_20151014163756.jpg",
                 @"http://a4.mzstatic.com/us/r30/Features49/v4/77/73/3b/77733b19-2fb6-be1a-6a5e-8e01c30d2c94/flowcase_640_260_2x.jpeg",
-//                @"http://img.taopic.com/uploads/allimg/140102/234988-1401020QU589.jpg"
+                @"http://img.taopic.com/uploads/allimg/140102/234988-1401020QU589.jpg"
                 ];
     
     NSMutableArray *items = [[NSMutableArray alloc] init];
