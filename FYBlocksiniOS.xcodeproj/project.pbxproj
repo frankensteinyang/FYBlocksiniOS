@@ -22,13 +22,13 @@
 		EF4ADD931CBEAF4900948A3F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4ADD901CBEAF4900948A3F /* ViewController.m */; };
 		EF4ADD991CBEAF5200948A3F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4ADD961CBEAF5200948A3F /* AppDelegate.m */; };
 		EF4ADD9B1CBEAF5200948A3F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4ADD981CBEAF5200948A3F /* main.m */; };
-		EF4ADD9D1CBEAFE100948A3F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EF4ADD9C1CBEAFE100948A3F /* Info.plist */; };
 		EF4ADDA01CBEB0DD00948A3F /* FYParametricClass.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4ADD9F1CBEB0DD00948A3F /* FYParametricClass.m */; };
 		EFDD1F661CAEC89D00AC09B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFDD1F641CAEC89D00AC09B1 /* Main.storyboard */; };
 		EFDD1F681CAEC89D00AC09B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EFDD1F671CAEC89D00AC09B1 /* Assets.xcassets */; };
 		EFDD1F6B1CAEC89D00AC09B1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFDD1F691CAEC89D00AC09B1 /* LaunchScreen.storyboard */; };
 		EFDD1F761CAEC89D00AC09B1 /* FYBlocksiniOSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDD1F751CAEC89D00AC09B1 /* FYBlocksiniOSTests.m */; };
 		EFDD1F811CAEC89D00AC09B1 /* FYBlocksiniOSUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDD1F801CAEC89D00AC09B1 /* FYBlocksiniOSUITests.m */; };
+		EFFBE6491CC6482100F4957A /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EFFBE6481CC6482100F4957A /* Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,7 +79,6 @@
 		EF4ADD951CBEAF5200948A3F /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		EF4ADD961CBEAF5200948A3F /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		EF4ADD981CBEAF5200948A3F /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		EF4ADD9C1CBEAFE100948A3F /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EF4ADD9E1CBEB0DD00948A3F /* FYParametricClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYParametricClass.h; sourceTree = "<group>"; };
 		EF4ADD9F1CBEB0DD00948A3F /* FYParametricClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYParametricClass.m; sourceTree = "<group>"; };
 		EFDD1F581CAEC89D00AC09B1 /* FYBlocksiniOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FYBlocksiniOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -92,6 +91,7 @@
 		EFDD1F7C1CAEC89D00AC09B1 /* FYBlocksiniOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FYBlocksiniOSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFDD1F801CAEC89D00AC09B1 /* FYBlocksiniOSUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FYBlocksiniOSUITests.m; sourceTree = "<group>"; };
 		EFDD1F821CAEC89D00AC09B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EFFBE6481CC6482100F4957A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,7 +195,7 @@
 		EF4ADD941CBEAF5200948A3F /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				EF4ADD9C1CBEAFE100948A3F /* Info.plist */,
+				EFFBE6481CC6482100F4957A /* Info.plist */,
 				EFDD1F641CAEC89D00AC09B1 /* Main.storyboard */,
 				EFDD1F671CAEC89D00AC09B1 /* Assets.xcassets */,
 				EFDD1F691CAEC89D00AC09B1 /* LaunchScreen.storyboard */,
@@ -383,7 +383,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EF4ADD9D1CBEAFE100948A3F /* Info.plist in Resources */,
+				EFFBE6491CC6482100F4957A /* Info.plist in Resources */,
 				EFDD1F6B1CAEC89D00AC09B1 /* LaunchScreen.storyboard in Resources */,
 				EFDD1F681CAEC89D00AC09B1 /* Assets.xcassets in Resources */,
 				EFDD1F661CAEC89D00AC09B1 /* Main.storyboard in Resources */,

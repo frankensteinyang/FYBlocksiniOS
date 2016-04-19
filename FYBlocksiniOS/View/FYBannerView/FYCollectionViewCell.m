@@ -10,7 +10,7 @@
 
 @interface FYCollectionViewCell ()
 
-@property (nonatomic, strong, readwrite) UIImageView *imgView;
+@property (nonatomic, strong, readwrite) UIImageView *imageView;
 @property (nonatomic, strong, readwrite) UILabel *label;
 
 @end
@@ -28,19 +28,19 @@
 
 - (void)initialize {
     
-    self.imgView = [[UIImageView alloc] init];
-    [self.contentView addSubview:self.imgView];
-    self.imgView.contentMode = UIViewContentModeScaleAspectFill;
-    self.imgView.clipsToBounds = YES;
-    self.imgView.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[imgView]|"
+    self.imageView = [[UIImageView alloc] init];
+    [self.contentView addSubview:self.imageView];
+    self.imageView.contentMode = UIViewContentModeScaleAspectFill;
+    self.imageView.clipsToBounds = YES;
+    self.imageView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[imageView]|"
                                                                              options:0
                                                                              metrics:nil
-                                                                               views:@{ @"imgView" : self.imgView }]];
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[imgView]|"
+                                                                               views:@{ @"imageView" : self.imageView }]];
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[imageView]|"
                                                                              options:0
                                                                              metrics:nil
-                                                                               views:@{ @"imgView" : self.imgView }]];
+                                                                               views:@{ @"imageView" : self.imageView }]];
     
     self.label = [[UILabel alloc] init];
     [self.contentView addSubview:self.label];

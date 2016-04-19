@@ -10,17 +10,17 @@
 
 @interface FYBannerViewItem ()
 
-@property (nonatomic, copy, readwrite) NSString *imgURL;
+@property (nonatomic, copy, readwrite) NSString *imageURL;
 @property (nonatomic, copy, readwrite) NSString *text;
 
 @end
 
 @implementation FYBannerViewItem
 
-+ (instancetype)itemWithImageURL:(NSString *)imgURL text:(NSString *)text {
++ (instancetype)itemWithImageURL:(NSString *)imageURL text:(NSString *)text {
 
     FYBannerViewItem *item = [[FYBannerViewItem alloc] init];
-    item.imgURL = imgURL;
+    item.imageURL = imageURL;
     item.text = text;
     return item;
 }

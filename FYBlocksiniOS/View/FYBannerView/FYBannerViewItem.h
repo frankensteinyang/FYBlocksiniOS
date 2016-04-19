@@ -13,6 +13,6 @@
 @property (nonatomic, copy, readonly) NSString *imageURL;
 @property (nonatomic, copy, readonly) NSString *text;
 
-+ (instancetype)itemWithImageURL:(NSString *)imgURL text:(NSString *)text;
++ (instancetype)itemWithImageURL:(NSString *)imageURL text:(NSString *)text;
 
 @end
