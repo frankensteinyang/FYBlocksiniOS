@@ -13,6 +13,7 @@
 #import "FYFirstViewController.h"
 #import "FYSecondViewController.h"
 #import "FYBannerViewController.h"
+#import "FYCalendarViewController.h"
 
 // 定义block类型
 typedef int (^newBlock)(int);
@@ -105,6 +106,20 @@ typedef int (^newBlock)(int);
         make.size.mas_equalTo(CGSizeMake(200, 50));
     }];
     
+    UIButton *calendarBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    calendarBtn.backgroundColor = [UIColor whiteColor];
+    [calendarBtn setTitle:@"Go To Calendar View" forState:UIControlStateNormal];
+    [calendarBtn addTarget:self
+                    action:@selector(goToCalendarView)
+          forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:calendarBtn];
+    [calendarBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        @strongify(self);
+        make.centerX.mas_equalTo(self.view.mas_centerX);
+        make.top.mas_equalTo(bannerBtn.mas_bottom).with.offset(10);
+        make.size.mas_equalTo(CGSizeMake(200, 50));
+    }];
+    
     // 回调
     [self objectMethod:^int(int a, int b) {
         NSLog(@"回调的block，a + b = %d", a + b);
@@ -137,6 +152,12 @@ typedef int (^newBlock)(int);
     
     FYBannerViewController *bannerCon = [[FYBannerViewController alloc] init];
     [self presentViewController:bannerCon animated:NO completion:nil];
+}
+
+- (void)goToCalendarView {
+    
+    FYCalendarViewController *calendarCon = [[FYCalendarViewController alloc] init];
+    [self presentViewController:calendarCon animated:NO completion:nil];
 }
 
 // block作为参数

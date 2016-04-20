@@ -61,6 +61,7 @@
     _pageControl = [[FYPageControl alloc] initWithFrame:CGRectMake(20, 100, 80, 20)];
     [_pageControl setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     [_pageControl setPageControlStyle:PageControlStyleWithPageNumber];
+    _pageControl.currentPage = 0;
     [self addSubview:_pageControl];
     
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[collectionView]|"
@@ -214,15 +215,26 @@
     
     CGFloat offsetX = scrollView.contentOffset.x;
     
-    NSLog(@"%f ---", offsetX);
-    NSLog(@"%f ***", periodOffset);
+//    NSUInteger currentPage = periodOffset / offsetX - 1;
     
-    int currentPage = periodOffset / offsetX - 1;
-    _pageControl.currentPage = currentPage;
+    NSLog(@"currentPage %d ---- %d", _pageControl.currentPage, self.items.count);
+//    NSLog(@"pageWidth %f", pageWidth);
+//    NSLog(@"periodOffset %f", periodOffset);
+//    NSLog(@"offsetX %f", offsetX);
+//    NSLog(@"offsetActivatingMoveToBeginning %f", offsetActivatingMoveToBeginning);
+//    NSLog(@"offsetActivatingMoveToEnd %f", offsetActivatingMoveToEnd);
+//    if (([self.items count] / 3) > 1){
+//        page --;
+//        if (page >= self.pageControl.numberOfPages){
+//            page = 0;
+//        }else if(page <0){
+//            page = self.pageControl.numberOfPages -1;
+//        }
+//    }
+//    self.pageControl.currentPage = page;
     
     if (offsetX > offsetActivatingMoveToBeginning) {
         scrollView.contentOffset = CGPointMake((offsetX - periodOffset), 0);
-        _pageControl.currentPage = currentPage;
     } else if (offsetX < offsetActivatingMoveToEnd) {
         scrollView.contentOffset = CGPointMake((offsetX + periodOffset), 0);
     }
