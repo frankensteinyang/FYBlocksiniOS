@@ -177,8 +177,6 @@
     [cell.imageView sd_setImageWithURL:[NSURL URLWithString:item.imageURL]
                       placeholderImage:self.placeholderImage];
     
-    NSLog(@"%@", cell.imageView);
-    
     cell.label.text = item.text;
     return cell;
     

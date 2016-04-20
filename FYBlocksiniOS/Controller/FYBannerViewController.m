@@ -45,16 +45,17 @@
     }];
     
     // Banner
-    self.bannerView = [[FYBannerView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), self.itemSize.height)];
+//    self.bannerView = [[FYBannerView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), self.itemSize.height)];
+    self.bannerView = [[FYBannerView alloc] init];
     [self.view addSubview:self.bannerView];
     
-//    [self.bannerView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        @strongify(self);
-//        make.bottom.equalTo(self.view.mas_bottom);
-//        make.right.equalTo(self.view.mas_right);
-//        make.left.equalTo(self.view.mas_left);
-//        make.height.mas_equalTo(150);
-//    }];
+    [self.bannerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        @strongify(self);
+        make.bottom.equalTo(self.view.mas_bottom);
+        make.right.equalTo(self.view.mas_right);
+        make.left.equalTo(self.view.mas_left);
+        make.height.mas_equalTo(150);
+    }];
     
     self.bannerView.itemSize = self.itemSize;
     self.bannerView.itemSpacing = self.itemSpacing;
@@ -75,9 +76,12 @@
 - (NSArray *)items {
     NSArray *imgURLs = nil;
     imgURLs = @[
-                @"http://file11.zk71.com/File/CorpProductImages/2015/10/14/3_bianpinqi_5120_1_20151014163756.jpg",
-                @"http://a4.mzstatic.com/us/r30/Features49/v4/77/73/3b/77733b19-2fb6-be1a-6a5e-8e01c30d2c94/flowcase_640_260_2x.jpeg",
-//                @"http://img.taopic.com/uploads/allimg/140102/234988-1401020QU589.jpg"
+                @"http://image.photophoto.cn/nm-8/056/001/0560010001.jpg",
+                @"http://image.photophoto.cn/nm-8/056/002/0560020026.jpg",
+                @"http://image.photophoto.cn/nm-8/056/002/0560020022.jpg",
+                @"http://image.photophoto.cn/nm-8/056/001/0560010012.jpg",
+                @"http://image.photophoto.cn/nm-8/056/002/0560020017.jpg",
+                @"http://image.photophoto.cn/nm-8/056/002/0560020015.jpg"
                 ];
     
     NSMutableArray *items = [[NSMutableArray alloc] init];
