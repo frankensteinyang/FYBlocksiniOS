@@ -40,6 +40,42 @@
         make.size.mas_equalTo(CGSizeMake(100, 50));
     }];
     
+    UILabel *fareLbl = [[UILabel alloc] init];
+    [fareLbl setText:@"￥125"];
+    [fareLbl setTextColor:[UIColor orangeColor]];
+    [fareLbl setTextAlignment:NSTextAlignmentCenter];
+    
+    fareLbl.userInteractionEnabled = YES;
+    UITapGestureRecognizer *labelTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(labelTouchUpInside:)];
+    [fareLbl addGestureRecognizer:labelTapGestureRecognizer];
+    
+    [self.view addSubview:fareLbl];
+    [fareLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+        @strongify(self);
+        make.top.equalTo(backBtn.mas_bottom).with.offset(10);
+        make.centerX.mas_equalTo(self.view.mas_centerX);
+        make.size.mas_equalTo(CGSizeMake(100, 50));
+    }];
+    
+}
+
+- (void)calendarViewConfirmClickWithStartDate:(NSInteger)startDate endDate:(NSInteger)endDate
+{
+    _startDate = startDate;
+    _endDate = endDate;
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat: @"yyyy-MM-dd"];
+    NSString *startDateString = [dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:_startDate]];
+    NSString *endDateString = [dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:_endDate]];
+    _startLabel.text = [NSString stringWithFormat:@"开始日期:%@",startDateString];
+    _endLabel.text = [NSString stringWithFormat:@"结束日期:%@",endDateString];
+}
+
+- (void)labelTouchUpInside:(UITapGestureRecognizer *)recognizer {
+    
+    UILabel *label = (UILabel *)recognizer.view;
+    NSLog(@"%@被点击了",label.text);
+    
     FYFareCalendarViewController *cvc = [[FYFareCalendarViewController alloc]init];
     cvc.limitMonth = 12 * 15;// 显示几个月的日历
     /*
@@ -60,18 +96,6 @@
     cvc.delegate = self;
     [self presentViewController:cvc animated:YES completion:nil];
     
-}
-
-- (void)calendarViewConfirmClickWithStartDate:(NSInteger)startDate endDate:(NSInteger)endDate
-{
-    _startDate = startDate;
-    _endDate = endDate;
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat: @"yyyy-MM-dd"];
-    NSString *startDateString = [dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:_startDate]];
-    NSString *endDateString = [dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:_endDate]];
-    _startLabel.text = [NSString stringWithFormat:@"开始日期:%@",startDateString];
-    _endLabel.text = [NSString stringWithFormat:@"结束日期:%@",endDateString];
 }
 
 - (void)backBtnClicked {

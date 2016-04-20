@@ -162,7 +162,7 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    FYFareCalendarCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MSSCalendarCollectionViewCell" forIndexPath:indexPath];
+    FYFareCalendarCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"FYFareCalendarCollectionViewCell" forIndexPath:indexPath];
     if(cell)
     {
         FYFareCalendarHeaderModel *headerItem = _dataArray[indexPath.section];
