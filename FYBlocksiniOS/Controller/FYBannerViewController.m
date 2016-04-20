@@ -81,8 +81,7 @@
                 @"http://image.photophoto.cn/nm-8/056/002/0560020022.jpg",
                 @"http://image.photophoto.cn/nm-8/056/001/0560010012.jpg",
                 @"http://image.photophoto.cn/nm-8/056/002/0560020017.jpg",
-                @"http://image.photophoto.cn/nm-8/056/002/0560020015.jpg"
-                ];
+                @"http://image.photophoto.cn/nm-8/056/002/0560020015.jpg"];
     
     NSMutableArray *items = [[NSMutableArray alloc] init];
     for (NSString *imageURL in imgURLs) {

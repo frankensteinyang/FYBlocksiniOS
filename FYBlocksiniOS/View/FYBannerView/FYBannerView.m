@@ -12,11 +12,13 @@
 #import "FYCollectionViewFlowLayout.h"
 #import "FYCollectionViewCell.h"
 #import "UIColor+FYImageAdditions.h"
+#import "FYPageControl.h"
 
 @interface FYBannerView () <UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) FYCollectionViewFlowLayout *collectionViewLayout;
+@property (nonatomic, strong) FYPageControl *pageControl;
 @property (nonatomic, strong) NSTimer *timer;
 
 @end
@@ -52,7 +54,14 @@
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     
+    // 不受Autosizing的控制
     self.collectionView.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    // PageControl
+    _pageControl = [[FYPageControl alloc] initWithFrame:CGRectMake(20, 100, 80, 20)];
+    [_pageControl setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+    [_pageControl setPageControlStyle:PageControlStyleWithPageNumber];
+    [self addSubview:_pageControl];
     
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[collectionView]|"
                                                                  options:0
@@ -107,6 +116,8 @@
 - (void)setItems:(NSArray<FYBannerViewItem *> *)items {
     
     if (items.count == 0) {
+        
+        _pageControl.hidesForSinglePage = YES;
         return;
     }
     
@@ -117,6 +128,7 @@
     }
     _items = mutableItems.copy;
     
+    [_pageControl setNumberOfPages:items.count];
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.collectionView reloadData];
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -201,8 +213,16 @@
     CGFloat offsetActivatingMoveToEnd = pageWidth * ((self.items.count / 3) * 1);
     
     CGFloat offsetX = scrollView.contentOffset.x;
+    
+    NSLog(@"%f ---", offsetX);
+    NSLog(@"%f ***", periodOffset);
+    
+    int currentPage = periodOffset / offsetX - 1;
+    _pageControl.currentPage = currentPage;
+    
     if (offsetX > offsetActivatingMoveToBeginning) {
         scrollView.contentOffset = CGPointMake((offsetX - periodOffset), 0);
+        _pageControl.currentPage = currentPage;
     } else if (offsetX < offsetActivatingMoveToEnd) {
         scrollView.contentOffset = CGPointMake((offsetX + periodOffset), 0);
     }
