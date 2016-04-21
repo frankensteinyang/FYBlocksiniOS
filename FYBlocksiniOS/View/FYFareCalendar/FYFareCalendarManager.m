@@ -53,7 +53,7 @@
         components.month -= (limitMonth + 1) / 2;
     }
     NSInteger i = 0;
-    for(i = 0;i < limitMonth;i++)
+    for(i = 0; i < limitMonth; i++)
     {
         components.month++;
         FYFareCalendarHeaderModel *headerItem = [[FYFareCalendarHeaderModel alloc] init];

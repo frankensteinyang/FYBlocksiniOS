@@ -71,7 +71,7 @@
 
 - (void)addWeakView
 {
-    UIView *weekView = [[UIView alloc]initWithFrame:CGRectMake(0, 64, FY_SCREEN_WIDTH, FY_WeekViewHeight)];
+    UIView *weekView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, FY_SCREEN_WIDTH, FY_WeekViewHeight)];
     weekView.backgroundColor = FY_SelectBackgroundColor;
     [self.view addSubview:weekView];
     
@@ -132,7 +132,7 @@
     NSInteger width = FY_Iphone6Scale(54);
     NSInteger height = FY_Iphone6Scale(60);
     
-    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc]init];
+    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.itemSize = CGSizeMake(width, height);
     flowLayout.headerReferenceSize = CGSizeMake(FY_SCREEN_WIDTH, FY_HeaderViewHeight);
     flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
