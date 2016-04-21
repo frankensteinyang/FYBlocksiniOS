@@ -20,7 +20,8 @@ typedef NS_ENUM(NSInteger, FYFareCalendarViewArrowPosition)
 @property (nonatomic,copy)NSString *topLabelText;
 @property (nonatomic,copy)NSString *bottomLabelText;
 
-- (instancetype)initWithSideView:(UIView *)sideView arrowPosition:(FYFareCalendarViewArrowPosition)arrowPosition;
+- (instancetype)initWithSideView:(UIView *)sideView
+                   arrowPosition:(FYFareCalendarViewArrowPosition)arrowPosition;
 
 - (void)showWithAnimation;
 

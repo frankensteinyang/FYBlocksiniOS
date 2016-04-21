@@ -180,8 +180,7 @@
         }
         
         // 价格标签逻辑，待完善
-        if(NO)
-        {
+        if(/* DISABLES CODE */ (NO)) {
             cell.subLabel.text = calendarItem.chineseCalendar;
         }
         
