@@ -15,15 +15,13 @@
 @property (nonatomic,strong)NSDateComponents *todayCompontents;
 @property (nonatomic,strong)NSCalendar *greCalendar;
 @property (nonatomic,strong)NSDateFormatter *dateFormatter;
-@property (nonatomic,assign)BOOL showChineseHoliday;// 是否展示农历节日
-@property (nonatomic,assign)BOOL showChineseCalendar;// 是否展示农历
 @property (nonatomic,assign)NSInteger startDate;
 
 @end
 
 @implementation FYFareCalendarManager
 
-- (instancetype)initWithShowChineseHoliday:(BOOL)showChineseHoliday showChineseCalendar:(BOOL)showChineseCalendar startDate:(NSInteger)startDate
+- (instancetype)initWithStartDate:(NSInteger)startDate
 {
     self = [super init];
     {
@@ -31,8 +29,6 @@
         _todayDate = [NSDate date];
         _todayCompontents = [self dateToComponents:_todayDate];
         _dateFormatter = [[NSDateFormatter alloc]init];
-        _showChineseCalendar = showChineseCalendar;
-        _showChineseHoliday = showChineseHoliday;
         _startDate = startDate;
     }
     return self;

@@ -12,7 +12,7 @@
 
 @interface FYFareCalendarManager : NSObject
 
-- (instancetype)initWithShowChineseHoliday:(BOOL)showChineseHoliday showChineseCalendar:(BOOL)showChineseCalendar startDate:(NSInteger)startDate;
+- (instancetype)initWithStartDate:(NSInteger)startDate;
 // 获取数据源
 - (NSArray *)getCalendarDataSoruceWithLimitMonth:(NSInteger)limitMonth type:(FYFareCalendarViewControllerType)type;
 

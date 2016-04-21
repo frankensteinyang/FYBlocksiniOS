@@ -30,10 +30,8 @@
     if(self)
     {
         _afterTodayCanTouch = YES;
-        _beforeTodayCanTouch = YES;
+        _beforeTodayCanTouch = NO;
         _dataArray = [[NSMutableArray alloc]init];
-        _showChineseCalendar = NO;
-        _showChineseHoliday = NO;
         _showHolidayDifferentColor = NO;
         _showAlertView = NO;
     }
@@ -60,9 +58,11 @@
 - (void)initDataSource
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        FYFareCalendarManager *manager = [[FYFareCalendarManager alloc]initWithShowChineseHoliday:_showChineseHoliday showChineseCalendar:_showChineseCalendar startDate:_startDate];
+        
+        FYFareCalendarManager *manager = [[FYFareCalendarManager alloc] initWithStartDate:_startDate];
         NSArray *tempDataArray = [manager getCalendarDataSoruceWithLimitMonth:_limitMonth type:_type];
         dispatch_async(dispatch_get_main_queue(), ^{
+            
             [_dataArray addObjectsFromArray:tempDataArray];
             [self showCollectionViewWithStartIndexPath:manager.startIndexPath];
         });
@@ -178,7 +178,9 @@
             cell.dateLabel.text = [NSString stringWithFormat:@"%ld",(long)calendarItem.day];
             cell.userInteractionEnabled = YES;
         }
-        if(_showChineseCalendar)
+        
+        // 价格标签逻辑，待完善
+        if(NO)
         {
             cell.subLabel.text = calendarItem.chineseCalendar;
         }
