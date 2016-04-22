@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FYCalendar.h"
 
-@interface FYCalendarView : UIView
+@interface FYCalendarView : UIView <FYCalendarDataSource, FYCalendarDelegate, FYCalendarDelegateAppearance>
 
 
 @end
