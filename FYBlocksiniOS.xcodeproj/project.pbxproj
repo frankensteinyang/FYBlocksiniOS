@@ -23,6 +23,15 @@
 		EF4ADD991CBEAF5200948A3F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4ADD961CBEAF5200948A3F /* AppDelegate.m */; };
 		EF4ADD9B1CBEAF5200948A3F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4ADD981CBEAF5200948A3F /* main.m */; };
 		EF4ADDA01CBEB0DD00948A3F /* FYParametricClass.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4ADD9F1CBEB0DD00948A3F /* FYParametricClass.m */; };
+		EF69FF2C1CCA421900EF1EA9 /* FYCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = EF69FF271CCA421900EF1EA9 /* FYCalendar.m */; };
+		EF69FF2D1CCA421900EF1EA9 /* FYCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF69FF291CCA421900EF1EA9 /* FYCalendarView.m */; };
+		EF69FF311CCA436F00EF1EA9 /* FYCalendarAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = EF69FF301CCA436F00EF1EA9 /* FYCalendarAppearance.m */; };
+		EF69FF341CCA4F1C00EF1EA9 /* FYCalendarConstant.m in Sources */ = {isa = PBXBuildFile; fileRef = EF69FF331CCA4F1C00EF1EA9 /* FYCalendarConstant.m */; };
+		EF69FF371CCA509500EF1EA9 /* UIView+FYExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = EF69FF361CCA509500EF1EA9 /* UIView+FYExtension.m */; };
+		EF69FF3B1CCA537C00EF1EA9 /* FYCalendarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EF69FF3A1CCA537C00EF1EA9 /* FYCalendarCell.m */; };
+		EF69FF3E1CCA552F00EF1EA9 /* FYCalendarEventIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = EF69FF3D1CCA552F00EF1EA9 /* FYCalendarEventIndicator.m */; };
+		EF69FF411CCA557F00EF1EA9 /* FYCalendarHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = EF69FF401CCA557F00EF1EA9 /* FYCalendarHeader.m */; };
+		EF69FF441CCA55C600EF1EA9 /* FYCalendarStickyHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = EF69FF431CCA55C600EF1EA9 /* FYCalendarStickyHeader.m */; };
 		EF7B231B1CC6A10B00C3DBB5 /* FYPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = EF7B231A1CC6A10B00C3DBB5 /* FYPageControl.m */; };
 		EFDD1F661CAEC89D00AC09B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFDD1F641CAEC89D00AC09B1 /* Main.storyboard */; };
 		EFDD1F681CAEC89D00AC09B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EFDD1F671CAEC89D00AC09B1 /* Assets.xcassets */; };
@@ -89,6 +98,25 @@
 		EF4ADD981CBEAF5200948A3F /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		EF4ADD9E1CBEB0DD00948A3F /* FYParametricClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYParametricClass.h; sourceTree = "<group>"; };
 		EF4ADD9F1CBEB0DD00948A3F /* FYParametricClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYParametricClass.m; sourceTree = "<group>"; };
+		EF69FF261CCA421900EF1EA9 /* FYCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYCalendar.h; sourceTree = "<group>"; };
+		EF69FF271CCA421900EF1EA9 /* FYCalendar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYCalendar.m; sourceTree = "<group>"; };
+		EF69FF281CCA421900EF1EA9 /* FYCalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYCalendarView.h; sourceTree = "<group>"; };
+		EF69FF291CCA421900EF1EA9 /* FYCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYCalendarView.m; sourceTree = "<group>"; };
+		EF69FF2F1CCA436F00EF1EA9 /* FYCalendarAppearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYCalendarAppearance.h; sourceTree = "<group>"; };
+		EF69FF301CCA436F00EF1EA9 /* FYCalendarAppearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYCalendarAppearance.m; sourceTree = "<group>"; };
+		EF69FF321CCA4F1C00EF1EA9 /* FYCalendarConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYCalendarConstant.h; sourceTree = "<group>"; };
+		EF69FF331CCA4F1C00EF1EA9 /* FYCalendarConstant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYCalendarConstant.m; sourceTree = "<group>"; };
+		EF69FF351CCA509500EF1EA9 /* UIView+FYExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FYExtension.h"; sourceTree = "<group>"; };
+		EF69FF361CCA509500EF1EA9 /* UIView+FYExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FYExtension.m"; sourceTree = "<group>"; };
+		EF69FF381CCA523100EF1EA9 /* FYCalendarDynamicHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYCalendarDynamicHeader.h; sourceTree = "<group>"; };
+		EF69FF391CCA537C00EF1EA9 /* FYCalendarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYCalendarCell.h; sourceTree = "<group>"; };
+		EF69FF3A1CCA537C00EF1EA9 /* FYCalendarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYCalendarCell.m; sourceTree = "<group>"; };
+		EF69FF3C1CCA552F00EF1EA9 /* FYCalendarEventIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYCalendarEventIndicator.h; sourceTree = "<group>"; };
+		EF69FF3D1CCA552F00EF1EA9 /* FYCalendarEventIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYCalendarEventIndicator.m; sourceTree = "<group>"; };
+		EF69FF3F1CCA557F00EF1EA9 /* FYCalendarHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYCalendarHeader.h; sourceTree = "<group>"; };
+		EF69FF401CCA557F00EF1EA9 /* FYCalendarHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYCalendarHeader.m; sourceTree = "<group>"; };
+		EF69FF421CCA55C600EF1EA9 /* FYCalendarStickyHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYCalendarStickyHeader.h; sourceTree = "<group>"; };
+		EF69FF431CCA55C600EF1EA9 /* FYCalendarStickyHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYCalendarStickyHeader.m; sourceTree = "<group>"; };
 		EF7B23191CC6A10B00C3DBB5 /* FYPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYPageControl.h; sourceTree = "<group>"; };
 		EF7B231A1CC6A10B00C3DBB5 /* FYPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYPageControl.m; sourceTree = "<group>"; };
 		EFDD1F581CAEC89D00AC09B1 /* FYBlocksiniOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FYBlocksiniOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -157,6 +185,7 @@
 		EF09BC991CC4807700EC4619 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				EF69FF251CCA421900EF1EA9 /* FYCalendar */,
 				EF09BC9E1CC4812600EC4619 /* FYBannerView */,
 				EF09BC9A1CC4807700EC4619 /* FYFareCalendar */,
 			);
@@ -236,6 +265,32 @@
 				EF4ADD981CBEAF5200948A3F /* main.m */,
 			);
 			path = Other;
+			sourceTree = "<group>";
+		};
+		EF69FF251CCA421900EF1EA9 /* FYCalendar */ = {
+			isa = PBXGroup;
+			children = (
+				EF69FF261CCA421900EF1EA9 /* FYCalendar.h */,
+				EF69FF271CCA421900EF1EA9 /* FYCalendar.m */,
+				EF69FF281CCA421900EF1EA9 /* FYCalendarView.h */,
+				EF69FF291CCA421900EF1EA9 /* FYCalendarView.m */,
+				EF69FF2F1CCA436F00EF1EA9 /* FYCalendarAppearance.h */,
+				EF69FF301CCA436F00EF1EA9 /* FYCalendarAppearance.m */,
+				EF69FF321CCA4F1C00EF1EA9 /* FYCalendarConstant.h */,
+				EF69FF331CCA4F1C00EF1EA9 /* FYCalendarConstant.m */,
+				EF69FF351CCA509500EF1EA9 /* UIView+FYExtension.h */,
+				EF69FF361CCA509500EF1EA9 /* UIView+FYExtension.m */,
+				EF69FF381CCA523100EF1EA9 /* FYCalendarDynamicHeader.h */,
+				EF69FF391CCA537C00EF1EA9 /* FYCalendarCell.h */,
+				EF69FF3A1CCA537C00EF1EA9 /* FYCalendarCell.m */,
+				EF69FF3C1CCA552F00EF1EA9 /* FYCalendarEventIndicator.h */,
+				EF69FF3D1CCA552F00EF1EA9 /* FYCalendarEventIndicator.m */,
+				EF69FF3F1CCA557F00EF1EA9 /* FYCalendarHeader.h */,
+				EF69FF401CCA557F00EF1EA9 /* FYCalendarHeader.m */,
+				EF69FF421CCA55C600EF1EA9 /* FYCalendarStickyHeader.h */,
+				EF69FF431CCA55C600EF1EA9 /* FYCalendarStickyHeader.m */,
+			);
+			path = FYCalendar;
 			sourceTree = "<group>";
 		};
 		EF7B23171CC6A08300C3DBB5 /* FYBannerView */ = {
@@ -520,10 +575,16 @@
 				EF4ADD9B1CBEAF5200948A3F /* main.m in Sources */,
 				EF4ADD991CBEAF5200948A3F /* AppDelegate.m in Sources */,
 				EF09BC9D1CC4807700EC4619 /* FYFareCalendarView.m in Sources */,
+				EF69FF2D1CCA421900EF1EA9 /* FYCalendarView.m in Sources */,
 				EFFB91961CC7B36400FFFE1A /* FYFareCalendarCollectionViewCell.m in Sources */,
+				EF69FF311CCA436F00EF1EA9 /* FYCalendarAppearance.m in Sources */,
 				EF0CF6B61CC0F56400BA94C6 /* FYARCBlockClass.m in Sources */,
+				EF69FF371CCA509500EF1EA9 /* UIView+FYExtension.m in Sources */,
 				EF09BCA11CC4827E00EC4619 /* FYBannerViewItem.m in Sources */,
 				EF4ADD931CBEAF4900948A3F /* ViewController.m in Sources */,
+				EF69FF341CCA4F1C00EF1EA9 /* FYCalendarConstant.m in Sources */,
+				EF69FF2C1CCA421900EF1EA9 /* FYCalendar.m in Sources */,
+				EF69FF441CCA55C600EF1EA9 /* FYCalendarStickyHeader.m in Sources */,
 				EFFB91991CC7B3A900FFFE1A /* FYCircleLabel.m in Sources */,
 				EF4ADD911CBEAF4900948A3F /* FYFirstViewController.m in Sources */,
 				EFFB918C1CC7A54C00FFFE1A /* FYFareCalendarViewController.m in Sources */,
@@ -535,10 +596,13 @@
 				EF39AB9B1CC3E829001A6395 /* FYBannerViewController.m in Sources */,
 				EF09BCA41CC485F200EC4619 /* FYBannerView.m in Sources */,
 				EF0CF6B31CC0F53F00BA94C6 /* FYMRCBlockClass.m in Sources */,
+				EF69FF3E1CCA552F00EF1EA9 /* FYCalendarEventIndicator.m in Sources */,
 				EFFB919C1CC7B4CB00FFFE1A /* FYFareCalendarCollectionReusableView.m in Sources */,
 				EF09BCAD1CC4C08E00EC4619 /* UIColor+FYImageAdditions.m in Sources */,
 				EF09BCAA1CC4936800EC4619 /* FYCollectionViewCell.m in Sources */,
+				EF69FF3B1CCA537C00EF1EA9 /* FYCalendarCell.m in Sources */,
 				EFFB91901CC7AE0C00FFFE1A /* FYFareCalendarManager.m in Sources */,
+				EF69FF411CCA557F00EF1EA9 /* FYCalendarHeader.m in Sources */,
 				EFFB91931CC7AFEE00FFFE1A /* FYFareCalendarHeaderModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -11,6 +11,7 @@
 
 #import "FYCalendarViewController.h"
 #import "FYFareCalendarViewController.h"
+#import "FYCalendarView.h"
 
 @interface FYCalendarViewController () <FYFareCalendarViewControllerDelegate>
 
@@ -57,6 +58,23 @@
         make.size.mas_equalTo(CGSizeMake(100, 50));
     }];
     
+    UILabel *calendarLbl = [[UILabel alloc] init];
+    [calendarLbl setText:@"$126"];
+    [calendarLbl setTextColor:[UIColor orangeColor]];
+    [calendarLbl setTextAlignment:NSTextAlignmentCenter];
+    calendarLbl.userInteractionEnabled = YES;
+    UITapGestureRecognizer *taper = [[UITapGestureRecognizer alloc]
+                                     initWithTarget:self
+                                     action:@selector(calendarTouchUpInside:)];
+    [calendarLbl addGestureRecognizer:taper];
+    [self.view addSubview:calendarLbl];
+    [calendarLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+        @strongify(self);
+        make.top.equalTo(fareLbl.mas_bottom).with.offset(10);
+        make.centerX.mas_equalTo(self.view.mas_centerX);
+        make.size.mas_equalTo(CGSizeMake(100, 50));
+    }];
+    
 }
 
 - (void)calendarViewSelectedWithStartDate:(NSInteger)startDate endDate:(NSInteger)endDate {
@@ -84,6 +102,24 @@
     fcvc.delegate = self;
     [self presentViewController:fcvc animated:YES completion:nil];
     
+}
+
+- (void)calendarTouchUpInside:(UITapGestureRecognizer *)recognizer {
+    
+    UILabel *lbl = (UILabel *)recognizer.view;
+    NSLog(@"%@被点击了", lbl.text);
+    
+    FYCalendarView *calendar = [[FYCalendarView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+    [self.view addSubview:calendar];
+    
+    @weakify(self);
+    [calendar mas_makeConstraints:^(MASConstraintMaker *make) {
+        @strongify(self);
+        make.top.equalTo(self.view);
+        make.left.equalTo(self.view);
+        make.right.equalTo(self.view);
+        make.bottom.equalTo(self.view);
+    }];
 }
 
 - (void)backBtnClicked {
