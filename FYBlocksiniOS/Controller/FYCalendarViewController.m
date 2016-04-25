@@ -25,6 +25,7 @@
 - (void)viewDidLoad {
     
     @weakify(self);
+    
     [self.view setBackgroundColor:[UIColor grayColor]];
     
     UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -111,7 +112,7 @@
     UILabel *lbl = (UILabel *)recognizer.view;
     NSLog(@"%@被点击了", lbl.text);
     
-    FYCalendarView *calendar = [[FYCalendarView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+    FYCalendarView *calendar = [[FYCalendarView alloc] init];
     [self.view addSubview:calendar];
     
     @weakify(self);

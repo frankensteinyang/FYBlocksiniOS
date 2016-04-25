@@ -19,7 +19,9 @@ typedef NS_ENUM(NSInteger, FYCalendarCellState) {
 };
 
 typedef NS_ENUM(NSUInteger, FYCalendarCellShape) {
+    // 圆形
     FYCalendarCellShapeCircle    = 0,
+    // 矩形
     FYCalendarCellShapeRectangle = 1
 };
 

@@ -8,7 +8,8 @@
 
 #import "FYCalendarConstant.h"
 
-CGFloat const FYCalendarStandardHeaderHeight = 40;
+// 日历的Header的高
+CGFloat const FYCalendarStandardHeaderHeight = 50;
 CGFloat const FYCalendarStandardWeekdayHeight = 25;
 CGFloat const FYCalendarStandardMonthlyPageHeight = 300.0;
 CGFloat const FYCalendarStandardWeeklyPageHeight = 108+1/3.0;
