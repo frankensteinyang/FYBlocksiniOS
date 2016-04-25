@@ -45,3 +45,20 @@ UIKIT_EXTERN NSInteger const FYCalendarDefaultHourComponent;
 #else
 #define FYCalendarFloor(c) floorf(c)
 #endif
+
+#pragma mark - Deprecated
+
+#define FYCalendarDeprecated(instead) DEPRECATED_MSG_ATTRIBUTE(" Use " # instead " instead")
+
+FYCalendarDeprecated('FYCalendarCellShape')
+typedef NS_ENUM(NSInteger, FYCalendarCellStyle) {
+    FYCalendarCellStyleCircle      = 0,
+    FYCalendarCellStyleRectangle   = 1
+};
+
+FYCalendarDeprecated('FYCalendarScrollDirection')
+typedef NS_ENUM(NSInteger, FYCalendarFlow) {
+    FYCalendarFlowVertical,
+    FYCalendarFlowHorizontal
+};
+

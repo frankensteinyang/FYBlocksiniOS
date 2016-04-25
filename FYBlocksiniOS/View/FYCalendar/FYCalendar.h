@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 #import "FYCalendarAppearance.h"
+#import "FYCalendarConstant.h"
 
 //! Project version number for FYCalendar.
 FOUNDATION_EXPORT double FYCalendarVersionNumber;
@@ -74,6 +75,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (NSInteger)calendar:(FYCalendar *)calendar numberOfEventsForDate:(NSDate *)date;
 
+/**
+ * This function is deprecated
+ */
+- (BOOL)calendar:(FYCalendar *)calendar hasEventForDate:(NSDate *)date FYCalendarDeprecated(-calendar:numberOfEventsForDate:);
+
 @end
 
 
@@ -113,6 +119,12 @@ NS_ASSUME_NONNULL_BEGIN
  * Tells the delegate the calendar is about to change the current page.
  */
 - (void)calendarCurrentPageDidChange:(FYCalendar *)calendar;
+
+/**
+ * These functions are deprecated
+ */
+- (void)calendarCurrentScopeWillChange:(FYCalendar *)calendar animated:(BOOL)animated FYCalendarDeprecated(-calendar:boundingRectWillChange:animated:);
+- (void)calendarCurrentMonthDidChange:(FYCalendar *)calendar FYCalendarDeprecated(-calendarCurrentPageDidChange:);
 
 @end
 
@@ -179,6 +191,13 @@ NS_ASSUME_NONNULL_BEGIN
  * Asks the delegate for a shape for the specific date.
  */
 - (FYCalendarCellShape)calendar:(FYCalendar *)calendar appearance:(FYCalendarAppearance *)appearance cellShapeForDate:(NSDate *)date;
+
+/**
+ * These functions are deprecated
+ */
+- (FYCalendarCellStyle)calendar:(FYCalendar *)calendar appearance:(FYCalendarAppearance *)appearance cellStyleForDate:(NSDate *)date FYCalendarDeprecated(-calendar:appearance:cellShapeForDate:);
+- (nullable UIColor *)calendar:(FYCalendar *)calendar appearance:(FYCalendarAppearance *)appearance fillColorForDate:(NSDate *)date FYCalendarDeprecated(-calendar:appearance:fillDefaultColorForDate:);
+- (nullable UIColor *)calendar:(FYCalendar *)calendar appearance:(FYCalendarAppearance *)appearance selectionColorForDate:(NSDate *)date FYCalendarDeprecated(-calendar:appearance:fillSelectionColorForDate:);
 
 @end
 
