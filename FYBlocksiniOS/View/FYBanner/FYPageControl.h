@@ -2,14 +2,13 @@
 //  FYPageControl.h
 //  FYBlocksiniOS
 //
-//  Created by Frankenstein Yang on 4/20/16.
+//  Created by Frankenstein Yang on 4/26/16.
 //  Copyright © 2016 Frankenstein Yang. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-typedef enum
-{
+typedef enum {
     PageControlStyleDefault = 0,
     PageControlStyleStrokedCircle = 1,
     PageControlStylePressed1 = 2,
@@ -17,6 +16,8 @@ typedef enum
     PageControlStyleWithPageNumber = 4,
     PageControlStyleThumb = 5,
     PageControlStyleStrokedSquare = 6,
+    PageControlStyleRect = 7
+    
 } PageControlStyle;
 
 @interface FYPageControl : UIControl

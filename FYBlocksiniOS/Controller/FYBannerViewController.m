@@ -13,12 +13,14 @@
 #import "FYBannerView.h"
 #import "FYBannerViewItem.h"
 #import "UIColor+FYImageAdditions.h"
+#import "FYBanner.h"
 
 @interface FYBannerViewController ()
 
 @property (nonatomic, strong) FYBannerView *bannerView;
 @property (nonatomic, assign) CGSize itemSize;
 @property (nonatomic, assign) CGFloat itemSpacing;
+@property (nonatomic, strong) NSArray *imageArray;
 
 @property (nonatomic, copy) NSArray<FYBannerViewItem *> *items;
 
@@ -46,30 +48,41 @@
     
     // Banner
 //    self.bannerView = [[FYBannerView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), self.itemSize.height)];
-    self.bannerView = [[FYBannerView alloc] init];
-    [self.view addSubview:self.bannerView];
+//    self.bannerView = [[FYBannerView alloc] init];
+//    [self.view addSubview:self.bannerView];
+//    
+//    [self.bannerView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        @strongify(self);
+//        make.bottom.equalTo(self.view.mas_bottom);
+//        make.right.equalTo(self.view.mas_right);
+//        make.left.equalTo(self.view.mas_left);
+//        make.height.mas_equalTo(150);
+//    }];
+//    
+//    self.bannerView.itemSize = self.itemSize;
+//    self.bannerView.itemSpacing = self.itemSpacing;
+//    
+//    self.bannerView.isAutoScroll = YES;
+//    self.bannerView.timeInterval = 2.0;
+//    
+//    UIColor *color = [UIColor colorWithRed:237 / 255.0 green:237 / 255.0 blue:237 / 255.0 alpha:1];
+//    self.bannerView.placeholderImage = [color fy_imageSized:self.itemSize];
+//    self.bannerView.didSelectItemAtIndex = ^(NSUInteger index) {
+//        NSLog(@"Did select item at index : %@", @(index));
+//    };
+//    self.bannerView.items = self.items;
+//    NSLog(@"%lu", (unsigned long)[self.bannerView.items count]);
     
-    [self.bannerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        @strongify(self);
-        make.bottom.equalTo(self.view.mas_bottom);
-        make.right.equalTo(self.view.mas_right);
-        make.left.equalTo(self.view.mas_left);
-        make.height.mas_equalTo(150);
+    // 另一种Banner思路
+    FYBanner *banner = [[FYBanner alloc] initWithContainerView:self.view responseBlock:^(NSString *link) {
+        NSLog(@"the link of the image you pressed is %@", link);
     }];
-    
-    self.bannerView.itemSize = self.itemSize;
-    self.bannerView.itemSpacing = self.itemSpacing;
-    
-    self.bannerView.isAutoScroll = YES;
-    self.bannerView.timeInterval = 2.0;
-    
-    UIColor *color = [UIColor colorWithRed:237 / 255.0 green:237 / 255.0 blue:237 / 255.0 alpha:1];
-    self.bannerView.placeholderImage = [color fy_imageSized:self.itemSize];
-    self.bannerView.didSelectItemAtIndex = ^(NSUInteger index) {
-        NSLog(@"Did select item at index : %@", @(index));
-    };
-    self.bannerView.items = self.items;
-    NSLog(@"%lu", (unsigned long)[self.bannerView.items count]);
+    banner.frame = CGRectMake(20, 200, self.view.frame.size.width - 40, 105);
+    // 设置placeHolder image
+//        banner.placeHolder = [UIImage imageNamed:@"Frankenstein.jpg"];
+    banner.duration = 1.5;
+    banner.imageArray = [NSMutableArray arrayWithArray:self.imageArray];
+    NSLog(@"%@", NSStringFromCGRect(banner.frame));
     
 }
 
@@ -90,6 +103,21 @@
     }
     
     return items.copy;
+    
+}
+
+- (NSArray *)imageArray {
+    
+    if (!_imageArray) {
+        _imageArray = @[
+                        @"http://image.photophoto.cn/nm-8/056/001/0560010001.jpg",
+                        @"http://image.photophoto.cn/nm-8/056/002/0560020026.jpg",
+                        @"http://image.photophoto.cn/nm-8/056/002/0560020022.jpg",
+                        @"http://image.photophoto.cn/nm-8/056/001/0560010012.jpg",
+                        @"http://image.photophoto.cn/nm-8/056/002/0560020017.jpg",
+                        @"http://image.photophoto.cn/nm-8/056/002/0560020015.jpg"];
+    }
+    return _imageArray;
     
 }
 

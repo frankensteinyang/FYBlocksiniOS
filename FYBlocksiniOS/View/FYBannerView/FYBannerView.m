@@ -60,7 +60,7 @@
     // PageControl
     _pageControl = [[FYPageControl alloc] initWithFrame:CGRectMake(20, 100, 80, 20)];
     [_pageControl setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
-    [_pageControl setPageControlStyle:PageControlStyleWithPageNumber];
+    [_pageControl setPageControlStyle:PageControlStyleRect];
     _pageControl.currentPage = 0;
     [self addSubview:_pageControl];
     
