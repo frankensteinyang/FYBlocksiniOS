@@ -15,6 +15,8 @@
 #import "UIColor+FYImageAdditions.h"
 #import "FYBanner.h"
 
+#import "UIView+FYRoundRect.h"
+
 @interface FYBannerViewController ()
 
 @property (nonatomic, strong) FYBannerView *bannerView;
@@ -74,15 +76,33 @@
 //    NSLog(@"%lu", (unsigned long)[self.bannerView.items count]);
     
     // 另一种Banner思路
-    FYBanner *banner = [[FYBanner alloc] initWithContainerView:self.view responseBlock:^(NSString *link) {
+//    FYBanner *banner = [[FYBanner alloc] initWithContainerView:self.view responseBlock:^(NSString *link) {
+//        NSLog(@"the link of the image you pressed is %@", link);
+//    }];
+//    banner.frame = CGRectMake(20, 200, self.view.frame.size.width - 40, 105);
+//    // 设置placeHolder image
+////        banner.placeHolder = [UIImage imageNamed:@"Frankenstein.jpg"];
+//    banner.duration = 1.5;
+//    banner.imageArray = [NSMutableArray arrayWithArray:self.imageArray];
+//    NSLog(@"%@", NSStringFromCGRect(banner.frame));
+    
+    UIView *new = [[UIView alloc] initWithFrame:CGRectMake(20, 360, self.view.frame.size.width - 40, 105)];
+    [new applyRoundCorners:UIRectCornerTopRight | UIRectCornerTopLeft radius:9.0 frame:new.frame];
+    FYBanner *x = [[FYBanner alloc] initWithFrame:new.frame responseBlock:^(NSString *link) {
         NSLog(@"the link of the image you pressed is %@", link);
     }];
-    banner.frame = CGRectMake(20, 200, self.view.frame.size.width - 40, 105);
+    
+    x.clipsToBounds = YES;
     // 设置placeHolder image
-//        banner.placeHolder = [UIImage imageNamed:@"Frankenstein.jpg"];
-    banner.duration = 1.5;
-    banner.imageArray = [NSMutableArray arrayWithArray:self.imageArray];
-    NSLog(@"%@", NSStringFromCGRect(banner.frame));
+    //        banner.placeHolder = [UIImage imageNamed:@"Frankenstein.jpg"];
+    x.duration = 1.5;
+    x.imageArray = [NSMutableArray arrayWithArray:self.imageArray];
+    [new addSubview:x];
+    [self.view addSubview:new];
+    
+    [new mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view);
+    }];
     
 }
 

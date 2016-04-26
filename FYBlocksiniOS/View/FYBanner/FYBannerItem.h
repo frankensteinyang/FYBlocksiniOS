@@ -10,7 +10,7 @@
 
 #import "FYCustomizedView.h"
 
-@interface FYBannerItem : FYCustomizedView
+@interface FYBannerItem : UIView
 
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) NSString    *link;

@@ -25,6 +25,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.userInteractionEnabled = YES;
+        self.clipsToBounds = YES;
         [self addSubview:self.imageView];
         [self addSubview:self.placeHolderImageView];
         [self makeConstraints];

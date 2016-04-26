@@ -15,6 +15,8 @@
 #import "FYBannerItem.h"
 #import "FYPageControl.h"
 
+#import "UIView+FYRoundRect.h"
+
 #define K_ITEM_WIDTH (self.frame.size.width)
 #define FY_SAFE_BLOCK_RUN(block, ...) block ? block(__VA_ARGS__) : nil
 
@@ -49,22 +51,30 @@
     }
 }
 
-- (instancetype)initWithContainerView:(UIView *)contianer
-                        responseBlock:(FYBannerResponseBlock)block {
+//- (instancetype)initWithContainerView:(UIView *)contianer
+//                        responseBlock:(FYBannerResponseBlock)block {
+- (instancetype)initWithFrame:(CGRect)frame responseBlock:(FYBannerResponseBlock)block {
     
-    self = [super init];
+    self = [super initWithFrame:frame];
     if (self) {
         [self addSubview:self.scrollView];
         [self addSubview:self.pageControl];
         
         [self makeConstraints];
+        
+        self.clipsToBounds = YES;
+        
+//        [self applyRoundCorners:UIRectCornerTopRight | UIRectCornerTopLeft radius:9.0];
+        
+        NSLog(@"%@", NSStringFromCGRect(self.frame));
+        
         _responseBlock = [block copy];
         
         
-        if (contianer) {
-            _container = contianer;
-            [contianer addSubview:self];
-        }
+//        if (contianer) {
+//            _container = contianer;
+//            [contianer addSubview:self];
+//        }
     }
     return self;
 }
@@ -74,8 +84,10 @@
 - (UIScrollView *)scrollView {
     if (!_scrollView) {
         _scrollView = [[UIScrollView alloc] init];
+//        [_scrollView applyRoundCorners:UIRectCornerTopRight | UIRectCornerTopLeft radius:
         _scrollView.userInteractionEnabled = YES;
-        _scrollView.bounces = YES;
+//        _scrollView.bounces = YES;
+        _scrollView.clipsToBounds = YES;
         _scrollView.showsHorizontalScrollIndicator = NO;
         _scrollView.showsVerticalScrollIndicator = NO;
         _scrollView.pagingEnabled = YES;
@@ -105,13 +117,13 @@
 - (void)makeConstraints {
     
     @weakify(self);
-    [self.scrollView mas_updateConstraints:^(MASConstraintMaker *make) {
+    [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
         @strongify(self);
         make.size.mas_equalTo(self);
         make.center.mas_equalTo(self);
     }];
     
-    [_pageControl mas_updateConstraints:^(MASConstraintMaker *make) {
+    [_pageControl mas_makeConstraints:^(MASConstraintMaker *make) {
         @strongify(self);
         make.right.equalTo(self.mas_right).offset(-5);
         make.left.equalTo(self.mas_left).offset(5);

@@ -38,6 +38,7 @@
 		EF69FF3E1CCA552F00EF1EA9 /* FYCalendarEventIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = EF69FF3D1CCA552F00EF1EA9 /* FYCalendarEventIndicator.m */; };
 		EF69FF411CCA557F00EF1EA9 /* FYCalendarHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = EF69FF401CCA557F00EF1EA9 /* FYCalendarHeader.m */; };
 		EF69FF441CCA55C600EF1EA9 /* FYCalendarStickyHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = EF69FF431CCA55C600EF1EA9 /* FYCalendarStickyHeader.m */; };
+		EFB13E011CCFD35E0089965C /* UIView+FYRoundRect.m in Sources */ = {isa = PBXBuildFile; fileRef = EFB13E001CCFD35E0089965C /* UIView+FYRoundRect.m */; };
 		EFDD1F661CAEC89D00AC09B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFDD1F641CAEC89D00AC09B1 /* Main.storyboard */; };
 		EFDD1F681CAEC89D00AC09B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EFDD1F671CAEC89D00AC09B1 /* Assets.xcassets */; };
 		EFDD1F6B1CAEC89D00AC09B1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFDD1F691CAEC89D00AC09B1 /* LaunchScreen.storyboard */; };
@@ -136,6 +137,8 @@
 		EF69FF401CCA557F00EF1EA9 /* FYCalendarHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYCalendarHeader.m; sourceTree = "<group>"; };
 		EF69FF421CCA55C600EF1EA9 /* FYCalendarStickyHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYCalendarStickyHeader.h; sourceTree = "<group>"; };
 		EF69FF431CCA55C600EF1EA9 /* FYCalendarStickyHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYCalendarStickyHeader.m; sourceTree = "<group>"; };
+		EFB13DFF1CCFD35E0089965C /* UIView+FYRoundRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FYRoundRect.h"; sourceTree = "<group>"; };
+		EFB13E001CCFD35E0089965C /* UIView+FYRoundRect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FYRoundRect.m"; sourceTree = "<group>"; };
 		EFDD1F581CAEC89D00AC09B1 /* FYBlocksiniOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FYBlocksiniOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFDD1F651CAEC89D00AC09B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EFDD1F671CAEC89D00AC09B1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../Assets.xcassets; sourceTree = "<group>"; };
@@ -216,6 +219,8 @@
 				EF098A9C1CCF72C200E92909 /* FYCustomizedView.m */,
 				EF098AA41CCF81F300E92909 /* UIImage+FYRoundRect.h */,
 				EF098AA51CCF81F300E92909 /* UIImage+FYRoundRect.m */,
+				EFB13DFF1CCFD35E0089965C /* UIView+FYRoundRect.h */,
+				EFB13E001CCFD35E0089965C /* UIView+FYRoundRect.m */,
 			);
 			path = FYBanner;
 			sourceTree = "<group>";
@@ -615,6 +620,7 @@
 				EFFB91961CC7B36400FFFE1A /* FYFareCalendarCollectionViewCell.m in Sources */,
 				EF69FF311CCA436F00EF1EA9 /* FYCalendarAppearance.m in Sources */,
 				EF0CF6B61CC0F56400BA94C6 /* FYARCBlockClass.m in Sources */,
+				EFB13E011CCFD35E0089965C /* UIView+FYRoundRect.m in Sources */,
 				EF69FF371CCA509500EF1EA9 /* UIView+FYExtension.m in Sources */,
 				EF09BCA11CC4827E00EC4619 /* FYBannerViewItem.m in Sources */,
 				EF4ADD931CBEAF4900948A3F /* ViewController.m in Sources */,
@@ -789,6 +795,7 @@
 			baseConfigurationReference = B697AE03AA05C7BA7B6A4E93 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				INFOPLIST_FILE = FYBlocksiniOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -803,6 +810,7 @@
 			baseConfigurationReference = 0236F843FA8B51FA994E77F4 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				INFOPLIST_FILE = FYBlocksiniOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
