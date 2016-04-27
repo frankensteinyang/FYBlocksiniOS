@@ -8,13 +8,13 @@
 
 #import <SDWebImage/UIImageView+WebCache.h>
 
-#import "FYBannerView.h"
+#import "FYBannerViewB.h"
 #import "FYCollectionViewFlowLayout.h"
 #import "FYCollectionViewCell.h"
 #import "UIColor+FYImageAdditions.h"
 #import "FYPageControl.h"
 
-@interface FYBannerView () <UICollectionViewDataSource, UICollectionViewDelegate>
+@interface FYBannerViewB () <UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) FYCollectionViewFlowLayout *collectionViewLayout;
@@ -23,7 +23,7 @@
 
 @end
 
-@implementation FYBannerView
+@implementation FYBannerViewB
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];

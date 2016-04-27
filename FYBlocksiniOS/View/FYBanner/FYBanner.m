@@ -15,8 +15,6 @@
 #import "FYBannerItem.h"
 #import "FYPageControl.h"
 
-#import "UIView+FYRoundRect.h"
-
 #define K_ITEM_WIDTH (self.frame.size.width)
 #define FY_SAFE_BLOCK_RUN(block, ...) block ? block(__VA_ARGS__) : nil
 
@@ -25,7 +23,7 @@
 @property (nonatomic, strong) UIScrollView                        *scrollView;
 @property (nonatomic, strong) FYPageControl                       *pageControl;
 @property (nonatomic, strong) NSTimer                             *timer;
-@property (nonatomic, copy  ) FYBannerResponseBlock               responseBlock;
+@property (nonatomic, copy  ) FYBannerResponseBridgeBlock         bridgeBlock;
 @property (nonatomic, weak  ) UIView                              *container;
 
 @end
@@ -46,37 +44,28 @@
         _timer = nil;
     }
     
-    if (_responseBlock) {
-        _responseBlock = nil;
+    if (_bridgeBlock) {
+        _bridgeBlock = nil;
     }
 }
 
-//- (instancetype)initWithContainerView:(UIView *)contianer
-//                        responseBlock:(FYBannerResponseBlock)block {
-- (instancetype)initWithFrame:(CGRect)frame responseBlock:(FYBannerResponseBlock)block {
+- (instancetype)initWithFrame:(CGRect)frame
+                    imageData:(NSMutableArray *)data
+                  bridgeBlock:(FYBannerResponseBridgeBlock)block {
     
     self = [super initWithFrame:frame];
     if (self) {
+        
+        self.imageArray = data;
         [self addSubview:self.scrollView];
         [self addSubview:self.pageControl];
         
         [self makeConstraints];
         
-        self.clipsToBounds = YES;
-        
-//        [self applyRoundCorners:UIRectCornerTopRight | UIRectCornerTopLeft radius:9.0];
-        
-        NSLog(@"%@", NSStringFromCGRect(self.frame));
-        
-        _responseBlock = [block copy];
-        
-        
-//        if (contianer) {
-//            _container = contianer;
-//            [contianer addSubview:self];
-//        }
+        _bridgeBlock = [block copy];
     }
     return self;
+    
 }
 
 #pragma mark - lazy load
@@ -84,9 +73,7 @@
 - (UIScrollView *)scrollView {
     if (!_scrollView) {
         _scrollView = [[UIScrollView alloc] init];
-//        [_scrollView applyRoundCorners:UIRectCornerTopRight | UIRectCornerTopLeft radius:
         _scrollView.userInteractionEnabled = YES;
-//        _scrollView.bounces = YES;
         _scrollView.clipsToBounds = YES;
         _scrollView.showsHorizontalScrollIndicator = NO;
         _scrollView.showsVerticalScrollIndicator = NO;
@@ -194,7 +181,7 @@
     }
     FYBannerItem *singleItemView = [[FYBannerItem alloc] initWithFrame:
                                                   CGRectMake(K_ITEM_WIDTH * position, 0, K_ITEM_WIDTH, self.frame.size.height)
-                                                                                       placeHolder:_placeHolder];
+                                                                                       placeHolderImage:_placeHolder];
     singleItemView.tag = tag;
     [self.scrollView addSubview:singleItemView];
     
@@ -256,9 +243,9 @@
         [[self.scrollView viewWithTag:currentTag]isKindOfClass:[FYBannerItem class]]) {
         itemView = (FYBannerItem *)[self.scrollView viewWithTag:currentTag];
         
-        if (_responseBlock) {
+        if (_bridgeBlock) {
             if (itemView.link && [itemView.link length]) {
-                FY_SAFE_BLOCK_RUN(_responseBlock,itemView.link);
+                FY_SAFE_BLOCK_RUN(_bridgeBlock, itemView.link);
             }
         }
     }

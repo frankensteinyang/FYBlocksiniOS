@@ -11,7 +11,6 @@
 @interface UIView (FYRoundRect)
 
 - (void)applyRoundCorners:(UIRectCorner)corners
-                   radius:(CGFloat)radius
-                    frame:(CGRect)frame;
+                   radius:(CGFloat)radius;
 
 @end

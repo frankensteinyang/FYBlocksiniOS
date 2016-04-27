@@ -8,9 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#import "FYCustomizedView.h"
-
-typedef void (^FYBannerResponseBlock)(NSString * link);
+typedef void (^FYBannerResponseBridgeBlock)(NSString *link);
 
 @interface FYBanner : UIView
 
@@ -18,10 +16,8 @@ typedef void (^FYBannerResponseBlock)(NSString * link);
 @property (nonatomic, strong) NSMutableArray                *imageArray;
 @property (nonatomic, assign) CFTimeInterval                duration;
 
-//- (instancetype)initWithContainerView:(UIView *)contianer
-//                        responseBlock:(FYBannerResponseBlock)block;
-
 - (instancetype)initWithFrame:(CGRect)frame
-                responseBlock:(FYBannerResponseBlock)block;
+                    imageData:(NSMutableArray *)data
+                  bridgeBlock:(FYBannerResponseBridgeBlock)block;
 
 @end

@@ -14,61 +14,74 @@
 @implementation FYBannerItem
 
 - (void)dealloc {
+    
     _imageView = nil;
     _placeHolderImageView =nil;
     _placeHolderImage = nil;
     _link = nil;
+    
 }
 
-
-- (instancetype)initWithFrame:(CGRect)frame placeHolder:(UIImage *)placeHolder {
+- (instancetype)initWithFrame:(CGRect)frame
+             placeHolderImage:(UIImage *)placeHolderImage {
+    
     self = [super initWithFrame:frame];
     if (self) {
         self.userInteractionEnabled = YES;
-        self.clipsToBounds = YES;
         [self addSubview:self.imageView];
         [self addSubview:self.placeHolderImageView];
         [self makeConstraints];
         
-        self.placeHolderImage = placeHolder;
+        self.placeHolderImage = placeHolderImage;
     }
     return self;
+    
 }
 
 - (void)setImage:(UIImage *)image {
+    
     self.hasSetImage = YES;
     [self.placeHolderImageView setHidden:YES];
     [self.imageView setImage:image];
+    
 }
 
-#pragma mark - lazy load
+#pragma mark - 懒加载
 
 - (UIImageView *)imageView {
+    
     if (!_imageView) {
+        
         _imageView = [[UIImageView alloc] init];
         _imageView.userInteractionEnabled = YES;
         [_imageView setContentMode:UIViewContentModeScaleToFill];
-        _imageView.clipsToBounds = YES;
     }
     return _imageView;
+    
 }
 
 -(UIImageView *)placeHolderImageView {
+    
     if (!_placeHolderImageView) {
-        _placeHolderImageView = [[UIImageView alloc]init];
+        
+        _placeHolderImageView = [[UIImageView alloc] init];
         [_placeHolderImageView setContentMode:UIViewContentModeScaleToFill];
     }
     return _placeHolderImageView;
+    
 }
 
-#pragma mark - setter
+#pragma mark - Setter
 
 - (void)setPlaceHolderImage:(UIImage *)placeHolderImage {
+    
     if (!placeHolderImage) {
+        
         return;
     }
     _placeHolderImage = placeHolderImage;
     [self.placeHolderImageView setImage:_placeHolderImage];
+    
 }
 
 #pragma mark - constraints

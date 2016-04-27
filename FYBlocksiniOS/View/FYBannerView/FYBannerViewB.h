@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "FYBannerViewItem.h"
 
-@interface FYBannerView : UIView
+@interface FYBannerViewB : UIView
 
 @property (nonatomic, copy) NSArray<FYBannerViewItem *> *items;
 @property (nonatomic, assign) CGSize itemSize;
