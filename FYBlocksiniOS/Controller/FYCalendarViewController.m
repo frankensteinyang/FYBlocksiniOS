@@ -10,13 +10,11 @@
 #import <libextobjc/EXTScope.h>
 
 #import "FYCalendarViewController.h"
-#import "FYFareCalendarViewController.h"
-#import "FYCalendarView.h"
+#import "FYCalendar.h"
 
-@interface FYCalendarViewController () <FYFareCalendarViewControllerDelegate>
+@interface FYCalendarViewController ()
 
-@property (nonatomic, assign)NSInteger startDate;
-@property (nonatomic, assign)NSInteger endDate;
+@property (nonatomic, strong) FYCalendar *calendar;
 
 @end
 
@@ -42,25 +40,6 @@
         make.size.mas_equalTo(CGSizeMake(100, 50));
     }];
     
-    UILabel *fareLbl = [[UILabel alloc] init];
-    [fareLbl setText:@"￥125"];
-    [fareLbl setTextColor:[UIColor orangeColor]];
-    [fareLbl setTextAlignment:NSTextAlignmentCenter];
-    
-    fareLbl.userInteractionEnabled = YES;
-    UITapGestureRecognizer *lblTaper = [[UITapGestureRecognizer alloc]
-                                        initWithTarget:self
-                                                action:@selector(lblTouchUpInside:)];
-    [fareLbl addGestureRecognizer:lblTaper];
-    
-    [self.view addSubview:fareLbl];
-    [fareLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        @strongify(self);
-        make.top.equalTo(backBtn.mas_bottom).with.offset(10);
-        make.centerX.mas_equalTo(self.view.mas_centerX);
-        make.size.mas_equalTo(CGSizeMake(100, 50));
-    }];
-    
     UILabel *calendarLbl = [[UILabel alloc] init];
     [calendarLbl setText:@"$126"];
     [calendarLbl setTextColor:[UIColor orangeColor]];
@@ -73,37 +52,10 @@
     [self.view addSubview:calendarLbl];
     [calendarLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         @strongify(self);
-        make.top.equalTo(fareLbl.mas_bottom).with.offset(10);
+        make.top.equalTo(backBtn.mas_bottom).with.offset(10);
         make.centerX.mas_equalTo(self.view.mas_centerX);
         make.size.mas_equalTo(CGSizeMake(100, 50));
     }];
-    
-}
-
-- (void)calendarViewSelectedWithStartDate:(NSInteger)startDate endDate:(NSInteger)endDate {
-}
-
-- (void)lblTouchUpInside:(UITapGestureRecognizer *)recognizer {
-    
-    UILabel *label = (UILabel *)recognizer.view;
-    NSLog(@"%@被点击了",label.text);
-    
-    FYFareCalendarViewController *fcvc = [[FYFareCalendarViewController alloc] init];
-    fcvc.limitMonth = 12 * 6;// 显示几个月的日历
-    /**
-     * FYFareCalendarViewControllerLastType 只显示当前月之前
-     * FYFareCalendarViewControllerMiddleType 前后各显示一半
-     * FYFareCalendarViewControllerNextType 只显示当前月之后
-     */
-    fcvc.type = FYFareCalendarViewControllerMiddleType;
-    fcvc.beforeTodayCanTouch = YES;// 今天之后的日期是否可以点击
-    fcvc.afterTodayCanTouch = NO;// 今天之前的日期是否可以点击
-    fcvc.startDate = _startDate;// 选中开始时间
-    fcvc.endDate = _endDate;// 选中结束时间
-    fcvc.showHolidayDifferentColor = YES;// 节假日是否显示不同的颜色
-    fcvc.showAlertView = NO;// 是否显示提示弹窗
-    fcvc.delegate = self;
-    [self presentViewController:fcvc animated:YES completion:nil];
     
 }
 
@@ -112,21 +64,39 @@
     UILabel *lbl = (UILabel *)recognizer.view;
     NSLog(@"%@被点击了", lbl.text);
     
-    FYCalendarView *calendar = [[FYCalendarView alloc] init];
-    [self.view addSubview:calendar];
+    [self.view addSubview:self.calendar];
+    [self makeConstraints];
     
-    @weakify(self);
-    [calendar mas_makeConstraints:^(MASConstraintMaker *make) {
-        @strongify(self);
-        make.top.equalTo(self.view);
-        make.left.equalTo(self.view);
-        make.right.equalTo(self.view);
-        make.bottom.equalTo(self.view);
-    }];
 }
 
 - (void)backBtnClicked {
     [self dismissViewControllerAnimated:NO completion:nil];
+}
+
+#pragma mark - 懒加载
+
+- (FYCalendar *)calendar {
+    
+    if (!_calendar) {
+        _calendar = [[FYCalendar alloc] init];
+    }
+    return _calendar;
+    
+}
+
+#pragma mark - 约束
+
+- (void)makeConstraints {
+    
+    @weakify(self);
+    [_calendar mas_makeConstraints:^(MASConstraintMaker *make) {
+        @strongify(self);
+        make.top.equalTo(self.view).offset(200);
+        make.left.equalTo(self.view).offset(40);
+        make.right.equalTo(self.view).offset(-40);
+        make.bottom.equalTo(self.view).offset(-50);
+    }];
+    
 }
 
 - (void)dealloc {

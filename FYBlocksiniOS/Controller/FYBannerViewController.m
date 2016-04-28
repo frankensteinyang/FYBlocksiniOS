@@ -16,13 +16,23 @@
 #import "FYBannerViewB.h"
 #import "FYBannerView.h"
 
+#define kFY_SCREEN_WIDTH ([UIScreen mainScreen].bounds.size.width)
+
+typedef enum : NSUInteger {
+    FYContainerStatusTypeSmaller,
+    FYContainerStatusTypeBigger,
+} FYContainerStatusType;
+
 @interface FYBannerViewController ()
 
-@property (nonatomic, strong) FYBannerViewB *bannerView;
+@property (nonatomic, strong) FYBannerViewB *bannerB;
 @property (nonatomic, assign) CGSize itemSize;
 @property (nonatomic, assign) CGFloat itemSpacing;
 @property (nonatomic, strong) NSArray *imageArray;
 @property (nonatomic, strong) UIView *roundRect;
+
+@property (nonatomic,assign) FYContainerStatusType status;
+@property (nonatomic,strong) UIView *container;
 
 @property (nonatomic, copy) NSArray<FYBannerViewItem *> *items;
 
@@ -48,15 +58,24 @@
         make.size.mas_equalTo(CGSizeMake(100, 50));
     }];
     
-    CGRect rect = CGRectMake(20, 360, self.view.frame.size.width - 40, 105);
-    NSMutableArray *array = [NSMutableArray arrayWithArray:self.imageArray];
-    
-    // RoundRectStyleTwoRoundedCorners RoundRectStyleDefault
-    FYBannerView *view = [[FYBannerView alloc] initWithFrame:rect imageData:array bannerStyle:RoundRectStyleTwoRoundedCorners responseBlock:^(NSString *url) {
-        //
+    UIButton *magicBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    magicBtn.backgroundColor = [UIColor whiteColor];
+    [magicBtn setTitle:@"Magic" forState:UIControlStateNormal];
+    [magicBtn addTarget:self
+                action:@selector(magicBtnClicked)
+      forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:magicBtn];
+    [magicBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        @strongify(self);
+        make.top.mas_equalTo(backBtn.mas_bottom).with.offset(10);
+        make.centerX.mas_equalTo(self.view.mas_centerX);
+        make.size.mas_equalTo(CGSizeMake(100, 50));
     }];
     
-    [self.view addSubview:view];
+    [self.view addSubview:self.container];
+    [self.container addSubview:self.bannerB];
+    
+    [self remakeConstraint:100];
     
 }
 
@@ -107,6 +126,69 @@
 
 - (void)backBtnClicked {
     [self dismissViewControllerAnimated:NO completion:nil];
+}
+
+- (UIView *)container {
+    if (!_container) {
+        _container = [[UIView alloc] init];
+        _container.layer.cornerRadius = 4;
+        _container.clipsToBounds = YES;
+        _container.backgroundColor = [UIColor grayColor];
+        
+    }
+    return _container;
+}
+
+- (void)magicBtnClicked {
+    
+    if (self.status == FYContainerStatusTypeSmaller) {
+        [self remakeConstraint:FYContainerStatusTypeBigger];
+    } else {
+        [self remakeConstraint:FYContainerStatusTypeSmaller];
+    }
+}
+
+- (void)remakeConstraint:(FYContainerStatusType)status {
+    
+    @weakify(self);
+    self.status = status;
+    if (self.status == FYContainerStatusTypeSmaller) {
+        
+        [_container setBackgroundColor:[UIColor brownColor]];
+        [_container mas_remakeConstraints:^(MASConstraintMaker *make) {
+            @strongify(self);
+            make.top.equalTo(self.view.mas_top).with.offset(200);
+            make.left.equalTo(self.view.mas_left).with.offset(20);
+            make.right.equalTo(self.view.mas_right).with.offset(-20);
+            make.height.mas_equalTo(kFY_SCREEN_WIDTH - 200);
+        }];
+        [_bannerB mas_remakeConstraints:^(MASConstraintMaker *make) {
+            @strongify(self);
+            make.top.equalTo(self.container.mas_top).with.offset(200);
+            make.left.equalTo(self.container.mas_left).with.offset(20);
+            make.right.equalTo(self.container.mas_right).with.offset(-20);
+            make.height.mas_equalTo(kFY_SCREEN_WIDTH - 200);
+        }];
+        
+    } else {
+        
+        [_container setBackgroundColor:[UIColor redColor]];
+        [_container mas_remakeConstraints:^(MASConstraintMaker *make) {
+            @strongify(self);
+            make.top.equalTo(self.view.mas_top).with.offset(200);
+            make.left.equalTo(self.view.mas_left).with.offset(10);
+            make.right.equalTo(self.view.mas_right).with.offset(-10);
+            make.height.mas_equalTo(kFY_SCREEN_WIDTH - 200);
+        }];
+        [_bannerB mas_remakeConstraints:^(MASConstraintMaker *make) {
+            @strongify(self);
+            make.top.equalTo(self.container.mas_top).with.offset(200);
+            make.left.equalTo(self.container.mas_left).with.offset(10);
+            make.right.equalTo(self.container.mas_right).with.offset(-10);
+            make.height.mas_equalTo(kFY_SCREEN_WIDTH - 200);
+        }];
+    }
+    
 }
 
 - (void)dealloc {

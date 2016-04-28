@@ -23,19 +23,18 @@
 @implementation FYBannerView
 
 - (instancetype)initWithFrame:(CGRect)frame
-                    imageData:(NSArray *)data
+                    imageData:(NSMutableArray *)data
+                     interval:(CFTimeInterval)interval
                   bannerStyle:(RoundRectStyle)style
                 responseBlock:(FYBannerResponseBlock)block {
     
-    self = [super initWithFrame:frame];
+    self = [super init];
     if (self) {
         
         self.imageData = [NSMutableArray arrayWithArray:data];
-        FYBanner *banner = [[FYBanner alloc] initWithFrame:frame imageData:_imageData bridgeBlock:^(NSString *link) {
-            //
+        FYBanner *banner = [[FYBanner alloc] initWithFrame:frame imageData:data interval:interval bridgeBlock:^(NSString *link) {
+            return _responseBlock(link);
         }];
-        
-        banner.duration = 1.2;
         
         [self addSubview:banner];
         

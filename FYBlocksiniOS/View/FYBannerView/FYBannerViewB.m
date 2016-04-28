@@ -217,7 +217,7 @@
     
 //    NSUInteger currentPage = periodOffset / offsetX - 1;
     
-    NSLog(@"currentPage %d ---- %d", _pageControl.currentPage, self.items.count);
+    NSLog(@"currentPage %ld ---- %lu", (long)_pageControl.currentPage, (unsigned long)self.items.count);
 //    NSLog(@"pageWidth %f", pageWidth);
 //    NSLog(@"periodOffset %f", periodOffset);
 //    NSLog(@"offsetX %f", offsetX);

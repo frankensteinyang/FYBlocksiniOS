@@ -20,11 +20,12 @@
 
 @interface FYBanner () <UIScrollViewDelegate>
 
-@property (nonatomic, strong) UIScrollView                        *scrollView;
-@property (nonatomic, strong) FYPageControl                       *pageControl;
-@property (nonatomic, strong) NSTimer                             *timer;
-@property (nonatomic, copy  ) FYBannerResponseBridgeBlock         bridgeBlock;
-@property (nonatomic, weak  ) UIView                              *container;
+@property (nonatomic, strong) UIScrollView                *scrollView;
+@property (nonatomic, strong) FYPageControl               *pageControl;
+@property (nonatomic, strong) NSTimer                     *timer;
+@property (nonatomic, copy  ) FYBannerResponseBridgeBlock bridgeBlock;
+@property (nonatomic, strong) NSMutableArray              *imageArray;
+@property (nonatomic, assign) CFTimeInterval              duration;
 
 @end
 
@@ -35,7 +36,6 @@
     _scrollView = nil;
     _pageControl = nil;
     _placeHolder = nil;
-    _container = nil;
     
     if (_timer) {
         if ([_timer isValid]) {
@@ -51,6 +51,7 @@
 
 - (instancetype)initWithFrame:(CGRect)frame
                     imageData:(NSMutableArray *)data
+                     interval:(CFTimeInterval)interval
                   bridgeBlock:(FYBannerResponseBridgeBlock)block {
     
     self = [super initWithFrame:frame];
@@ -251,13 +252,11 @@
     }
 }
 
-
-
 #pragma mark - timer methods
 
 - (void)fireTimer {
     [self stopTimer];
-    _duration = _duration ? _duration:3;
+    _duration = _duration ? _duration : 2;
     _timer = [NSTimer scheduledTimerWithTimeInterval:_duration target:self selector:@selector(go2Next) userInfo:nil repeats:YES];
     [[NSRunLoop mainRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
 }
@@ -280,6 +279,7 @@
 #pragma mark -scrollView delegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
     [self stopTimer];
     
     CGFloat targetX = scrollView.contentOffset.x;
@@ -292,7 +292,7 @@
             [self.scrollView setContentOffset:CGPointMake(targetX, 0) animated:NO];
         }
     }
-    NSInteger page = (self.scrollView.contentOffset.x+K_ITEM_WIDTH/2.0) / K_ITEM_WIDTH;
+    NSInteger page = (self.scrollView.contentOffset.x + K_ITEM_WIDTH / 2.0) / K_ITEM_WIDTH;
     
     if ([self.imageArray count] > 1){
         page --;
@@ -308,6 +308,7 @@
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    
     if (!decelerate){
         CGFloat targetX = _scrollView.contentOffset.x + _scrollView.frame.size.width;
         targetX = (NSInteger)(targetX/K_ITEM_WIDTH) * K_ITEM_WIDTH;
@@ -341,11 +342,11 @@
                 [[SDWebImageManager sharedManager] downloadImageWithURL:[NSURL URLWithString:url] options:SDWebImageProgressiveDownload progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
                     if (finished) {
                         [[SDWebImageManager sharedManager] saveImageToCache:image forURL:[NSURL URLWithString:url]];
-                        FY_SAFE_BLOCK_RUN(block,image,relatedlink?:@"");
+                        FY_SAFE_BLOCK_RUN(block, image, relatedlink ?: @"");
                     }
                 }];
             }else{
-                FY_SAFE_BLOCK_RUN(block,image,relatedlink?:@"");
+                FY_SAFE_BLOCK_RUN(block, image, relatedlink ?: @"");
             }
         }];
     }

@@ -19,6 +19,7 @@ typedef void (^FYBannerResponseBlock)(NSString *url);
 
 - (instancetype)initWithFrame:(CGRect)frame
                     imageData:(NSArray *)data
+                     interval:(CFTimeInterval)interval
                   bannerStyle:(RoundRectStyle)style
                 responseBlock:(FYBannerResponseBlock)block;
 
