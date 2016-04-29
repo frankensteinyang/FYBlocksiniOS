@@ -1,31 +1,28 @@
 //
 //  FYBanner.m
-//  FYBlocksiniOS
+//  Pods
 //
-//  Created by Frankenstein Yang on 4/26/16.
-//  Copyright © 2016 Frankenstein Yang. All rights reserved.
+//  Created by Frankenstein Yang on 4/28/16.
+//
 //
 
-#import <SDWebImage/SDWebImageManager.h>
-#import <SDWebImage/SDWebImageDownloader.h>
 #import <Masonry/Masonry.h>
 #import <libextobjc/EXTScope.h>
+#import <SDWebImage/SDWebImageManager.h>
 
 #import "FYBanner.h"
-#import "FYBannerItem.h"
 #import "FYPageControl.h"
+#import "FYBannerItem.h"
 
-#define K_ITEM_WIDTH (self.frame.size.width)
-#define FY_SAFE_BLOCK_RUN(block, ...) block ? block(__VA_ARGS__) : nil
+#define kFY_ITEM_WIDTH  (self.frame.size.width)
+#define kFY_ITEM_HEIGHT (self.frame.size.height)
+#define kFY_SAFE_BLOCK_RUN(block, ...) block ? block(__VA_ARGS__) : nil
 
 @interface FYBanner () <UIScrollViewDelegate>
 
 @property (nonatomic, strong) UIScrollView                *scrollView;
-@property (nonatomic, strong) FYPageControl               *pageControl;
-@property (nonatomic, strong) NSTimer                     *timer;
-@property (nonatomic, copy  ) FYBannerResponseBridgeBlock bridgeBlock;
-@property (nonatomic, strong) NSMutableArray              *imageArray;
-@property (nonatomic, assign) CFTimeInterval              duration;
+@property (nonatomic, strong) FYPageControl             *pageControl;
+@property (nonatomic, copy  ) FYBannerResponseBlock     responseBlock;
 
 @end
 
@@ -35,41 +32,32 @@
     _scrollView.delegate = nil;
     _scrollView = nil;
     _pageControl = nil;
-    _placeHolder = nil;
+    _bannerPlaceHolder = nil;
     
-    if (_timer) {
-        if ([_timer isValid]) {
-            [_timer invalidate];
-        }
-        _timer = nil;
-    }
-    
-    if (_bridgeBlock) {
-        _bridgeBlock = nil;
+    if (_responseBlock) {
+        _responseBlock = nil;
     }
 }
 
-- (instancetype)initWithFrame:(CGRect)frame
-                    imageData:(NSMutableArray *)data
-                     interval:(CFTimeInterval)interval
-                  bridgeBlock:(FYBannerResponseBridgeBlock)block {
+- (instancetype)initWithFrame:(CGRect)frame responseBlock:(FYBannerResponseBlock)block {
     
     self = [super initWithFrame:frame];
+    
     if (self) {
-        
-        self.imageArray = data;
         [self addSubview:self.scrollView];
         [self addSubview:self.pageControl];
         
         [self makeConstraints];
         
-        _bridgeBlock = [block copy];
+        _responseBlock = [block copy];
+        
     }
+    
     return self;
     
 }
 
-#pragma mark - lazy load
+#pragma mark - 懒加载
 
 - (UIScrollView *)scrollView {
     if (!_scrollView) {
@@ -83,10 +71,11 @@
         _scrollView.bounces = NO;
         _scrollView.decelerationRate = UIScrollViewDecelerationRateFast;
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                                                     action:@selector(clickOnScrollView:)];
+                                                                                     action:@selector(scrollViewTapped:)];
         [_scrollView addGestureRecognizer:tapGesture];
     }
     return _scrollView;
+    
 }
 
 - (FYPageControl *)pageControl {
@@ -100,37 +89,33 @@
     return _pageControl;
 }
 
-#pragma mark - constraints
+#pragma mark - 约束
 
 - (void)makeConstraints {
     
     @weakify(self);
-    [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.scrollView mas_updateConstraints:^(MASConstraintMaker *make) {
         @strongify(self);
         make.size.mas_equalTo(self);
         make.center.mas_equalTo(self);
     }];
     
-    [_pageControl mas_makeConstraints:^(MASConstraintMaker *make) {
+    [_pageControl mas_updateConstraints:^(MASConstraintMaker *make) {
         @strongify(self);
         make.right.equalTo(self.mas_right).offset(-5);
         make.left.equalTo(self.mas_left).offset(5);
         make.bottom.mas_equalTo(self.mas_bottom).offset(-5);
         make.height.equalTo(@20);
     }];
+    
 }
 
+#pragma mark - Setter
 
-#pragma mark - setter
-
-- (void)setPlaceHolder:(UIImage *)placeHolder {
-    if (placeHolder) {
-        _placeHolder = placeHolder;
+- (void)setBannerPlaceHolder:(UIImage *)bannerPlaceHolder {
+    if (bannerPlaceHolder) {
+        _bannerPlaceHolder = bannerPlaceHolder;
     }
-}
-
-- (void)setDuration:(CFTimeInterval)duration {
-    _duration = duration;
 }
 
 - (void)setImageArray:(NSMutableArray *)imageArray {
@@ -142,32 +127,35 @@
     
     if (_imageArray.count) {
         
-        //首尾各加一张图片
+        // 首尾各加一张图片
         self.pageControl.hidden = YES;
-        self.scrollView.contentSize	 = CGSizeMake(K_ITEM_WIDTH * (_imageArray.count+2), self.frame.size.height);
-        //set center view
+        
+        CGFloat width = kFY_ITEM_WIDTH * (_imageArray.count+2);
+        CGSize size = CGSizeMake(width, kFY_ITEM_HEIGHT);
+        self.scrollView.contentSize = size;
+        
+        // 中间视图
         for (NSInteger i = 0; i < _imageArray.count; i ++) {
             NSInteger tag = 100+i;
             [self buildSubViewOfScrollViewWithTag:tag andImageData:[_imageArray objectAtIndex:i]];
         }
         
-        //set head view
+        // 前视图
         NSInteger tag_head = 99;
         [self buildSubViewOfScrollViewWithTag:tag_head andImageData:[_imageArray lastObject]];
         
-        //set tail view
+        // 后视图
         NSInteger tag_tail = 100 + [_imageArray count];
         [self buildSubViewOfScrollViewWithTag:tag_tail andImageData:[_imageArray firstObject]];
         
-        //move to the first item
         [self gotoStartPostionAfterSetData];
     }
 }
 
-
-#pragma mark - build view
+#pragma mark - 构建视图
 
 - (void)buildSubViewOfScrollViewWithTag:(NSInteger)tag andImageData:(id)imageData {
+    
     if ([self.scrollView viewWithTag:tag]) {
         [[self.scrollView viewWithTag:tag] removeFromSuperview];
     }
@@ -175,34 +163,38 @@
     NSInteger position;
     if (tag == 99) {
         position = 0;
-    }else if (tag == (100 + [_imageArray count])){
+    } else if (tag == (100 + [_imageArray count])){
         position = [_imageArray count]+1;
-    }else{
+    } else {
         position = (tag - 100) + 1;
     }
-    FYBannerItem *singleItemView = [[FYBannerItem alloc] initWithFrame:
-                                                  CGRectMake(K_ITEM_WIDTH * position, 0, K_ITEM_WIDTH, self.frame.size.height)
-                                                                                       placeHolderImage:_placeHolder];
-    singleItemView.tag = tag;
-    [self.scrollView addSubview:singleItemView];
     
+    CGRect rect = CGRectMake(kFY_ITEM_WIDTH * position, 0, kFY_ITEM_WIDTH, kFY_ITEM_HEIGHT);
+    FYBannerItem *item = [[FYBannerItem alloc] initWithFrame:rect
+                                                placeHolderImage:_bannerPlaceHolder];
+    
+    item.tag = tag;
+    [self.scrollView addSubview:item];
     
     if ([imageData isKindOfClass:[UIImage class]]) {
+        
         dispatch_async(dispatch_get_main_queue(), ^{
-            singleItemView.link = nil;
-            [singleItemView setImage:(UIImage*)imageData];
+            item.url = nil;
+            [item setImage:(UIImage *)imageData];
             if (self.pageControl.hidden) {
                 self.pageControl.hidden = NO;
             }
         });
-    }else if ([imageData isKindOfClass:[NSString class]]){
+        
+    } else if ([imageData isKindOfClass:[NSString class]]) {
+        
         @weakify(self);
         [self downloadImageWithUrl:imageData relatedLink:imageData downloadImageCallBack:^(UIImage *image, NSString *link) {
             @strongify(self);
             if (image) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    singleItemView.link = link;
-                    [singleItemView setImage:image];
+                    item.url = link;
+                    [item setImage:image];
                     if (self.pageControl.hidden) {
                         self.pageControl.hidden = NO;
                     }
@@ -218,81 +210,66 @@
     self.pageControl.currentPage = 0;
     [self scrollToIndex:0];
     CGFloat targetX = self.scrollView.contentOffset.x + self.scrollView.frame.size.width;
-    targetX = (NSInteger)(targetX/K_ITEM_WIDTH) * K_ITEM_WIDTH;
+    targetX = (NSInteger)(targetX / kFY_ITEM_WIDTH) * kFY_ITEM_WIDTH;
     [self.scrollView setContentOffset:CGPointMake(targetX, 0) animated:NO];
 }
 
 
-#pragma mark - press image
+#pragma mark - 点击事件
 
-- (void)clickOnScrollView:(UITapGestureRecognizer *)gesture {
+- (void)scrollViewTapped:(UITapGestureRecognizer *)gesture {
     
     CGPoint point = [gesture locationInView:self.scrollView];
     NSInteger page = (NSInteger)point.x / (NSInteger)self.frame.size.width;
     
-    FYBannerItem *itemView;
+    FYBannerItem *item;
     NSInteger currentTag;
-    if (page == 0) {//head
+    if (page == 0) { // 首视图
         currentTag = 99;
-    }else if (page == [self.imageArray count]+1){//tail
+    }else if (page == [self.imageArray count]+1){ // 尾视图
         currentTag = (100 + [_imageArray count]);
-    }else{//center
-        currentTag = (page-1+100);
+    }else{ // 中间视图
+        currentTag = (page - 1 + 100);
     }
     
-    if ([self.scrollView viewWithTag:currentTag] &&
-        [[self.scrollView viewWithTag:currentTag]isKindOfClass:[FYBannerItem class]]) {
-        itemView = (FYBannerItem *)[self.scrollView viewWithTag:currentTag];
+    if ([self.scrollView viewWithTag:currentTag] && [[self.scrollView viewWithTag:currentTag] isKindOfClass:[FYBannerItem class]]) {
         
-        if (_bridgeBlock) {
-            if (itemView.link && [itemView.link length]) {
-                FY_SAFE_BLOCK_RUN(_bridgeBlock, itemView.link);
+        item = (FYBannerItem *)[self.scrollView viewWithTag:currentTag];
+        
+//        [item mas_updateConstraints:^(MASConstraintMaker *make) {
+//            make.top.mas_equalTo(_scrollView.mas_top);
+//            make.left.mas_equalTo(_scrollView.mas_left);
+//            make.right.mas_equalTo(_scrollView.mas_right);
+//            make.bottom.mas_equalTo(_scrollView.mas_bottom);
+//            make.center.mas_equalTo(_scrollView);
+//        }];
+//        
+//        [self.scrollView setNeedsLayout];
+//        [self.scrollView layoutIfNeeded];
+        
+        if (_responseBlock) {
+            if (item.url && [item.url length]) {
+                kFY_SAFE_BLOCK_RUN(_responseBlock, item.url);
             }
         }
     }
 }
 
-#pragma mark - timer methods
-
-- (void)fireTimer {
-    [self stopTimer];
-    _duration = _duration ? _duration : 2;
-    _timer = [NSTimer scheduledTimerWithTimeInterval:_duration target:self selector:@selector(go2Next) userInfo:nil repeats:YES];
-    [[NSRunLoop mainRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
-}
-
-- (void)go2Next {
-    CGFloat targetX = self.scrollView.contentOffset.x + self.scrollView.frame.size.width;
-    targetX = (NSInteger)(targetX / K_ITEM_WIDTH) * K_ITEM_WIDTH;
-    [self.scrollView setContentOffset:CGPointMake(targetX, 0) animated:YES];
-}
-
-- (void)stopTimer {
-    if (_timer) {
-        if ([_timer isValid]) {
-            [_timer invalidate];
-        }
-    }
-}
-
-
-#pragma mark -scrollView delegate
+#pragma mark - ScrollView 代理
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
-    [self stopTimer];
-    
     CGFloat targetX = scrollView.contentOffset.x;
     if ([self.imageArray count] >= 1){
-        if (targetX >= K_ITEM_WIDTH * ([self.imageArray count] + 1)) {
-            targetX = K_ITEM_WIDTH;
+        if (targetX >= kFY_ITEM_WIDTH * ([self.imageArray count] + 1)) {
+            targetX = kFY_ITEM_WIDTH;
             [self.scrollView setContentOffset:CGPointMake(targetX, 0) animated:NO];
         }else if(targetX <= 0){
-            targetX = K_ITEM_WIDTH *[self.imageArray count];
+            targetX = kFY_ITEM_WIDTH *[self.imageArray count];
             [self.scrollView setContentOffset:CGPointMake(targetX, 0) animated:NO];
         }
     }
-    NSInteger page = (self.scrollView.contentOffset.x + K_ITEM_WIDTH / 2.0) / K_ITEM_WIDTH;
+    NSInteger page = (self.scrollView.contentOffset.x + kFY_ITEM_WIDTH / 2.0) / kFY_ITEM_WIDTH;
     
     if ([self.imageArray count] > 1){
         page --;
@@ -304,25 +281,23 @@
     }
     self.pageControl.currentPage = page;
     
-    [self fireTimer];
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
     
     if (!decelerate){
         CGFloat targetX = _scrollView.contentOffset.x + _scrollView.frame.size.width;
-        targetX = (NSInteger)(targetX/K_ITEM_WIDTH) * K_ITEM_WIDTH;
+        targetX = (NSInteger)(targetX / kFY_ITEM_WIDTH) * kFY_ITEM_WIDTH;
         [self.scrollView setContentOffset:CGPointMake((NSInteger)targetX, 0) animated:YES];
     }
 }
-
 
 - (void)scrollToIndex:(NSInteger)aIndex {
     if ([self.imageArray count]>1){
         if (aIndex >= ([self.imageArray count])){
             aIndex = [self.imageArray count]-1;
         }
-        [self.scrollView setContentOffset:CGPointMake(K_ITEM_WIDTH*(aIndex+1), 0) animated:YES];
+        [self.scrollView setContentOffset:CGPointMake(kFY_ITEM_WIDTH * (aIndex+1), 0) animated:YES];
     }else{
         [self.scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
     }
@@ -331,7 +306,7 @@
 
 
 
-#pragma mark - download image
+#pragma mark - 下载图片
 
 - (void)downloadImageWithUrl:(NSString *)url
                  relatedLink:(NSString *)relatedlink
@@ -342,11 +317,11 @@
                 [[SDWebImageManager sharedManager] downloadImageWithURL:[NSURL URLWithString:url] options:SDWebImageProgressiveDownload progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
                     if (finished) {
                         [[SDWebImageManager sharedManager] saveImageToCache:image forURL:[NSURL URLWithString:url]];
-                        FY_SAFE_BLOCK_RUN(block, image, relatedlink ?: @"");
+                        kFY_SAFE_BLOCK_RUN(block, image, relatedlink ?: @"");
                     }
                 }];
             }else{
-                FY_SAFE_BLOCK_RUN(block, image, relatedlink ?: @"");
+                kFY_SAFE_BLOCK_RUN(block, image, relatedlink ?: @"");
             }
         }];
     }

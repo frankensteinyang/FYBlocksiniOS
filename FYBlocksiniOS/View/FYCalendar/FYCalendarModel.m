@@ -10,4 +10,14 @@
 
 @implementation FYCalendarModel
 
++ (FYCalendarModel *)calendarModelWithYear:(NSNumber*)year withMonth:(NSNumber*)month withDay:(NSNumber*)day withPrice:(NSNumber*)price withCount:(NSNumber*)count {
+    FYCalendarModel * __autoreleasing m = [self new];
+    m.year = year;
+    m.month = month;
+    m.day = day;
+    m.price = price;
+    m.count = count;
+    return m;
+}
+
 @end

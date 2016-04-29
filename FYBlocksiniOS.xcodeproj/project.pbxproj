@@ -8,9 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0AA669F552F0A392176A7A0E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 64958671C7C753AAC492E3F5 /* libPods.a */; };
-		EF098A941CCF08DF00E92909 /* FYBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = EF098A931CCF08DF00E92909 /* FYBanner.m */; };
-		EF098A971CCF092C00E92909 /* FYBannerItem.m in Sources */ = {isa = PBXBuildFile; fileRef = EF098A961CCF092C00E92909 /* FYBannerItem.m */; };
-		EF098A9A1CCF4C7500E92909 /* FYPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = EF098A991CCF4C7500E92909 /* FYPageControl.m */; };
 		EF09BCA11CC4827E00EC4619 /* FYBannerViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = EF09BCA01CC4827E00EC4619 /* FYBannerViewItem.m */; };
 		EF09BCA41CC485F200EC4619 /* FYBannerViewB.m in Sources */ = {isa = PBXBuildFile; fileRef = EF09BCA31CC485F200EC4619 /* FYBannerViewB.m */; };
 		EF09BCA71CC48B2D00EC4619 /* FYCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = EF09BCA61CC48B2D00EC4619 /* FYCollectionViewFlowLayout.m */; };
@@ -24,7 +21,9 @@
 		EF1045161CD30CB700B07797 /* FYCalendarLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = EF1045151CD30CB700B07797 /* FYCalendarLayout.m */; };
 		EF10451A1CD30D2F00B07797 /* FYCalendarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EF1045191CD30D2F00B07797 /* FYCalendarCell.m */; };
 		EF10451D1CD30D6000B07797 /* FYCalendarHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = EF10451C1CD30D6000B07797 /* FYCalendarHeader.m */; };
-		EF315E101CD091CD009F835E /* FYBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF315E0F1CD091CD009F835E /* FYBannerView.m */; };
+		EF10452D1CD3347800B07797 /* FYBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = EF1045281CD3347800B07797 /* FYBanner.m */; };
+		EF10452E1CD3347800B07797 /* FYBannerItem.m in Sources */ = {isa = PBXBuildFile; fileRef = EF10452A1CD3347800B07797 /* FYBannerItem.m */; };
+		EF10452F1CD3347800B07797 /* FYPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = EF10452C1CD3347800B07797 /* FYPageControl.m */; };
 		EF39AB9B1CC3E829001A6395 /* FYBannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF39AB9A1CC3E829001A6395 /* FYBannerViewController.m */; };
 		EF4ADD911CBEAF4900948A3F /* FYFirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4ADD8C1CBEAF4900948A3F /* FYFirstViewController.m */; };
 		EF4ADD921CBEAF4900948A3F /* FYSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4ADD8E1CBEAF4900948A3F /* FYSecondViewController.m */; };
@@ -32,7 +31,6 @@
 		EF4ADD991CBEAF5200948A3F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4ADD961CBEAF5200948A3F /* AppDelegate.m */; };
 		EF4ADD9B1CBEAF5200948A3F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4ADD981CBEAF5200948A3F /* main.m */; };
 		EF4ADDA01CBEB0DD00948A3F /* FYParametricClass.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4ADD9F1CBEB0DD00948A3F /* FYParametricClass.m */; };
-		EFB13E011CCFD35E0089965C /* UIView+FYRoundRect.m in Sources */ = {isa = PBXBuildFile; fileRef = EFB13E001CCFD35E0089965C /* UIView+FYRoundRect.m */; };
 		EFB340061CD23A5D00356085 /* FYCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = EFB340051CD23A5D00356085 /* FYCalendar.m */; };
 		EFDD1F661CAEC89D00AC09B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFDD1F641CAEC89D00AC09B1 /* Main.storyboard */; };
 		EFDD1F681CAEC89D00AC09B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EFDD1F671CAEC89D00AC09B1 /* Assets.xcassets */; };
@@ -64,12 +62,6 @@
 		0236F843FA8B51FA994E77F4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		64958671C7C753AAC492E3F5 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B697AE03AA05C7BA7B6A4E93 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		EF098A921CCF08DF00E92909 /* FYBanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYBanner.h; sourceTree = "<group>"; };
-		EF098A931CCF08DF00E92909 /* FYBanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYBanner.m; sourceTree = "<group>"; };
-		EF098A951CCF092C00E92909 /* FYBannerItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYBannerItem.h; sourceTree = "<group>"; };
-		EF098A961CCF092C00E92909 /* FYBannerItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYBannerItem.m; sourceTree = "<group>"; };
-		EF098A981CCF4C7500E92909 /* FYPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYPageControl.h; sourceTree = "<group>"; };
-		EF098A991CCF4C7500E92909 /* FYPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYPageControl.m; sourceTree = "<group>"; };
 		EF09BC9F1CC4827E00EC4619 /* FYBannerViewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYBannerViewItem.h; sourceTree = "<group>"; };
 		EF09BCA01CC4827E00EC4619 /* FYBannerViewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYBannerViewItem.m; sourceTree = "<group>"; };
 		EF09BCA21CC485F200EC4619 /* FYBannerViewB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYBannerViewB.h; sourceTree = "<group>"; };
@@ -97,8 +89,12 @@
 		EF1045191CD30D2F00B07797 /* FYCalendarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYCalendarCell.m; sourceTree = "<group>"; };
 		EF10451B1CD30D6000B07797 /* FYCalendarHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYCalendarHeader.h; sourceTree = "<group>"; };
 		EF10451C1CD30D6000B07797 /* FYCalendarHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYCalendarHeader.m; sourceTree = "<group>"; };
-		EF315E0E1CD091CD009F835E /* FYBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYBannerView.h; sourceTree = "<group>"; };
-		EF315E0F1CD091CD009F835E /* FYBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYBannerView.m; sourceTree = "<group>"; };
+		EF1045271CD3347800B07797 /* FYBanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYBanner.h; sourceTree = "<group>"; };
+		EF1045281CD3347800B07797 /* FYBanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYBanner.m; sourceTree = "<group>"; };
+		EF1045291CD3347800B07797 /* FYBannerItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYBannerItem.h; sourceTree = "<group>"; };
+		EF10452A1CD3347800B07797 /* FYBannerItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYBannerItem.m; sourceTree = "<group>"; };
+		EF10452B1CD3347800B07797 /* FYPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYPageControl.h; sourceTree = "<group>"; };
+		EF10452C1CD3347800B07797 /* FYPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYPageControl.m; sourceTree = "<group>"; };
 		EF39AB991CC3E829001A6395 /* FYBannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYBannerViewController.h; sourceTree = "<group>"; };
 		EF39AB9A1CC3E829001A6395 /* FYBannerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYBannerViewController.m; sourceTree = "<group>"; };
 		EF4ADD8B1CBEAF4900948A3F /* FYFirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYFirstViewController.h; sourceTree = "<group>"; };
@@ -112,8 +108,6 @@
 		EF4ADD981CBEAF5200948A3F /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		EF4ADD9E1CBEB0DD00948A3F /* FYParametricClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYParametricClass.h; sourceTree = "<group>"; };
 		EF4ADD9F1CBEB0DD00948A3F /* FYParametricClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYParametricClass.m; sourceTree = "<group>"; };
-		EFB13DFF1CCFD35E0089965C /* UIView+FYRoundRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FYRoundRect.h"; sourceTree = "<group>"; };
-		EFB13E001CCFD35E0089965C /* UIView+FYRoundRect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FYRoundRect.m"; sourceTree = "<group>"; };
 		EFB340041CD23A5D00356085 /* FYCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYCalendar.h; sourceTree = "<group>"; };
 		EFB340051CD23A5D00356085 /* FYCalendar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYCalendar.m; sourceTree = "<group>"; };
 		EFDD1F581CAEC89D00AC09B1 /* FYBlocksiniOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FYBlocksiniOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -169,16 +163,12 @@
 		EF098A911CCF08A200E92909 /* FYBanner */ = {
 			isa = PBXGroup;
 			children = (
-				EF098A921CCF08DF00E92909 /* FYBanner.h */,
-				EF098A931CCF08DF00E92909 /* FYBanner.m */,
-				EF098A951CCF092C00E92909 /* FYBannerItem.h */,
-				EF098A961CCF092C00E92909 /* FYBannerItem.m */,
-				EF098A981CCF4C7500E92909 /* FYPageControl.h */,
-				EF098A991CCF4C7500E92909 /* FYPageControl.m */,
-				EFB13DFF1CCFD35E0089965C /* UIView+FYRoundRect.h */,
-				EFB13E001CCFD35E0089965C /* UIView+FYRoundRect.m */,
-				EF315E0E1CD091CD009F835E /* FYBannerView.h */,
-				EF315E0F1CD091CD009F835E /* FYBannerView.m */,
+				EF1045271CD3347800B07797 /* FYBanner.h */,
+				EF1045281CD3347800B07797 /* FYBanner.m */,
+				EF1045291CD3347800B07797 /* FYBannerItem.h */,
+				EF10452A1CD3347800B07797 /* FYBannerItem.m */,
+				EF10452B1CD3347800B07797 /* FYPageControl.h */,
+				EF10452C1CD3347800B07797 /* FYPageControl.m */,
 			);
 			path = FYBanner;
 			sourceTree = "<group>";
@@ -223,7 +213,7 @@
 			name = Layout;
 			sourceTree = "<group>";
 		};
-		EF1045171CD30CC000B07797 /* View */ = {
+		EF1045171CD30CC000B07797 /* Component */ = {
 			isa = PBXGroup;
 			children = (
 				EF1045181CD30D2F00B07797 /* FYCalendarCell.h */,
@@ -231,7 +221,7 @@
 				EF10451B1CD30D6000B07797 /* FYCalendarHeader.h */,
 				EF10451C1CD30D6000B07797 /* FYCalendarHeader.m */,
 			);
-			name = View;
+			name = Component;
 			sourceTree = "<group>";
 		};
 		EF4ADD891CBEAF4200948A3F /* Model */ = {
@@ -281,7 +271,7 @@
 		EF69FF251CCA421900EF1EA9 /* FYCalendar */ = {
 			isa = PBXGroup;
 			children = (
-				EF1045171CD30CC000B07797 /* View */,
+				EF1045171CD30CC000B07797 /* Component */,
 				EF1045131CD30C7700B07797 /* Layout */,
 				EF1045061CD30B7700B07797 /* Model */,
 				EFB340041CD23A5D00356085 /* FYCalendar.h */,
@@ -562,21 +552,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF4ADD9B1CBEAF5200948A3F /* main.m in Sources */,
+				EF10452D1CD3347800B07797 /* FYBanner.m in Sources */,
 				EF10451D1CD30D6000B07797 /* FYCalendarHeader.m in Sources */,
 				EF4ADD991CBEAF5200948A3F /* AppDelegate.m in Sources */,
 				EF10451A1CD30D2F00B07797 /* FYCalendarCell.m in Sources */,
+				EF10452F1CD3347800B07797 /* FYPageControl.m in Sources */,
 				EF0CF6B61CC0F56400BA94C6 /* FYARCBlockClass.m in Sources */,
-				EFB13E011CCFD35E0089965C /* UIView+FYRoundRect.m in Sources */,
 				EF1045121CD30C5000B07797 /* FYCalendarModel.m in Sources */,
 				EF09BCA11CC4827E00EC4619 /* FYBannerViewItem.m in Sources */,
 				EF4ADD931CBEAF4900948A3F /* ViewController.m in Sources */,
+				EF10452E1CD3347800B07797 /* FYBannerItem.m in Sources */,
 				EF4ADD911CBEAF4900948A3F /* FYFirstViewController.m in Sources */,
 				EFFB91861CC78CD400FFFE1A /* FYCalendarViewController.m in Sources */,
 				EFB340061CD23A5D00356085 /* FYCalendar.m in Sources */,
-				EF098A971CCF092C00E92909 /* FYBannerItem.m in Sources */,
 				EF4ADD921CBEAF4900948A3F /* FYSecondViewController.m in Sources */,
 				EF09BCA71CC48B2D00EC4619 /* FYCollectionViewFlowLayout.m in Sources */,
-				EF098A9A1CCF4C7500E92909 /* FYPageControl.m in Sources */,
 				EF4ADDA01CBEB0DD00948A3F /* FYParametricClass.m in Sources */,
 				EF39AB9B1CC3E829001A6395 /* FYBannerViewController.m in Sources */,
 				EF09BCA41CC485F200EC4619 /* FYBannerViewB.m in Sources */,
@@ -586,8 +576,6 @@
 				EF09BCAD1CC4C08E00EC4619 /* UIColor+FYImageAdditions.m in Sources */,
 				EF09BCAA1CC4936800EC4619 /* FYCollectionViewCell.m in Sources */,
 				EF10450F1CD30C1300B07797 /* FYCalendarDataModel.m in Sources */,
-				EF315E101CD091CD009F835E /* FYBannerView.m in Sources */,
-				EF098A941CCF08DF00E92909 /* FYBanner.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

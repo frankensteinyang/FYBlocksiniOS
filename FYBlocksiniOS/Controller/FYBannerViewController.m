@@ -12,9 +12,8 @@
 #import "UIColor+FYImageAdditions.h"
 
 #import "FYBannerViewController.h"
-#import "FYBannerViewItem.h"
-#import "FYBannerViewB.h"
-#import "FYBannerView.h"
+
+#import "FYBanner.h"
 
 #define kFY_SCREEN_WIDTH ([UIScreen mainScreen].bounds.size.width)
 
@@ -25,16 +24,12 @@ typedef enum : NSUInteger {
 
 @interface FYBannerViewController ()
 
-@property (nonatomic, strong) FYBannerViewB *bannerB;
-@property (nonatomic, assign) CGSize itemSize;
-@property (nonatomic, assign) CGFloat itemSpacing;
+@property (nonatomic, strong) FYBanner *banner;
 @property (nonatomic, strong) NSArray *imageArray;
 @property (nonatomic, strong) UIView *roundRect;
 
 @property (nonatomic,assign) FYContainerStatusType status;
 @property (nonatomic,strong) UIView *container;
-
-@property (nonatomic, copy) NSArray<FYBannerViewItem *> *items;
 
 @end
 @implementation FYBannerViewController
@@ -73,49 +68,9 @@ typedef enum : NSUInteger {
     }];
     
     [self.view addSubview:self.container];
-    
-    
-    
-    UIView *a =[[UIView alloc] initWithFrame:CGRectMake(0, 0, 90, 90)];
-    a.backgroundColor = [UIColor whiteColor];
-//    [a mas_remakeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(_container.mas_top).offset(20);
-//        make.size.mas_equalTo(CGSizeMake(50, 50));
-//    }];
-    
-    [_container addSubview:a];
-    
-    UIView *b =[[UIView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
-    b.backgroundColor = [UIColor blackColor];
-    //    [a mas_remakeConstraints:^(MASConstraintMaker *make) {
-    //        make.top.equalTo(_container.mas_top).offset(20);
-    //        make.size.mas_equalTo(CGSizeMake(50, 50));
-    //    }];
-    
-    [a addSubview:b];
-//    [self.container addSubview:self.bannerB];
+    [self.container addSubview:self.banner];
     
     [self remakeConstraint:100];
-    
-}
-
-- (NSArray *)items {
-    NSArray *imgURLs = nil;
-    imgURLs = @[
-                @"http://image.photophoto.cn/nm-8/056/001/0560010001.jpg",
-                @"http://image.photophoto.cn/nm-8/056/002/0560020026.jpg",
-                @"http://image.photophoto.cn/nm-8/056/002/0560020022.jpg",
-                @"http://image.photophoto.cn/nm-8/056/001/0560010012.jpg",
-                @"http://image.photophoto.cn/nm-8/056/002/0560020017.jpg",
-                @"http://image.photophoto.cn/nm-8/056/002/0560020015.jpg"];
-    
-    NSMutableArray *items = [[NSMutableArray alloc] init];
-    for (NSString *imageURL in imgURLs) {
-        FYBannerViewItem *item = [FYBannerViewItem itemWithImageURL:imageURL text:nil];
-        [items addObject:item];
-    }
-    
-    return items.copy;
     
 }
 
@@ -168,6 +123,20 @@ typedef enum : NSUInteger {
     }
 }
 
+- (FYBanner *)banner {
+    
+    if (!_banner) {
+        
+        CGRect rect = CGRectMake(0, 0, 200, 100);
+        _banner = [[FYBanner alloc] initWithFrame:rect responseBlock:^(NSString *url) {
+            NSLog(@"%s", __FUNCTION__);
+        }];
+        _banner.imageArray = [NSMutableArray arrayWithArray:self.imageArray];
+    }
+    return _banner;
+    
+}
+
 - (void)remakeConstraint:(FYContainerStatusType)status {
     
     @weakify(self);
@@ -182,7 +151,7 @@ typedef enum : NSUInteger {
             make.right.equalTo(self.view.mas_right).with.offset(-20);
             make.height.mas_equalTo(kFY_SCREEN_WIDTH - 200);
         }];
-        [_bannerB mas_remakeConstraints:^(MASConstraintMaker *make) {
+        [_banner mas_remakeConstraints:^(MASConstraintMaker *make) {
             @strongify(self);
             make.top.equalTo(self.container.mas_top).with.offset(200);
             make.left.equalTo(self.container.mas_left).with.offset(20);
@@ -200,7 +169,7 @@ typedef enum : NSUInteger {
             make.right.equalTo(self.view.mas_right).with.offset(-10);
             make.height.mas_equalTo(kFY_SCREEN_WIDTH - 200);
         }];
-        [_bannerB mas_remakeConstraints:^(MASConstraintMaker *make) {
+        [_banner mas_remakeConstraints:^(MASConstraintMaker *make) {
             @strongify(self);
             make.top.equalTo(self.container.mas_top).with.offset(200);
             make.left.equalTo(self.container.mas_left).with.offset(10);

@@ -1,9 +1,9 @@
 //
 //  FYBannerItem.m
-//  FYBlocksiniOS
+//  Pods
 //
-//  Created by Frankenstein Yang on 4/26/16.
-//  Copyright © 2016 Frankenstein Yang. All rights reserved.
+//  Created by Frankenstein Yang on 4/28/16.
+//
 //
 
 #import <Masonry/Masonry.h>
@@ -18,7 +18,7 @@
     _imageView = nil;
     _placeHolderImageView =nil;
     _placeHolderImage = nil;
-    _link = nil;
+    _url = nil;
     
 }
 
@@ -84,20 +84,20 @@
     
 }
 
-#pragma mark - constraints
+#pragma mark - 约束
 
 - (void)makeConstraints {
     @weakify(self);
     [self.imageView mas_updateConstraints:^(MASConstraintMaker *make) {
-        @strongify(self);
-        make.size.mas_equalTo(self);
-        make.center.mas_equalTo(self);
+        @strongify(self)
+        make.center.equalTo(self);
+        make.size.equalTo(self);
     }];
     
     [self.placeHolderImageView mas_updateConstraints:^(MASConstraintMaker *make) {
         @strongify(self);
-        make.size.mas_equalTo(self);
-        make.center.mas_equalTo(self);
+        make.center.equalTo(self);
+        make.size.equalTo(self);
     }];
 }
 

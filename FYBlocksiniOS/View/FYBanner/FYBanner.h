@@ -1,22 +1,20 @@
 //
 //  FYBanner.h
-//  FYBlocksiniOS
+//  Pods
 //
-//  Created by Frankenstein Yang on 4/26/16.
-//  Copyright © 2016 Frankenstein Yang. All rights reserved.
+//  Created by Frankenstein Yang on 4/28/16.
+//
 //
 
 #import <UIKit/UIKit.h>
 
-typedef void (^FYBannerResponseBridgeBlock)(NSString *link);
+typedef void (^FYBannerResponseBlock)(NSString *url);
 
 @interface FYBanner : UIView
 
-@property (nonatomic, strong) UIImage                       *placeHolder;
+@property (nonatomic, strong) UIImage                       *bannerPlaceHolder;
+@property (nonatomic, strong) NSMutableArray                *imageArray;
 
-- (instancetype)initWithFrame:(CGRect)frame
-                    imageData:(NSMutableArray *)data
-                     interval:(CFTimeInterval)interval
-                  bridgeBlock:(FYBannerResponseBridgeBlock)block;
+- (instancetype)initWithFrame:(CGRect)frame responseBlock:(FYBannerResponseBlock)block;
 
 @end
