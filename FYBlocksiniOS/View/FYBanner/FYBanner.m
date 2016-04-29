@@ -20,7 +20,7 @@
 
 @interface FYBanner () <UIScrollViewDelegate>
 
-@property (nonatomic, strong) UIScrollView                *scrollView;
+@property (nonatomic, strong) UIScrollView              *scrollView;
 @property (nonatomic, strong) FYPageControl             *pageControl;
 @property (nonatomic, copy  ) FYBannerResponseBlock     responseBlock;
 
@@ -79,6 +79,7 @@
 }
 
 - (FYPageControl *)pageControl {
+    
     if (!_pageControl) {
         _pageControl = [[FYPageControl alloc] init];
         _pageControl.hidesForSinglePage = YES;
@@ -113,6 +114,7 @@
 #pragma mark - Setter
 
 - (void)setBannerPlaceHolder:(UIImage *)bannerPlaceHolder {
+    
     if (bannerPlaceHolder) {
         _bannerPlaceHolder = bannerPlaceHolder;
     }
@@ -232,20 +234,10 @@
         currentTag = (page - 1 + 100);
     }
     
-    if ([self.scrollView viewWithTag:currentTag] && [[self.scrollView viewWithTag:currentTag] isKindOfClass:[FYBannerItem class]]) {
+    if ([self.scrollView viewWithTag:currentTag] &&
+        [[self.scrollView viewWithTag:currentTag] isKindOfClass:[FYBannerItem class]]) {
         
         item = (FYBannerItem *)[self.scrollView viewWithTag:currentTag];
-        
-//        [item mas_updateConstraints:^(MASConstraintMaker *make) {
-//            make.top.mas_equalTo(_scrollView.mas_top);
-//            make.left.mas_equalTo(_scrollView.mas_left);
-//            make.right.mas_equalTo(_scrollView.mas_right);
-//            make.bottom.mas_equalTo(_scrollView.mas_bottom);
-//            make.center.mas_equalTo(_scrollView);
-//        }];
-//        
-//        [self.scrollView setNeedsLayout];
-//        [self.scrollView layoutIfNeeded];
         
         if (_responseBlock) {
             if (item.url && [item.url length]) {
@@ -325,6 +317,16 @@
             }
         }];
     }
+}
+
+- (void)layoutSubviews {
+    
+    [super layoutSubviews];
+    [self makeConstraints];
+    CGFloat width = self.bounds.size.width;
+    CGFloat height = self.bounds.size.height;
+    self.scrollView.frame = CGRectMake(0, 0, width, height);
+    
 }
 
 @end

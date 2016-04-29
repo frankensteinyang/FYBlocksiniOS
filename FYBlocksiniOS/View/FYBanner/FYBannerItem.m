@@ -27,6 +27,7 @@
     
     self = [super initWithFrame:frame];
     if (self) {
+        
         self.userInteractionEnabled = YES;
         [self addSubview:self.imageView];
         [self addSubview:self.placeHolderImageView];
@@ -52,7 +53,8 @@
     
     if (!_imageView) {
         
-        _imageView = [[UIImageView alloc] init];
+        _imageView = [[UIImageView alloc] initWithFrame:self.bounds];
+        _imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         _imageView.userInteractionEnabled = YES;
         [_imageView setContentMode:UIViewContentModeScaleToFill];
     }

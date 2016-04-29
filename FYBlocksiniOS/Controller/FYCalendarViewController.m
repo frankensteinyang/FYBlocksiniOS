@@ -63,6 +63,15 @@
     _calendar.frame = CGRectMake(0, 114, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) - 64);
     [self.view addSubview:_calendar];
     
+    FYCalendarLayout* layout = (id)_calendar.collectionViewLayout;
+    layout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
+    
+    FYCalendarModel *model = [FYCalendarModel calendarModelWithYear:@(2015) withMonth:@(3) withDay:@(22) withPrice:@(30) withCount:@(10)];
+    FYCalendarModel *model2 = [FYCalendarModel calendarModelWithYear:@(2015) withMonth:@(9) withDay:@(22) withPrice:@(10) withCount:@(10)];
+    FYCalendarModel *model3 = [FYCalendarModel calendarModelWithYear:@(2015) withMonth:@(7) withDay:@(24) withPrice:@(20) withCount:@(10)];
+    _calendar.datas = @[model, model2, model3];
+    _calendar.today = [NSDate date];
+    
 }
 
 - (void)calendarTouchUpInside:(UITapGestureRecognizer *)recognizer {
@@ -103,6 +112,22 @@
         make.bottom.equalTo(self.view).offset(-50);
     }];
     
+}
+
+- (NSDictionary *)calendar:(FYCalendar *)cview cellDataStringDictionaryWithIndexPath:(NSIndexPath *)indexPath withYear:(NSString *)year withMonth:(NSString *)month withDay:(NSString *)day withPrice:(NSString *)price withCount:(NSString *)count withIsToday:(BOOL)isToady {
+    
+    return @{kFYCalendarCellDataKeyDay:[NSString stringWithFormat:@"%@号", day],
+             kFYCalendarCellDataKeyPrice:[NSString stringWithFormat:@"%@元", price]
+             //             kSkyCalendarPriceViewCellDataKeyCount:[NSString stringWithFormat:@"还有%@", count]
+             };
+    
+}
+
+#pragma mark - 代理
+
+- (BOOL)calendar:(FYCalendar *)cview shouldSelectIndexWithPriceModel:(FYCalendarModel *)model {
+    
+    return YES;
 }
 
 - (void)dealloc {

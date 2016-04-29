@@ -9,8 +9,6 @@
 #import <Masonry/Masonry.h>
 #import <libextobjc/EXTScope.h>
 
-#import "UIColor+FYImageAdditions.h"
-
 #import "FYBannerViewController.h"
 
 #import "FYBanner.h"
@@ -26,12 +24,12 @@ typedef enum : NSUInteger {
 
 @property (nonatomic, strong) FYBanner *banner;
 @property (nonatomic, strong) NSArray *imageArray;
-@property (nonatomic, strong) UIView *roundRect;
 
 @property (nonatomic,assign) FYContainerStatusType status;
 @property (nonatomic,strong) UIView *container;
 
 @end
+
 @implementation FYBannerViewController
 
 - (void)viewDidLoad {
@@ -68,9 +66,9 @@ typedef enum : NSUInteger {
     }];
     
     [self.view addSubview:self.container];
-    [self.container addSubview:self.banner];
-    
+    [_container addSubview:self.banner];
     [self remakeConstraint:100];
+    
     
 }
 
@@ -85,21 +83,13 @@ typedef enum : NSUInteger {
                         @"http://image.photophoto.cn/nm-8/056/002/0560020017.jpg",
                         @"http://image.photophoto.cn/nm-8/056/002/0560020015.jpg"];
     }
+    
     return _imageArray;
     
 }
 
-- (CGSize)itemSize {
-    
-    return CGSizeMake(320, 130);
-}
-
-- (CGFloat)itemSpacing {
-    
-    return 0;
-}
-
 - (void)backBtnClicked {
+    
     [self dismissViewControllerAnimated:NO completion:nil];
 }
 
@@ -112,6 +102,7 @@ typedef enum : NSUInteger {
         
     }
     return _container;
+    
 }
 
 - (void)magicBtnClicked {
@@ -126,9 +117,7 @@ typedef enum : NSUInteger {
 - (FYBanner *)banner {
     
     if (!_banner) {
-        
-        CGRect rect = CGRectMake(0, 0, 200, 100);
-        _banner = [[FYBanner alloc] initWithFrame:rect responseBlock:^(NSString *url) {
+        _banner = [[FYBanner alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen ].bounds.size.width, 120) responseBlock:^(NSString *url) {
             NSLog(@"%s", __FUNCTION__);
         }];
         _banner.imageArray = [NSMutableArray arrayWithArray:self.imageArray];
@@ -144,40 +133,43 @@ typedef enum : NSUInteger {
     if (self.status == FYContainerStatusTypeSmaller) {
         
         [_container setBackgroundColor:[UIColor brownColor]];
-        [_container mas_remakeConstraints:^(MASConstraintMaker *make) {
+        [_container mas_updateConstraints:^(MASConstraintMaker *make) {
             @strongify(self);
-            make.top.equalTo(self.view.mas_top).with.offset(200);
-            make.left.equalTo(self.view.mas_left).with.offset(20);
-            make.right.equalTo(self.view.mas_right).with.offset(-20);
+            make.top.equalTo(self.view.mas_top).offset(200);
+            make.left.equalTo(self.view.mas_left).offset(20);
+            make.right.equalTo(self.view.mas_right).offset(-20);
             make.height.mas_equalTo(kFY_SCREEN_WIDTH - 200);
         }];
-        [_banner mas_remakeConstraints:^(MASConstraintMaker *make) {
+        [_banner mas_updateConstraints:^(MASConstraintMaker *make) {
             @strongify(self);
-            make.top.equalTo(self.container.mas_top).with.offset(200);
-            make.left.equalTo(self.container.mas_left).with.offset(20);
-            make.right.equalTo(self.container.mas_right).with.offset(-20);
-            make.height.mas_equalTo(kFY_SCREEN_WIDTH - 200);
+            make.edges.equalTo(self.container);
+            make.center.equalTo(self.container);
+            make.size.equalTo(self.container);
         }];
         
     } else {
         
         [_container setBackgroundColor:[UIColor redColor]];
-        [_container mas_remakeConstraints:^(MASConstraintMaker *make) {
+        [_container mas_updateConstraints:^(MASConstraintMaker *make) {
             @strongify(self);
             make.top.equalTo(self.view.mas_top).with.offset(200);
             make.left.equalTo(self.view.mas_left).with.offset(10);
             make.right.equalTo(self.view.mas_right).with.offset(-10);
             make.height.mas_equalTo(kFY_SCREEN_WIDTH - 200);
         }];
-        [_banner mas_remakeConstraints:^(MASConstraintMaker *make) {
+        [_banner mas_updateConstraints:^(MASConstraintMaker *make) {
             @strongify(self);
-            make.top.equalTo(self.container.mas_top).with.offset(200);
-            make.left.equalTo(self.container.mas_left).with.offset(10);
-            make.right.equalTo(self.container.mas_right).with.offset(-10);
-            make.height.mas_equalTo(kFY_SCREEN_WIDTH - 200);
+            make.edges.equalTo(self.container);
+            make.center.equalTo(self.container);
+            make.size.equalTo(self.container);
         }];
     }
     
+}
+
+- (void)setNeedsUpdateConstraints {
+    
+    [self remakeConstraint:212];
 }
 
 - (void)dealloc {
