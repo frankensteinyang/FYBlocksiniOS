@@ -12,7 +12,7 @@
 #import "FYCalendarViewController.h"
 #import "FYCalendar.h"
 
-@interface FYCalendarViewController ()
+@interface FYCalendarViewController () <FYCalendarDelegate>
 
 @property (nonatomic, strong) FYCalendar *calendar;
 
@@ -56,6 +56,12 @@
         make.centerX.mas_equalTo(self.view.mas_centerX);
         make.size.mas_equalTo(CGSizeMake(100, 50));
     }];
+    
+    _calendar = [FYCalendar calendarPriceViewWithToday:[NSDate date]];
+    _calendar.today = [NSDate date];
+    _calendar.calendarDelegate = self;
+    _calendar.frame = CGRectMake(0, 114, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) - 64);
+    [self.view addSubview:_calendar];
     
 }
 

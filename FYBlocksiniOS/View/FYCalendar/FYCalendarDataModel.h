@@ -18,7 +18,7 @@
 @property (strong, nonatomic) NSNumber *dayCount;
 @property (strong, nonatomic) NSDictionary *models;
 
-+ (NSArray *)calendarDataModelsWithCalendarModels:(NSArray*)models;
++ (NSArray *)calendarDataModelWithCalendarModel:(NSArray*)models;
 
 - (FYCalendarDataSubModel *)modelFromDay:(NSInteger)day;
 

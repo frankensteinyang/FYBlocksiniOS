@@ -11,7 +11,7 @@
 
 @implementation FYCalendarDataModel
 
-+ (NSArray *)calendarDataModelsWithCalendarModels:(NSArray*)models {
++ (NSArray *)calendarDataModelWithCalendarModel:(NSArray*)models {
     
     models = [models sortedArrayUsingComparator:^NSComparisonResult(FYCalendarModel *obj1, FYCalendarModel *obj2) {
         BOOL great = NO;
