@@ -73,7 +73,27 @@ typedef enum : NSUInteger {
     }];
     
     [self.view addSubview:self.container];
-    [self.container addSubview:self.bannerB];
+    
+    
+    
+    UIView *a =[[UIView alloc] initWithFrame:CGRectMake(0, 0, 90, 90)];
+    a.backgroundColor = [UIColor whiteColor];
+//    [a mas_remakeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(_container.mas_top).offset(20);
+//        make.size.mas_equalTo(CGSizeMake(50, 50));
+//    }];
+    
+    [_container addSubview:a];
+    
+    UIView *b =[[UIView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+    b.backgroundColor = [UIColor blackColor];
+    //    [a mas_remakeConstraints:^(MASConstraintMaker *make) {
+    //        make.top.equalTo(_container.mas_top).offset(20);
+    //        make.size.mas_equalTo(CGSizeMake(50, 50));
+    //    }];
+    
+    [a addSubview:b];
+//    [self.container addSubview:self.bannerB];
     
     [self remakeConstraint:100];
     
