@@ -12,6 +12,5 @@
 
 @property (strong, nonatomic) NSNumber *day; // 天
 @property (strong, nonatomic) NSNumber *price; // 价格
-@property (strong, nonatomic) NSNumber *count; // 剩余数量
 
 @end

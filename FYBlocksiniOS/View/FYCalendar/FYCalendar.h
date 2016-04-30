@@ -12,9 +12,8 @@
 #import "FYCalendarLayout.h"
 #import "FYCalendarCell.h"
 
-#define kFYCalendarCellDataKeyDay (@"kSkyCalendarPriceViewCellDataKeyDay") // 日期
-#define kFYCalendarCellDataKeyPrice (@"kSkyCalendarPriceViewCellDataKeyPrice") // 价格
-#define kFYCalendarCellDataKeyCount (@"kSkyCalendarPriceViewCellDataKeyCount") // 数量
+#define kFY_CALENDAR_CELL_KEY_DAY (@"FYCalendarCellKeyDay") // 日期
+#define kFY_CALENDAR_CELL_KEY_PRICE (@"kFYCalendarCellDataKeyPrice") // 价格
 
 @class FYCalendar;
 
@@ -40,7 +39,7 @@
 - (void)calendar:(FYCalendar *)cview didUnselectIndexWithPriceModel:(FYCalendarModel *)model;
 
 /**
- *  获取用于直接显示在cell中lb的string，dictionary的key为上面kSkyCalendarPriceViewCellDataKey
+ *  获取用于直接显示在cell中lb的string，dictionary的key为上面kFYCalendarPriceViewCellDataKey
  *
  *  @param cview
  *  @param indexPath
@@ -53,7 +52,7 @@
  *
  *  @return 需要显示string数据，返回nil为使用默认，可以其中几个数据返回nil
  */
-- (NSDictionary *)calendar:(FYCalendar *)cview cellDataStringDictionaryWithIndexPath:(NSIndexPath*)indexPath withYear:(NSString*)year withMonth:(NSString*)month withDay:(NSString*)day withPrice:(NSString*)price withCount:(NSString*)count withIsToday:(BOOL)isToady;
+- (NSDictionary *)calendar:(FYCalendar *)cview cellDataStringDictionaryWithIndexPath:(NSIndexPath*)indexPath withYear:(NSString*)year withMonth:(NSString*)month withDay:(NSString*)day withPrice:(NSString*)price withIsToday:(BOOL)isToady;
 
 /**
  *  获取用于直接显示在只显示日期的cell中lb的string
@@ -84,7 +83,7 @@
 @interface FYCalendar : UICollectionView <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (weak, nonatomic) id<FYCalendarDelegate> calendarDelegate;
-@property (copy, nonatomic) NSArray *datas; // SkyCalendarPriceModel
+@property (copy, nonatomic) NSArray *datas; // FYCalendarPriceModel
 @property (copy, nonatomic) NSDate *today; // 今天的日期，用于今天的日期内显示别的string
 
 /**
@@ -102,43 +101,35 @@
 
 @end
 
-@interface NSMutableDictionary (SkyCalendarPriceViewCellData)
+@interface NSMutableDictionary (FYCalendarPriceCellData)
+
 @property (copy, nonatomic) NSString *dayStr;
 @property (copy, nonatomic) NSString *priceStr;
-@property (copy, nonatomic) NSString *countStr;
+
 @end
 
-@implementation NSMutableDictionary (SkyCalendarPriceViewCellData)
+@implementation NSMutableDictionary (FYCalendarPriceCellData)
+
 - (void)setDayStr:(NSString *)dayStr {
     if(dayStr) {
-        self[kFYCalendarCellDataKeyDay] = [dayStr copy];
+        self[kFY_CALENDAR_CELL_KEY_DAY] = [dayStr copy];
     } else {
-        [self removeObjectForKey:kFYCalendarCellDataKeyDay];
+        [self removeObjectForKey:kFY_CALENDAR_CELL_KEY_DAY];
     }
 }
 -(NSString *)dayStr {
-    return self[kFYCalendarCellDataKeyDay];
+    return self[kFY_CALENDAR_CELL_KEY_DAY];
 }
 
 - (void)setPriceStr:(NSString *)priceStr {
     if(priceStr) {
-        self[kFYCalendarCellDataKeyPrice] = [priceStr copy];
+        self[kFY_CALENDAR_CELL_KEY_PRICE] = [priceStr copy];
     } else {
-        [self removeObjectForKey:kFYCalendarCellDataKeyPrice];
+        [self removeObjectForKey:kFY_CALENDAR_CELL_KEY_PRICE];
     }
 }
 - (NSString *)priceStr {
-    return self[kFYCalendarCellDataKeyPrice];
+    return self[kFY_CALENDAR_CELL_KEY_PRICE];
 }
 
-- (void)setCountStr:(NSString *)countStr {
-    if(countStr) {
-        self[kFYCalendarCellDataKeyCount] = [countStr copy];
-    } else {
-        [self removeObjectForKey:kFYCalendarCellDataKeyCount];
-    }
-}
-- (NSString *)countStr {
-    return self[kFYCalendarCellDataKeyCount];
-}
 @end

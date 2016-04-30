@@ -15,8 +15,13 @@
 
 #define kFY_WEEK_VIEW_FONTCOLOR ([UIColor colorWithRed:173/256.0  green:173/256.0 blue:173/256.0 alpha:1])
 
-#define kFY_CALENDAR_INDETIFIER_HEADER @"__SkyCalendarHeader__"
-#define kFY_CALENDAR_INDETIFIER_CELL @"__SkyCalendarCell__"
+#define kFY_CALENDAR_INDETIFIER_HEADER @"FYCalendarHeader"
+#define kFY_CALENDAR_INDETIFIER_CELL @"FYCalendarCell"
+
+/**
+ *  重点：
+ *  - (NSInteger)numberOfItemsInSection:(NSInteger)section;
+ */
 
 @interface FYCalendar ()
 
@@ -29,15 +34,6 @@
 @implementation FYCalendar
 
 @synthesize datas = _datas, today = _today;
-
-- (instancetype)initWithCoder:(NSCoder *)coder
-{
-    self = [super initWithCoder:coder];
-    if (self) {
-        [self setup];
-    }
-    return self;
-}
 
 + (instancetype)calendarPriceView {
     FYCalendarLayout *layout = [FYCalendarLayout new];
@@ -132,16 +128,15 @@
         if(sdm) {
             NSString *dayStr = nil;
             NSString *priceStr = nil;
-            NSString *countStr = nil;
-            if(_calendarDelegate && [_calendarDelegate respondsToSelector:@selector(calendar:cellDataStringDictionaryWithIndexPath:withYear:withMonth:withDay:withPrice:withCount:withIsToday:)] ) {
-                NSMutableDictionary *dic = [[_calendarDelegate calendar:self cellDataStringDictionaryWithIndexPath:[NSIndexPath indexPathForItem:indexPath.row inSection:indexPath.section] withYear:dm.year.stringValue withMonth:dm.month.stringValue withDay:sdm.day.stringValue withPrice:sdm.price.stringValue withCount:sdm.count.stringValue withIsToday:isToday] mutableCopy];
+            
+            if(_calendarDelegate && [_calendarDelegate respondsToSelector:@selector(calendar:cellDataStringDictionaryWithIndexPath:withYear:withMonth:withDay:withPrice:withIsToday:)] ) {
+                NSMutableDictionary *dic = [[_calendarDelegate calendar:self cellDataStringDictionaryWithIndexPath:[NSIndexPath indexPathForItem:indexPath.row inSection:indexPath.section] withYear:dm.year.stringValue withMonth:dm.month.stringValue withDay:sdm.day.stringValue withPrice:sdm.price.stringValue withIsToday:isToday] mutableCopy];
                 if(dic) {
                     dayStr = dic.dayStr;
                     priceStr = dic.priceStr;
-                    countStr = dic.countStr;
                 }
             }
-            [cell setContentWithDay:dayStr?dayStr:(isToday?@"今天":sdm.day.stringValue) withPrice:priceStr?priceStr:sdm.price.stringValue withCount:countStr?countStr:sdm.count.stringValue];
+            [cell setContentWithDay:dayStr?dayStr:(isToday?@"今天":sdm.day.stringValue) withPrice:priceStr?priceStr:sdm.price.stringValue];
         } else {
             NSString *dayStr = nil;
             if(_calendarDelegate && [_calendarDelegate respondsToSelector:@selector(calendar:cellDayStringWithYear:withMonth:withDay:withIsToday:)] ) {
@@ -154,12 +149,14 @@
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return _dataModels.count;
+    return 1;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    
     FYCalendarDataModel *dm = _dataModels[section];
     return dm.dayCount.integerValue+dm.startWeek.integerValue;
+    
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
@@ -185,7 +182,7 @@
     CGFloat w = CGRectGetWidth(self.frame);
     UICollectionViewFlowLayout *layout = (id)self.collectionViewLayout;
     CGFloat s = (w - layout.sectionInset.left - layout.sectionInset.right - 6.f*layout.minimumInteritemSpacing) / 7.f;
-    return CGSizeMake(s, [FYCalendarCell hegith]);
+    return CGSizeMake(s, [FYCalendarCell height]);
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {

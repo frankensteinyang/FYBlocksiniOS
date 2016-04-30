@@ -74,10 +74,18 @@ static void(^weekLableStyleBlock)(NSArray *);
         [self addConstraints:cs2];
         [self addConstraints:cs3];
         
-        _weekLbs = [NSMutableArray new];
-        id weeks = @[FYCalendarHeader_SYMBOL_SUNDAY, FYCalendarHeader_SYMBOL_MONDAY, FYCalendarHeader_SYMBOL_TUESDAY, FYCalendarHeader_SYMBOL_WEDNESDAY, FYCalendarHeader_SYMBOL_THURSDAY, FYCalendarHeader_SYMBOL_FRIDAY, FYCalendarHeader_SYMBOL_SATURDAY];
-        for(int i=0; i<7 ; i++) {
-            UILabel *lb = [UILabel new];
+        _weekLbs = [[NSMutableArray alloc] init];
+        
+        id weeks = @[FYCalendarHeader_SYMBOL_MONDAY,
+                     FYCalendarHeader_SYMBOL_TUESDAY,
+                     FYCalendarHeader_SYMBOL_WEDNESDAY,
+                     FYCalendarHeader_SYMBOL_THURSDAY,
+                     FYCalendarHeader_SYMBOL_FRIDAY,
+                     FYCalendarHeader_SYMBOL_SATURDAY,
+                     FYCalendarHeader_SYMBOL_SUNDAY];
+        
+        for(int i = 0; i < 7 ; i++) {
+            UILabel *lb = [[UILabel alloc] init];
             lb.font = [UIFont systemFontOfSize:FYCalendarHeader_WEEK_LB_FONE_SIZE];
             lb.textColor = FYCalendarHeader_WEEK_LB_FONE_COLOR;
             lb.textAlignment = NSTextAlignmentCenter;

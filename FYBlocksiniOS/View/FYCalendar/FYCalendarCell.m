@@ -6,30 +6,25 @@
 //  Copyright © 2016 Frankenstein Yang. All rights reserved.
 //
 
+#import <Masonry/Masonry.h>
+
 #import "FYCalendarCell.h"
 #import "FYCalendarUIDefine.h"
 
+#define kFY_CALENDAR_CELL_PADDING (7.0f)
+#define kFY_CALENDAR_CELL_HEIGHT (43.0f)
+
 @interface FYCalendarCell ()
 
-@property (strong, nonatomic) UILabel *lb1;
-@property (strong, nonatomic) UILabel *lb2;
-@property (strong, nonatomic) UILabel *lb3;
+@property (strong, nonatomic) UILabel *dayLbl;
+@property (strong, nonatomic) UILabel *priceLbl;
+@property (strong, nonatomic) UIImageView *cellBackgroundView;
 
 @end
 
 @implementation FYCalendarCell
 
-static void(^InitCellStyleBlock)(UIView *);
-
-+ (void)calendarCellStyleWithBlock:(void(^)(UICollectionViewCell *cell))block {
-    
-    if(InitCellStyleBlock) {
-        Block_release((__bridge void*)block);
-    }
-    InitCellStyleBlock = (__bridge id)Block_copy((__bridge void*)block);
-}
-
-+ (CGFloat)hegith {
++ (CGFloat)height {
     
     return (FYCalendarCell_LB_HEIGHT) * 3.f +
             FYCalendarCell_LB_PADDING * 2.f +
@@ -41,81 +36,116 @@ static void(^InitCellStyleBlock)(UIView *);
 {
     self = [super initWithFrame:frame];
     if (self) {
-        UILabel *lb1 = [self createLb];
-        UILabel *lb2 = [self createLb];
-        UILabel *lb3 = [self createLb];
         
-        _lb1 = lb1;
-        _lb2 = lb2;
-        _lb3 = lb3;
+        [self addSubview:self.dayLbl];
+        [self addSubview:self.priceLbl];
         
-        _lb1.textColor = FYCalendarCell_DAY_COLOR;
-        _lb3.textColor = FYCalendarCell_COUNT_COLOR;
+//        [self.contentView addSubview:self.cellBackgroundView];
+//        CGFloat top = 25; // 顶端盖高度
+//        CGFloat bottom = 25 ; // 底端盖高度
+//        CGFloat left = 10; // 左端盖宽度
+//        CGFloat right = 10; // 右端盖宽度
+//        UIEdgeInsets insets = UIEdgeInsetsMake(top, left, bottom, right);
+//        // 指定为拉伸模式，伸缩后重新赋值
+//        UIImage *image = [image resizableImageWithCapInsets:insets resizingMode:UIImageResizingModeStretch];
+//        id vs = NSDictionaryOfVariableBindings(dayLbl, priceLbl);
+//        
+//        id ms = @{@"lbHeight":@(FYCalendarCell_LB_HEIGHT), @"lbPadding":@(FYCalendarCell_LB_PADDING)};
+//        id cs1 = [NSLayoutConstraint constraintsWithVisualFormat:@"|[dayLbl]|" options:0 metrics:nil views:vs];
+//        
+//        id cs2 = [NSLayoutConstraint constraintsWithVisualFormat:@"|[priceLbl]|" options:0 metrics:nil views:vs];
+//        
+//        id cs4 = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[dayLbl(lbHeight)]-lbPadding-[priceLbl(lbHeight)]" options:0 metrics:ms views:vs];
+//        
+//        // NSLayoutAttributeNotAnAttribute
+//        id c = [NSLayoutConstraint constraintWithItem:priceLbl attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:dayLbl.superview attribute:NSLayoutAttributeCenterY multiplier:1.f constant:1.f];
+//        
+//        [self.contentView addConstraint:c];
+//        [self.contentView addConstraints:cs1];
+//        [self.contentView addConstraints:cs2];
+//        [self.contentView addConstraints:cs4];
         
-        id vs = NSDictionaryOfVariableBindings(lb1, lb2, lb3);
-        
-        id ms = @{@"lbHeight":@(FYCalendarCell_LB_HEIGHT), @"lbPadding":@(FYCalendarCell_LB_PADDING)};
-        id cs1 = [NSLayoutConstraint constraintsWithVisualFormat:@"|[lb1]|" options:0 metrics:nil views:vs];
-        id cs2 = [NSLayoutConstraint constraintsWithVisualFormat:@"|[lb2]|" options:0 metrics:nil views:vs];
-        id cs3 = [NSLayoutConstraint constraintsWithVisualFormat:@"|[lb3]|" options:0 metrics:nil views:vs];
-        id cs4 = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[lb1(lbHeight)]-lbPadding-[lb2(lbHeight)]-lbPadding-[lb3(lbHeight)]" options:0 metrics:ms views:vs];
-        id c = [NSLayoutConstraint constraintWithItem:lb2 attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:lb2.superview attribute:NSLayoutAttributeCenterY multiplier:1.f constant:1.f];
-        
-        [self.contentView addConstraint:c];
-        [self.contentView addConstraints:cs1];
-        [self.contentView addConstraints:cs2];
-        [self.contentView addConstraints:cs3];
-        [self.contentView addConstraints:cs4];
-        
-        if(InitCellStyleBlock) {
-            InitCellStyleBlock(self);
-        }
     }
     return self;
 }
 
-- (UILabel*)createLb {
-    UILabel *lb = [UILabel new];
-    lb.textAlignment = NSTextAlignmentCenter;
-    lb.font = [UIFont systemFontOfSize:FYCalendarCell_LB_FONT_SIZE];
-    lb.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.contentView addSubview:lb];
-    return lb;
-}
-
-- (void)setContentWithDay:(NSString*)day withPrice:(NSString*)price withCount:(NSString*)count {
+- (void)setContentWithDay:(NSString*)day withPrice:(NSString*)price {
     
-    self.contentView.backgroundColor =
-                                     self.isSelected ?
-    FYCalendarCell_DATA_CELL_SELECT_BACKGROUND_COLOR :
-    FYCalendarCell_DATA_CELL_UNSELECT_BACKGROUND_COLOR;
     
-    _lb1.text = day;
-    _lb2.text = price;
-    _lb3.text = count;
+         [self.contentView addSubview:self.cellBackgroundView];
+    CGFloat top = 25; // 顶端盖高度
+    CGFloat bottom = 25 ; // 底端盖高度
+    CGFloat left = 10; // 左端盖宽度
+    CGFloat right = 10; // 右端盖宽度
+    UIEdgeInsets insets = UIEdgeInsetsMake(top, left, bottom, right);
+    // 指定为拉伸模式，伸缩后重新赋值
+    UIImage *image = [image resizableImageWithCapInsets:insets resizingMode:UIImageResizingModeStretch];
     
-    _lb2.textColor = FYCalendarCell_PRICE_COLOR;
-    _lb2.font = [UIFont systemFontOfSize:FYCalendarCell_LB_FONT_SIZE];
+    _dayLbl.text = day;
+    _priceLbl.text = price;
+    
+    _priceLbl.textColor = FYCalendarCell_PRICE_COLOR;
+    _priceLbl.font = [UIFont systemFontOfSize:kFY_CALENDAR_CELL_PRICE_FONT_SIZE];
+    
 }
 
 - (void)setContentWithDay:(NSString*)day {
     
-    self.contentView.backgroundColor = FYCalendarCell_DATE_CELL_BACKGROUND_COLOR;
-    _lb1.text = @"";
-    _lb2.text = day;
-    _lb3.text = @"";
+    _dayLbl.text = @"";
+    _priceLbl.text = day;
     
-    _lb2.textColor = FYCalendarCell_DARE_COLOR_ONLY_DAY;
-    _lb2.font = [UIFont systemFontOfSize:FYCalendarCell_LB_FONE_SIZE_ONLY_DAY];
+    _priceLbl.textColor = FYCalendarCell_DARE_COLOR_ONLY_DAY;
+    _priceLbl.font = [UIFont systemFontOfSize:FYCalendarCell_LB_FONE_SIZE_ONLY_DAY];
     
 }
 
 - (void)setContentEmpty {
     
-    self.contentView.backgroundColor = FYCalendarCell_EMPTY_CELL_BACKGROUND_COLOR;
-    _lb1.text = @"";
-    _lb2.text = @"";
-    _lb3.text = @"";
+    _dayLbl.text = @"";
+    _priceLbl.text = @"";
+    
+}
+
+#pragma mark - 约束
+- (void)makeConstraints {
+    
+    [self.dayLbl mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self);
+    }];
+    
+    [self.priceLbl mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self);
+    }];
+}
+
+#pragma mark - 懒加载
+
+- (UIImageView *)cellBackgroundView {
+    
+    if (!_cellBackgroundView) {
+        _cellBackgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Calender"]];
+    }
+    return _cellBackgroundView;
+    
+}
+
+- (UILabel *)dayLbl {
+    
+    if (!_dayLbl) {
+        _dayLbl = [[UILabel alloc] init];
+        [_dayLbl setBackgroundColor:[UIColor redColor]];
+        _dayLbl.textColor = kFY_CALENDAR_CELL_DAY_COLOR;
+    }
+    return _dayLbl;
+}
+
+- (UILabel *)priceLbl {
+    
+    if (!_priceLbl) {
+        _priceLbl = [[UILabel alloc] init];
+        [_dayLbl setBackgroundColor:[UIColor yellowColor]];
+    }
+    return _priceLbl;
     
 }
 

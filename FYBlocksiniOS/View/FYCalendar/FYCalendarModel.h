@@ -15,6 +15,6 @@
 @property (copy, nonatomic) NSNumber *year; // 年
 @property (copy, nonatomic) NSNumber *month; // 月
 
-+ (FYCalendarModel *)calendarModelWithYear:(NSNumber*)year withMonth:(NSNumber*)month withDay:(NSNumber*)day withPrice:(NSNumber*)price withCount:(NSNumber*)count;
++ (FYCalendarModel *)calendarModelWithYear:(NSNumber*)year withMonth:(NSNumber*)month withDay:(NSNumber*)day withPrice:(NSNumber*)price;
 
 @end

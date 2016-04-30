@@ -10,13 +10,11 @@
 
 @interface FYCalendarCell : UICollectionViewCell
 
-+ (void)calendarCellStyleWithBlock:(void(^)(UICollectionViewCell *cell))block;
++ (CGFloat)height;
 
-+ (CGFloat)hegith;
+- (void)setContentWithDay:(NSString *)day withPrice:(NSString *)price;
 
-- (void)setContentWithDay:(NSString*)day withPrice:(NSString*)price withCount:(NSString*)count;
-
-- (void)setContentWithDay:(NSString*)day;
+- (void)setContentWithDay:(NSString *)day;
 
 - (void)setContentEmpty;
 

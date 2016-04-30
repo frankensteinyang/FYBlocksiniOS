@@ -66,10 +66,10 @@
     FYCalendarLayout* layout = (id)_calendar.collectionViewLayout;
     layout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
     
-    FYCalendarModel *model = [FYCalendarModel calendarModelWithYear:@(2015) withMonth:@(3) withDay:@(22) withPrice:@(30) withCount:@(10)];
-    FYCalendarModel *model2 = [FYCalendarModel calendarModelWithYear:@(2015) withMonth:@(9) withDay:@(22) withPrice:@(10) withCount:@(10)];
-    FYCalendarModel *model3 = [FYCalendarModel calendarModelWithYear:@(2015) withMonth:@(7) withDay:@(24) withPrice:@(20) withCount:@(10)];
-    _calendar.datas = @[model, model2, model3];
+    FYCalendarModel *model = [FYCalendarModel calendarModelWithYear:@(2016) withMonth:@(4) withDay:@(30) withPrice:@(30)];
+    FYCalendarModel *modelA = [FYCalendarModel calendarModelWithYear:@(2016) withMonth:@(4) withDay:@(28) withPrice:@(120)];
+    FYCalendarModel *modelB = [FYCalendarModel calendarModelWithYear:@(2016) withMonth:@(4) withDay:@(29) withPrice:@(430)];
+    _calendar.datas = @[model, modelA, modelB];
     _calendar.today = [NSDate date];
     
 }
@@ -114,12 +114,10 @@
     
 }
 
-- (NSDictionary *)calendar:(FYCalendar *)cview cellDataStringDictionaryWithIndexPath:(NSIndexPath *)indexPath withYear:(NSString *)year withMonth:(NSString *)month withDay:(NSString *)day withPrice:(NSString *)price withCount:(NSString *)count withIsToday:(BOOL)isToady {
+- (NSDictionary *)calendar:(FYCalendar *)cview cellDataStringDictionaryWithIndexPath:(NSIndexPath *)indexPath withYear:(NSString *)year withMonth:(NSString *)month withDay:(NSString *)day withPrice:(NSString *)price withIsToday:(BOOL)isToady {
     
-    return @{kFYCalendarCellDataKeyDay:[NSString stringWithFormat:@"%@号", day],
-             kFYCalendarCellDataKeyPrice:[NSString stringWithFormat:@"%@元", price]
-             //             kSkyCalendarPriceViewCellDataKeyCount:[NSString stringWithFormat:@"还有%@", count]
-             };
+    return @{kFY_CALENDAR_CELL_KEY_DAY:[NSString stringWithFormat:@"%@", day],
+             kFY_CALENDAR_CELL_KEY_PRICE:[NSString stringWithFormat:@"￥%@", price]};
     
 }
 

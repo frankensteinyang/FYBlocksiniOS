@@ -327,6 +327,11 @@
     CGFloat height = self.bounds.size.height;
     self.scrollView.frame = CGRectMake(0, 0, width, height);
     
+    CGFloat contentSizeWidth = width * (_imageArray.count + 2);
+    CGSize size = CGSizeMake(contentSizeWidth, kFY_ITEM_HEIGHT);
+    self.scrollView.contentSize = size;
+    [self layoutIfNeeded];
+    
 }
 
 @end

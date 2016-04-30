@@ -49,9 +49,11 @@
             
             dc.month = month;
             NSDate *d = [cd dateFromComponents:dc];
+            
             NSDateComponents *resDc = [cd components:NSCalendarUnitWeekday fromDate:d];
+            
             NSUInteger ds = [cd rangeOfUnit:NSCalendarUnitDay inUnit:NSCalendarUnitMonth forDate:d].length;
-            dm.startWeek = @(resDc.weekday-1);
+            dm.startWeek = @(resDc.weekday - 2);
             dm.dayCount = @(ds);
             NSMutableDictionary *dsms = [NSMutableDictionary new];
             while(msIdx<msCount) {
