@@ -19,6 +19,7 @@
 @property (strong, nonatomic) UILabel *dayLbl;
 @property (strong, nonatomic) UILabel *priceLbl;
 @property (strong, nonatomic) UIImageView *cellBackgroundView;
+@property (strong, nonatomic) UIView *container;
 
 @end
 
@@ -37,8 +38,11 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        [self addSubview:self.dayLbl];
-        [self addSubview:self.priceLbl];
+        [self.container addSubview:self.dayLbl];
+        [self.container addSubview:self.priceLbl];
+        [self addSubview:self.container];
+        
+        [self makeConstraints];
         
 //        [self.contentView addSubview:self.cellBackgroundView];
 //        CGFloat top = 25; // 顶端盖高度
@@ -71,21 +75,43 @@
 
 - (void)setContentWithDay:(NSString*)day withPrice:(NSString*)price {
     
+    if ([day isEqualToString:@"18"]) {
+        UIImage *image = [UIImage imageNamed:@"calendar_left"];
+        [self.cellBackgroundView setImage:image];
+        [self.priceLbl setTextColor:[UIColor whiteColor]];
+        [self.dayLbl setTextColor:[UIColor whiteColor]];
+        self.priceLbl.font = [UIFont boldSystemFontOfSize:kFY_CALENDAR_CELL_PRICE_FONT_SIZE];
+    } else if ([day isEqualToString:@"23"]) {
+        UIImage *image = [UIImage imageNamed:@"calendar_right"];
+        [self.cellBackgroundView setImage:image];
+        [self.priceLbl setTextColor:[UIColor whiteColor]];
+        [self.dayLbl setTextColor:[UIColor whiteColor]];
+        self.priceLbl.font = [UIFont boldSystemFontOfSize:kFY_CALENDAR_CELL_PRICE_FONT_SIZE];
+    } else if ([day isEqualToString:@"19"] || [day isEqualToString:@"20"] || [day isEqualToString:@"21"] || [day isEqualToString:@"22"]) {
+        // 56 x 43
+        //    CGFloat top = 0; // 顶端盖高度
+        //    CGFloat bottom = 0 ; // 底端盖高度
+        //    CGFloat left = 0; // 左端盖宽度
+        //    CGFloat right = 30; // 右端盖宽度
+        //    UIEdgeInsets insets = UIEdgeInsetsMake(top, left, bottom, right);
+        [self.priceLbl setTextColor:[UIColor whiteColor]];
+        [self.dayLbl setTextColor:[UIColor whiteColor]];
+        UIImage *image = [UIImage imageNamed:@"Calender"];
+        UIImage *clippedImg = [self imageFromImage:image inRect:CGRectMake(30, 30, 30, 30)];
+        // 指定为拉伸模式，伸缩后重新赋值
+        //    UIImage *resizedImage = [image resizableImageWithCapInsets:insets resizingMode:UIImageResizingModeTile];
+        [self.cellBackgroundView setImage:clippedImg];
+        self.priceLbl.font = [UIFont boldSystemFontOfSize:kFY_CALENDAR_CELL_PRICE_FONT_SIZE];
+        
+    }
     
-         [self.contentView addSubview:self.cellBackgroundView];
-    CGFloat top = 25; // 顶端盖高度
-    CGFloat bottom = 25 ; // 底端盖高度
-    CGFloat left = 10; // 左端盖宽度
-    CGFloat right = 10; // 右端盖宽度
-    UIEdgeInsets insets = UIEdgeInsetsMake(top, left, bottom, right);
-    // 指定为拉伸模式，伸缩后重新赋值
-    UIImage *image = [image resizableImageWithCapInsets:insets resizingMode:UIImageResizingModeStretch];
+    self.dayLbl.text = day;
+    self.priceLbl.text = price;
+    [self.contentView addSubview:self.cellBackgroundView];
     
-    _dayLbl.text = day;
-    _priceLbl.text = price;
-    
-    _priceLbl.textColor = FYCalendarCell_PRICE_COLOR;
-    _priceLbl.font = [UIFont systemFontOfSize:kFY_CALENDAR_CELL_PRICE_FONT_SIZE];
+    [self.cellBackgroundView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self);
+    }];
     
 }
 
@@ -109,12 +135,21 @@
 #pragma mark - 约束
 - (void)makeConstraints {
     
+    [self.container mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(self);
+        make.left.equalTo(self);
+        make.right.equalTo(self);
+        make.height.mas_equalTo(43);
+    }];
+    
     [self.dayLbl mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self);
+        make.top.equalTo(self.container).offset(2);
+        make.centerX.equalTo(self.container);
     }];
     
     [self.priceLbl mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self);
+        make.top.mas_equalTo(self.dayLbl.mas_bottom).offset(3);
+        make.centerX.equalTo(self.container);
     }];
 }
 
@@ -123,7 +158,7 @@
 - (UIImageView *)cellBackgroundView {
     
     if (!_cellBackgroundView) {
-        _cellBackgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Calender"]];
+        _cellBackgroundView = [[UIImageView alloc] init];
     }
     return _cellBackgroundView;
     
@@ -133,8 +168,7 @@
     
     if (!_dayLbl) {
         _dayLbl = [[UILabel alloc] init];
-        [_dayLbl setBackgroundColor:[UIColor redColor]];
-        _dayLbl.textColor = kFY_CALENDAR_CELL_DAY_COLOR;
+        _dayLbl.textColor = kFY_CALENDAR_CELL_DAY_FONT_COLOR;
     }
     return _dayLbl;
 }
@@ -143,9 +177,27 @@
     
     if (!_priceLbl) {
         _priceLbl = [[UILabel alloc] init];
-        [_dayLbl setBackgroundColor:[UIColor yellowColor]];
+        _priceLbl.textColor = kFY_CALENDAR_CELL_PRICE_FONT_COLOR;
+        _priceLbl.font = [UIFont systemFontOfSize:kFY_CALENDAR_CELL_PRICE_FONT_SIZE];
     }
     return _priceLbl;
+    
+}
+
+- (UIImage *)imageFromImage:(UIImage *)image inRect:(CGRect)rect {
+    CGImageRef sourceImageRef = [image CGImage];
+    CGImageRef newImageRef = CGImageCreateWithImageInRect(sourceImageRef, rect);
+    UIImage *newImage = [UIImage imageWithCGImage:newImageRef];
+    CGImageRelease(newImageRef);
+    return newImage;
+}
+
+- (UIView *)container {
+    
+    if (!_container) {
+        _container = [[UIView alloc] init];
+    }
+    return _container;
     
 }
 

@@ -47,7 +47,6 @@
  *  @param month     月
  *  @param day       日
  *  @param price     价格
- *  @param count     数量
  *  @param isToady   是否为今天
  *
  *  @return 需要显示string数据，返回nil为使用默认，可以其中几个数据返回nil

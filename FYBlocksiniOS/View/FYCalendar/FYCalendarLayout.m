@@ -14,8 +14,8 @@
     
     NSMutableArray *marr = (id)[super layoutAttributesForElementsInRect:rect];
     
-    NSMutableIndexSet *hasSectionSet = [NSMutableIndexSet new];
-    NSMutableArray *headerAtts = [NSMutableArray new];
+    NSMutableIndexSet *hasSectionSet = [[NSMutableIndexSet alloc] init];
+    NSMutableArray *headerAtts = [[NSMutableArray alloc] init];
     
     [marr enumerateObjectsUsingBlock:^(UICollectionViewLayoutAttributes *att,
                                        NSUInteger idx,

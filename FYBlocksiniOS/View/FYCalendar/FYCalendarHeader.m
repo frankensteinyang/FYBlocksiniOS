@@ -55,8 +55,8 @@ static void(^weekLableStyleBlock)(NSArray *);
         _yearAndMonthLb = yearAndMonthLb;
         yearAndMonthLb.textAlignment = NSTextAlignmentCenter;
         yearAndMonthLb.translatesAutoresizingMaskIntoConstraints = NO;
-        yearAndMonthLb.font = [UIFont systemFontOfSize:FYCalendarHeader_YEAR_MONTH_LB_FONE_SIZE];
-        yearAndMonthLb.textColor = FYCalendarHeader_YEAR_MONTH_LB_FONE_COLOR;
+        yearAndMonthLb.font = [UIFont systemFontOfSize:kFY_CALENDAR_HEADER_YEAR_MONTH_FONT_SIZE];
+        yearAndMonthLb.textColor = kFY_CALENDAR_HEADER_YEAR_MONTH_FONT_COLOR;
         
         UIView *weekView = [UIView new];
         weekView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -86,8 +86,8 @@ static void(^weekLableStyleBlock)(NSArray *);
         
         for(int i = 0; i < 7 ; i++) {
             UILabel *lb = [[UILabel alloc] init];
-            lb.font = [UIFont systemFontOfSize:FYCalendarHeader_WEEK_LB_FONE_SIZE];
-            lb.textColor = FYCalendarHeader_WEEK_LB_FONE_COLOR;
+            lb.font = [UIFont systemFontOfSize:kFY_CALENDAR_HEADER_WEEK_FONT_SIZE];
+            lb.textColor = kFY_CALENDAR_HEADER_WEEK_FONT_COLOR;
             lb.textAlignment = NSTextAlignmentCenter;
             lb.text = weeks[i];
             [weekView addSubview:lb];
