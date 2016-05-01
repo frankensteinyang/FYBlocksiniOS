@@ -10,9 +10,9 @@
 
 @implementation FYCalendarModel
 
-+ (FYCalendarModel *)calendarModelWithYear:(NSNumber*)year withMonth:(NSNumber*)month withDay:(NSNumber*)day withPrice:(NSNumber*)price {
++ (FYCalendarModel *)calendarModelWithYear:(NSInteger *)year withMonth:(NSInteger *)month withDay:(NSInteger *)day withPrice:(NSString *)price {
     
-    FYCalendarModel * __autoreleasing m = [self new];
+    FYCalendarModel * __autoreleasing m = [[self alloc] init];
     m.year = year;
     m.month = month;
     m.day = day;

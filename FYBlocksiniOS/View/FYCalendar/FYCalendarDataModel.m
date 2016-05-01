@@ -15,13 +15,13 @@
     
     models = [models sortedArrayUsingComparator:^NSComparisonResult(FYCalendarModel *obj1, FYCalendarModel *obj2) {
         BOOL great = NO;
-        if(obj1.year.integerValue>obj2.year.integerValue) {
+        if(obj1.year > obj2.year) {
             great = YES;
-        } else if(obj1.year.integerValue == obj2.year.integerValue) {
-            if(obj1.month.integerValue>obj2.month.integerValue) {
+        } else if(obj1.year == obj2.year) {
+            if(obj1.month > obj2.month) {
                 great = YES;
-            } else if(obj1.month.integerValue==obj2.month.integerValue) {
-                great = obj1.day.integerValue>obj2.day.integerValue;
+            } else if(obj1.month ==obj2.month) {
+                great = obj1.day >obj2.day;
             }
         }
         return great;
@@ -30,10 +30,10 @@
     NSMutableArray * __autoreleasing dms = [NSMutableArray new];
     FYCalendarModel *modelFirst = models.firstObject;
     FYCalendarModel *modelLast = models.lastObject;
-    NSInteger fy = modelFirst.year.integerValue;
-    NSInteger fm = modelFirst.month.integerValue;
-    NSInteger ly = modelLast.year.integerValue;
-    NSInteger lm = modelLast.month.integerValue;
+    NSInteger fy = *(modelFirst.year);
+    NSInteger fm = *(modelFirst.month);
+    NSInteger ly = *(modelLast.year);
+    NSInteger lm = *(modelLast.month);
     
     NSUInteger msIdx = 0;
     NSInteger msCount = models.count;
@@ -58,9 +58,10 @@
             NSMutableDictionary *dsms = [NSMutableDictionary new];
             while(msIdx<msCount) {
                 FYCalendarModel *model = models[msIdx];
-                if(model.year.integerValue==year && model.month.integerValue==month) {
+                if((model.year == &(year)) && (model.month == &(month))) {
                     ++msIdx;
-                    [dsms setObject:model forKey:model.day];
+                    
+                    [dsms setObject:model forKey:[NSNumber numberWithInt:*(model.day)]];
                 } else {
                     break;
                 }
@@ -73,9 +74,10 @@
     return dms;
 }
 
-- (FYCalendarDataSubModel*)modelFromDay:(NSInteger)day {
+- (FYCalendarDataModel *)modelFromDay:(NSInteger)day {
     
-    return _models.count?_models[@(day)]:nil;
+    return _models.count ? _models[@(day)] : nil;
+    
 }
 
 @end

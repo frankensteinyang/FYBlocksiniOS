@@ -18,11 +18,6 @@
 #define kFY_CALENDAR_INDETIFIER_HEADER @"FYCalendarHeader"
 #define kFY_CALENDAR_INDETIFIER_CELL @"FYCalendarCell"
 
-/**
- *  重点：
- *  - (NSInteger)numberOfItemsInSection:(NSInteger)section;
- */
-
 @interface FYCalendar ()
 
 @property (strong, nonatomic) NSArray *dataModels;
@@ -33,7 +28,7 @@
 
 @implementation FYCalendar
 
-@synthesize datas = _datas, today = _today;
+@synthesize datas = _datas;
 
 + (instancetype)calendarPriceView {
     FYCalendarLayout *layout = [FYCalendarLayout new];
@@ -47,7 +42,6 @@
 
 + (instancetype)calendarPriceViewWithToday:(NSDate*)today {
     FYCalendar * __autoreleasing v = [self calendarPriceView];
-    v.today = today;
     return v;
 }
 
@@ -88,13 +82,7 @@
     [self updateCalendarDatas];
 }
 
-- (void)setToday:(NSDate *)today {
-    _today = today;
-    _todayStr = [_df stringFromDate:_today];
-}
-
 - (void)setTodayWithYear:(int)year withMonth:(int)month withDay:(int)day {
-    self.today = [self formDateWithYear:year withMonth:month withDay:day];
 }
 
 - (NSDate*)formDateWithYear:(int)year withMonth:(int)month withDay:(int)day {
@@ -117,33 +105,13 @@
 #pragma mark - UICollectionViewDataSource
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     FYCalendarCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kFY_CALENDAR_INDETIFIER_CELL forIndexPath:indexPath];
-    FYCalendarDataModel *dm = _dataModels[indexPath.section];
-    NSInteger sw = dm.startWeek.integerValue;
-    NSInteger day = indexPath.row - sw + 1;
-    if(indexPath.row<sw) {
+    FYCalendarDataModel *dataModel = _dataModels[indexPath.section];
+    NSInteger startWeek = dataModel.startWeek.integerValue;
+    NSInteger day = indexPath.row - startWeek;
+    if(indexPath.row < startWeek) {
         [cell setContentEmpty];
     } else {
-        FYCalendarDataSubModel *sdm = [dm modelFromDay:day];
-        BOOL isToday = [self isTodayWithYear:dm.year.intValue withMonth:dm.month.intValue withDay:(int)day];
-        if(sdm) {
-            NSString *dayStr = nil;
-            NSString *priceStr = nil;
-            
-            if(_calendarDelegate && [_calendarDelegate respondsToSelector:@selector(calendar:cellDataStringDictionaryWithIndexPath:withYear:withMonth:withDay:withPrice:withIsToday:)] ) {
-                NSMutableDictionary *dic = [[_calendarDelegate calendar:self cellDataStringDictionaryWithIndexPath:[NSIndexPath indexPathForItem:indexPath.row inSection:indexPath.section] withYear:dm.year.stringValue withMonth:dm.month.stringValue withDay:sdm.day.stringValue withPrice:sdm.price.stringValue withIsToday:isToday] mutableCopy];
-                if(dic) {
-                    dayStr = dic.dayStr;
-                    priceStr = dic.priceStr;
-                }
-            }
-            [cell setContentWithDay:dayStr?dayStr:(isToday?@"今天":sdm.day.stringValue) withPrice:priceStr?priceStr:sdm.price.stringValue];
-        } else {
-            NSString *dayStr = nil;
-            if(_calendarDelegate && [_calendarDelegate respondsToSelector:@selector(calendar:cellDayStringWithYear:withMonth:withDay:withIsToday:)] ) {
-                dayStr = [_calendarDelegate calendar:self cellDayStringWithYear:dm.year.stringValue withMonth:dm.month.stringValue withDay:[NSNumber numberWithInteger:day].stringValue withIsToday:isToday];
-            }
-            [cell setContentWithDay:dayStr?dayStr:(isToday?@"今天":[NSNumber numberWithInteger:day].stringValue)];
-        }
+        [cell setContentWithDay:[NSNumber numberWithInteger:day].stringValue withPrice:@"" startWeek:&startWeek];
     }
     return cell;
 }
@@ -201,30 +169,8 @@
     }
     
     BOOL isSel = YES;
-    NSInteger day = indexPath.row - sw + 1;
-    FYCalendarModel *model = (id)[dm modelFromDay:day];
-    NSArray *selsIdx = [self indexPathsForSelectedItems];
-    if(selsIdx.count) {
-        NSIndexPath* selIdx = selsIdx.firstObject;
-        if (indexPath.section==selIdx.section && indexPath.row==selIdx.row) {
-            isSel = NO;
-            if([_calendarDelegate respondsToSelector:@selector(calendar:didUnselectIndexWithPriceModel:)] ) {
-                [_calendarDelegate calendar:self didUnselectIndexWithPriceModel:model];
-            }
-        }
-    }
     
     if(isSel) {
-        if(model) {
-            if([_calendarDelegate respondsToSelector:@selector(calendar:shouldSelectIndexWithPriceModel:)] ) {
-                isSel = [_calendarDelegate calendar:self shouldSelectIndexWithPriceModel:model];
-            }
-        } else {
-            isSel = NO;
-        }
-        if(!isSel) {
-            return NO;
-        }
     }
     
     [collectionView reloadData];

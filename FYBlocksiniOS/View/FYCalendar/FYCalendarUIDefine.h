@@ -39,14 +39,15 @@
 #define FYCalendarHeader_SYMBOL_SUNDAY (@"日") // 星期日的符号
 
 // FYCalendarCell
+#define kFY_CALENDAR_CELL_PRICE_FONT_SIZE (11.f) // 价格的字号
+#define kFY_CALENDAR_CELL_DAY_FONT_SIZE (15.f) // 日期的字号
+#define kFY_CALENDAR_CELL_DAY_FONT_COLOR [UIColor colorWithRed:102.0/255.0 green:102.0/255.0 blue:102.0/255.0 alpha:1]
+#define kFY_CALENDAR_CELL_PRICE_FONT_COLOR ([UIColor colorWithRed:135.0/255.0 green:135.0/255.0 blue:135.0/255.0 alpha:1]) // 价格的字体颜色
+
 #define FYCalendarCell_LB_HEIGHT (16.f) // cell内lb的默认高度
 #define FYCalendarCell_PADDING (5.f) // cell内部与顶部和底部的距离
 #define FYCalendarCell_LB_PADDING (0.f) // lb间的间隙
-#define kFY_CALENDAR_CELL_PRICE_FONT_SIZE (11.f) // 价格的字号
-#define FYCalendarCell_LB_FONE_SIZE_ONLY_DAY (18.f) // 只显示日期时的lb字号
 #define FYCalendarCell_DARE_COLOR_ONLY_DAY ([UIColor grayColor]) //只显示日期时的字体颜色
-#define kFY_CALENDAR_CELL_DAY_FONT_COLOR [UIColor colorWithRed:102.0/255.0 green:102.0/255.0 blue:102.0/255.0 alpha:1]
-#define kFY_CALENDAR_CELL_PRICE_FONT_COLOR ([UIColor colorWithRed:135.0/255.0 green:135.0/255.0 blue:135.0/255.0 alpha:1]) // 价格的字体颜色
 #define FYCalendarCell_DATA_CELL_SELECT_BACKGROUND_COLOR ([[UIColor greenColor] colorWithAlphaComponent:.8f]) // 有价格数据的cell的选中背景颜色
 #define FYCalendarCell_DATA_CELL_UNSELECT_BACKGROUND_COLOR ([[UIColor greenColor] colorWithAlphaComponent:.3f]) // 有价格数据的cell的未选中背景颜色
 #define FYCalendarCell_EMPTY_CELL_BACKGROUND_COLOR ([UIColor whiteColor]) // 空白cell背景颜色

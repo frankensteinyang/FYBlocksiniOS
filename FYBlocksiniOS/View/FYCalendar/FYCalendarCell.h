@@ -12,9 +12,7 @@
 
 + (CGFloat)height;
 
-- (void)setContentWithDay:(NSString *)day withPrice:(NSString *)price;
-
-- (void)setContentWithDay:(NSString *)day;
+- (void)setContentWithDay:(NSString *)day withPrice:(NSString *)price startWeek:(NSInteger *)startWeek;
 
 - (void)setContentEmpty;
 

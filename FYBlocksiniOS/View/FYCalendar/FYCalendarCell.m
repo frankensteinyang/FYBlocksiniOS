@@ -52,76 +52,63 @@
 //        UIEdgeInsets insets = UIEdgeInsetsMake(top, left, bottom, right);
 //        // 指定为拉伸模式，伸缩后重新赋值
 //        UIImage *image = [image resizableImageWithCapInsets:insets resizingMode:UIImageResizingModeStretch];
-//        id vs = NSDictionaryOfVariableBindings(dayLbl, priceLbl);
-//        
-//        id ms = @{@"lbHeight":@(FYCalendarCell_LB_HEIGHT), @"lbPadding":@(FYCalendarCell_LB_PADDING)};
-//        id cs1 = [NSLayoutConstraint constraintsWithVisualFormat:@"|[dayLbl]|" options:0 metrics:nil views:vs];
-//        
-//        id cs2 = [NSLayoutConstraint constraintsWithVisualFormat:@"|[priceLbl]|" options:0 metrics:nil views:vs];
-//        
-//        id cs4 = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[dayLbl(lbHeight)]-lbPadding-[priceLbl(lbHeight)]" options:0 metrics:ms views:vs];
-//        
-//        // NSLayoutAttributeNotAnAttribute
-//        id c = [NSLayoutConstraint constraintWithItem:priceLbl attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:dayLbl.superview attribute:NSLayoutAttributeCenterY multiplier:1.f constant:1.f];
-//        
-//        [self.contentView addConstraint:c];
-//        [self.contentView addConstraints:cs1];
-//        [self.contentView addConstraints:cs2];
-//        [self.contentView addConstraints:cs4];
         
     }
     return self;
 }
 
-- (void)setContentWithDay:(NSString*)day withPrice:(NSString*)price {
+- (void)setContentWithDay:(NSString*)day withPrice:(NSString*)price startWeek:(NSInteger *)startWeek {
+
+#if DEBUG
     
-    if ([day isEqualToString:@"18"]) {
-        UIImage *image = [UIImage imageNamed:@"calendar_left"];
-        [self.cellBackgroundView setImage:image];
-        [self.priceLbl setTextColor:[UIColor whiteColor]];
-        [self.dayLbl setTextColor:[UIColor whiteColor]];
-        self.priceLbl.font = [UIFont boldSystemFontOfSize:kFY_CALENDAR_CELL_PRICE_FONT_SIZE];
-    } else if ([day isEqualToString:@"23"]) {
-        UIImage *image = [UIImage imageNamed:@"calendar_right"];
-        [self.cellBackgroundView setImage:image];
-        [self.priceLbl setTextColor:[UIColor whiteColor]];
-        [self.dayLbl setTextColor:[UIColor whiteColor]];
-        self.priceLbl.font = [UIFont boldSystemFontOfSize:kFY_CALENDAR_CELL_PRICE_FONT_SIZE];
-    } else if ([day isEqualToString:@"19"] || [day isEqualToString:@"20"] || [day isEqualToString:@"21"] || [day isEqualToString:@"22"]) {
-        // 56 x 43
-        //    CGFloat top = 0; // 顶端盖高度
-        //    CGFloat bottom = 0 ; // 底端盖高度
-        //    CGFloat left = 0; // 左端盖宽度
-        //    CGFloat right = 30; // 右端盖宽度
-        //    UIEdgeInsets insets = UIEdgeInsetsMake(top, left, bottom, right);
-        [self.priceLbl setTextColor:[UIColor whiteColor]];
-        [self.dayLbl setTextColor:[UIColor whiteColor]];
-        UIImage *image = [UIImage imageNamed:@"Calender"];
-        UIImage *clippedImg = [self imageFromImage:image inRect:CGRectMake(30, 30, 30, 30)];
-        // 指定为拉伸模式，伸缩后重新赋值
-        //    UIImage *resizedImage = [image resizableImageWithCapInsets:insets resizingMode:UIImageResizingModeTile];
-        [self.cellBackgroundView setImage:clippedImg];
-        self.priceLbl.font = [UIFont boldSystemFontOfSize:kFY_CALENDAR_CELL_PRICE_FONT_SIZE];
+    NSArray *bookedDays = [NSArray arrayWithObjects:@"13", @"14", @"15", @"16", nil];
+    NSString *firstBookedDay = [bookedDays firstObject];
+    NSString *lastBookedDay = [bookedDays lastObject];
+
+//    if (startWeek == [day intValue]) {
+        if ([day isEqualToString:firstBookedDay]) {
+            UIImage *image = [UIImage imageNamed:@"calendar_left"];
+            [self.cellBackgroundView setImage:image];
+            [self.priceLbl setTextColor:[UIColor whiteColor]];
+            [self.dayLbl setTextColor:[UIColor whiteColor]];
+            self.priceLbl.font = [UIFont boldSystemFontOfSize:kFY_CALENDAR_CELL_PRICE_FONT_SIZE];
+            
+        } else if ([day isEqualToString:lastBookedDay]) {
+            UIImage *image = [UIImage imageNamed:@"calendar_right"];
+            [self.cellBackgroundView setImage:image];
+            [self.priceLbl setTextColor:[UIColor whiteColor]];
+            [self.dayLbl setTextColor:[UIColor whiteColor]];
+            self.priceLbl.font = [UIFont boldSystemFontOfSize:kFY_CALENDAR_CELL_PRICE_FONT_SIZE];
+        } else if ([day isEqualToString:@"14"] || [day isEqualToString:@"15"]) {
+            // 56 x 43
+            //    CGFloat top = 0; // 顶端盖高度
+            //    CGFloat bottom = 0 ; // 底端盖高度
+            //    CGFloat left = 0; // 左端盖宽度
+            //    CGFloat right = 30; // 右端盖宽度
+            //    UIEdgeInsets insets = UIEdgeInsetsMake(top, left, bottom, right);
+            [self.priceLbl setTextColor:[UIColor whiteColor]];
+            [self.dayLbl setTextColor:[UIColor whiteColor]];
+            UIImage *image = [UIImage imageNamed:@"Calender"];
+            UIImage *clippedImg = [self imageFromImage:image inRect:CGRectMake(30, 30, 30, 30)];
+            // 指定为拉伸模式，伸缩后重新赋值
+            //    UIImage *resizedImage = [image resizableImageWithCapInsets:insets resizingMode:UIImageResizingModeTile];
+            [self.cellBackgroundView setImage:clippedImg];
+            self.priceLbl.font = [UIFont boldSystemFontOfSize:kFY_CALENDAR_CELL_PRICE_FONT_SIZE];
+            
+        }
         
-    }
+        self.dayLbl.text = day;
+        int testPrice = arc4random() % 500;
+        self.priceLbl.text = [NSString stringWithFormat:@"￥%d", testPrice];
+//    }
     
-    self.dayLbl.text = day;
-    self.priceLbl.text = price;
+#endif
+    
     [self.contentView addSubview:self.cellBackgroundView];
     
     [self.cellBackgroundView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self);
     }];
-    
-}
-
-- (void)setContentWithDay:(NSString*)day {
-    
-    _dayLbl.text = @"";
-    _priceLbl.text = day;
-    
-    _priceLbl.textColor = FYCalendarCell_DARE_COLOR_ONLY_DAY;
-    _priceLbl.font = [UIFont systemFontOfSize:FYCalendarCell_LB_FONE_SIZE_ONLY_DAY];
     
 }
 
@@ -169,6 +156,7 @@
     if (!_dayLbl) {
         _dayLbl = [[UILabel alloc] init];
         _dayLbl.textColor = kFY_CALENDAR_CELL_DAY_FONT_COLOR;
+        _dayLbl.font = [UIFont systemFontOfSize:kFY_CALENDAR_CELL_DAY_FONT_SIZE];
     }
     return _dayLbl;
 }

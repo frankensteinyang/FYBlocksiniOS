@@ -8,13 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-#import "FYCalendarDataSubModel.h"
+@interface FYCalendarModel : NSObject
 
-@interface FYCalendarModel : FYCalendarDataSubModel
+@property (assign, nonatomic) NSInteger *year; // 年
+@property (assign, nonatomic) NSInteger *month; // 月
+@property (assign, nonatomic) NSInteger *day; // 天
+@property (strong, nonatomic) NSString  *price; // 价格
 
-@property (copy, nonatomic) NSNumber *year; // 年
-@property (copy, nonatomic) NSNumber *month; // 月
-
-+ (FYCalendarModel *)calendarModelWithYear:(NSNumber*)year withMonth:(NSNumber*)month withDay:(NSNumber*)day withPrice:(NSNumber*)price;
++ (FYCalendarModel *)calendarModelWithYear:(NSInteger *)year withMonth:(NSInteger *)month withDay:(NSInteger *)day withPrice:(NSString *)price;
 
 @end

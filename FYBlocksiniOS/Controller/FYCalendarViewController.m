@@ -58,7 +58,6 @@
     }];
     
     _calendar = [FYCalendar calendarPriceViewWithToday:[NSDate date]];
-    _calendar.today = [NSDate date];
     _calendar.userInteractionEnabled = NO;
     _calendar.calendarDelegate = self;
     _calendar.frame = CGRectMake(0, 114, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) - 64);
@@ -67,38 +66,32 @@
     FYCalendarLayout* layout = (id)_calendar.collectionViewLayout;
     layout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
     
-    FYCalendarModel *model = [FYCalendarModel calendarModelWithYear:@(2016) withMonth:@(4) withDay:@(1) withPrice:@(30)];
-    FYCalendarModel *modelA = [FYCalendarModel calendarModelWithYear:@(2016) withMonth:@(4) withDay:@(2) withPrice:@(120)];
-    FYCalendarModel *modelB = [FYCalendarModel calendarModelWithYear:@(2016) withMonth:@(4) withDay:@(3) withPrice:@(430)];
-    FYCalendarModel *modelC = [FYCalendarModel calendarModelWithYear:@(2016) withMonth:@(4) withDay:@(4) withPrice:@(119)];
-    FYCalendarModel *modelD = [FYCalendarModel calendarModelWithYear:@(2016) withMonth:@(4) withDay:@(5) withPrice:@(9)];
-    FYCalendarModel *modelE = [FYCalendarModel calendarModelWithYear:@(2016) withMonth:@(4) withDay:@(6) withPrice:@(120)];
-    FYCalendarModel *modelF = [FYCalendarModel calendarModelWithYear:@(2016) withMonth:@(4) withDay:@(7) withPrice:@(430)];
-    FYCalendarModel *modelG = [FYCalendarModel calendarModelWithYear:@(2016) withMonth:@(4) withDay:@(8) withPrice:@(119)];
-    FYCalendarModel *modelH = [FYCalendarModel calendarModelWithYear:@(2016) withMonth:@(4) withDay:@(9) withPrice:@(9)];
-    FYCalendarModel *modelI = [FYCalendarModel calendarModelWithYear:@(2016) withMonth:@(4) withDay:@(10) withPrice:@(9)];
-    FYCalendarModel *modelJ = [FYCalendarModel calendarModelWithYear:@(2016) withMonth:@(4) withDay:@(11) withPrice:@(120)];
-    FYCalendarModel *modelK = [FYCalendarModel calendarModelWithYear:@(2016) withMonth:@(4) withDay:@(12) withPrice:@(430)];
-    FYCalendarModel *modelL = [FYCalendarModel calendarModelWithYear:@(2016) withMonth:@(4) withDay:@(13) withPrice:@(430)];
-    FYCalendarModel *modelM = [FYCalendarModel calendarModelWithYear:@(2016) withMonth:@(4) withDay:@(14) withPrice:@(9)];
-    FYCalendarModel *modelN = [FYCalendarModel calendarModelWithYear:@(2016) withMonth:@(4) withDay:@(15) withPrice:@(120)];
-    FYCalendarModel *modelO = [FYCalendarModel calendarModelWithYear:@(2016) withMonth:@(4) withDay:@(16) withPrice:@(430)];
-    FYCalendarModel *modelP = [FYCalendarModel calendarModelWithYear:@(2016) withMonth:@(4) withDay:@(17) withPrice:@(119)];
-    FYCalendarModel *modelQ = [FYCalendarModel calendarModelWithYear:@(2016) withMonth:@(4) withDay:@(18) withPrice:@(9)];
-    FYCalendarModel *modelR = [FYCalendarModel calendarModelWithYear:@(2016) withMonth:@(4) withDay:@(19) withPrice:@(120)];
-    FYCalendarModel *modelS = [FYCalendarModel calendarModelWithYear:@(2016) withMonth:@(4) withDay:@(20) withPrice:@(430)];
-    FYCalendarModel *modelT = [FYCalendarModel calendarModelWithYear:@(2016) withMonth:@(4) withDay:@(21) withPrice:@(119)];
-    FYCalendarModel *modelU = [FYCalendarModel calendarModelWithYear:@(2016) withMonth:@(4) withDay:@(22) withPrice:@(9)];
-    FYCalendarModel *model23 = [FYCalendarModel calendarModelWithYear:@(2016) withMonth:@(4) withDay:@(23) withPrice:@(120)];
-    FYCalendarModel *model24 = [FYCalendarModel calendarModelWithYear:@(2016) withMonth:@(4) withDay:@(24) withPrice:@(430)];
-    FYCalendarModel *model25 = [FYCalendarModel calendarModelWithYear:@(2016) withMonth:@(4) withDay:@(25) withPrice:@(119)];
-    FYCalendarModel *model26 = [FYCalendarModel calendarModelWithYear:@(2016) withMonth:@(4) withDay:@(26) withPrice:@(9)];
-    FYCalendarModel *model27 = [FYCalendarModel calendarModelWithYear:@(2016) withMonth:@(4) withDay:@(27) withPrice:@(120)];
-    FYCalendarModel *model28 = [FYCalendarModel calendarModelWithYear:@(2016) withMonth:@(4) withDay:@(28) withPrice:@(430)];
-    FYCalendarModel *model29 = [FYCalendarModel calendarModelWithYear:@(2016) withMonth:@(4) withDay:@(29) withPrice:@(119)];
-    FYCalendarModel *model30 = [FYCalendarModel calendarModelWithYear:@(2016) withMonth:@(4) withDay:@(30) withPrice:@(9)];
-    _calendar.datas = @[model, modelA, modelB, modelC, modelD, modelE, modelF, modelG, modelH, modelI, modelJ, modelK, modelL, modelM, modelN, modelO, modelP, modelQ, modelR, modelS, modelT, modelU, model23, model24, model25, model26, model27, model28, model29, model30];
-    _calendar.today = [NSDate date];
+    
+    
+#if DEBUG
+    
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSRange range = [calendar rangeOfUnit:NSDayCalendarUnit inUnit:NSMonthCalendarUnit forDate:[NSDate date]];
+    
+    NSUInteger numberOfDaysInMonth = range.length;
+    
+    unsigned unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit;
+    
+    NSDateComponents *components = [calendar components:unitFlags fromDate:[NSDate date]];
+    
+    NSInteger iCurYear = [components year];  //当前的年份
+    
+    NSInteger iCurMonth = [components month];  //当前的月份
+    
+    for (NSInteger i = 1; i < numberOfDaysInMonth + 1; i++) {
+        
+        FYCalendarModel *model = [FYCalendarModel calendarModelWithYear:&iCurYear withMonth:&iCurMonth withDay:&i withPrice:@"234"];
+        
+        _calendar.datas = @[model];
+        
+    }
+    
+#endif
     
 }
 
@@ -126,10 +119,9 @@
     
 }
 
-- (NSDictionary *)calendar:(FYCalendar *)cview cellDataStringDictionaryWithIndexPath:(NSIndexPath *)indexPath withYear:(NSString *)year withMonth:(NSString *)month withDay:(NSString *)day withPrice:(NSString *)price withIsToday:(BOOL)isToady {
+- (NSDictionary *)calendar:(FYCalendar *)cview cellDataStringDictionaryWithIndexPath:(NSIndexPath *)indexPath withYear:(NSString *)year withMonth:(NSString *)month withDay:(NSString *)day withPrice:(NSString *)price {
     
-    return @{kFY_CALENDAR_CELL_KEY_DAY:[NSString stringWithFormat:@"%@", day],
-             kFY_CALENDAR_CELL_KEY_PRICE:[NSString stringWithFormat:@"￥%@", price]};
+    return 0;
     
 }
 
@@ -144,5 +136,9 @@
     
     NSLog(@"FYCalendarViewController gets dealloced!");
 }
+
+#if DEBUG
+
+#endif
 
 @end

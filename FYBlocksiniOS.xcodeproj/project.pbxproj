@@ -15,7 +15,6 @@
 		EF09BCAD1CC4C08E00EC4619 /* UIColor+FYImageAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = EF09BCAC1CC4C08E00EC4619 /* UIColor+FYImageAdditions.m */; };
 		EF0CF6B31CC0F53F00BA94C6 /* FYMRCBlockClass.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0CF6B21CC0F53F00BA94C6 /* FYMRCBlockClass.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		EF0CF6B61CC0F56400BA94C6 /* FYARCBlockClass.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0CF6B51CC0F56400BA94C6 /* FYARCBlockClass.m */; };
-		EF10450C1CD30BE900B07797 /* FYCalendarDataSubModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EF10450B1CD30BE900B07797 /* FYCalendarDataSubModel.m */; };
 		EF10450F1CD30C1300B07797 /* FYCalendarDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EF10450E1CD30C1300B07797 /* FYCalendarDataModel.m */; };
 		EF1045121CD30C5000B07797 /* FYCalendarModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EF1045111CD30C5000B07797 /* FYCalendarModel.m */; };
 		EF1045161CD30CB700B07797 /* FYCalendarLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = EF1045151CD30CB700B07797 /* FYCalendarLayout.m */; };
@@ -77,8 +76,6 @@
 		EF0CF6B41CC0F56400BA94C6 /* FYARCBlockClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYARCBlockClass.h; sourceTree = "<group>"; };
 		EF0CF6B51CC0F56400BA94C6 /* FYARCBlockClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYARCBlockClass.m; sourceTree = "<group>"; };
 		EF1045051CD3095C00B07797 /* FYCalendarUIDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYCalendarUIDefine.h; sourceTree = "<group>"; };
-		EF10450A1CD30BE900B07797 /* FYCalendarDataSubModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYCalendarDataSubModel.h; sourceTree = "<group>"; };
-		EF10450B1CD30BE900B07797 /* FYCalendarDataSubModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYCalendarDataSubModel.m; sourceTree = "<group>"; };
 		EF10450D1CD30C1300B07797 /* FYCalendarDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYCalendarDataModel.h; sourceTree = "<group>"; };
 		EF10450E1CD30C1300B07797 /* FYCalendarDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYCalendarDataModel.m; sourceTree = "<group>"; };
 		EF1045101CD30C5000B07797 /* FYCalendarModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYCalendarModel.h; sourceTree = "<group>"; };
@@ -194,8 +191,6 @@
 		EF1045061CD30B7700B07797 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				EF10450A1CD30BE900B07797 /* FYCalendarDataSubModel.h */,
-				EF10450B1CD30BE900B07797 /* FYCalendarDataSubModel.m */,
 				EF10450D1CD30C1300B07797 /* FYCalendarDataModel.h */,
 				EF10450E1CD30C1300B07797 /* FYCalendarDataModel.m */,
 				EF1045101CD30C5000B07797 /* FYCalendarModel.h */,
@@ -570,7 +565,6 @@
 				EF4ADDA01CBEB0DD00948A3F /* FYParametricClass.m in Sources */,
 				EF39AB9B1CC3E829001A6395 /* FYBannerViewController.m in Sources */,
 				EF09BCA41CC485F200EC4619 /* FYBannerViewB.m in Sources */,
-				EF10450C1CD30BE900B07797 /* FYCalendarDataSubModel.m in Sources */,
 				EF1045161CD30CB700B07797 /* FYCalendarLayout.m in Sources */,
 				EF0CF6B31CC0F53F00BA94C6 /* FYMRCBlockClass.m in Sources */,
 				EF09BCAD1CC4C08E00EC4619 /* UIColor+FYImageAdditions.m in Sources */,

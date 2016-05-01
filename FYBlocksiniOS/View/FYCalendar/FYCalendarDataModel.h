@@ -8,8 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-#import "FYCalendarDataSubModel.h"
-
 @interface FYCalendarDataModel : NSObject
 
 @property (strong, nonatomic) NSNumber *year;
@@ -19,7 +17,5 @@
 @property (strong, nonatomic) NSDictionary *models;
 
 + (NSArray *)calendarDataModelWithCalendarModel:(NSArray*)models;
-
-- (FYCalendarDataSubModel *)modelFromDay:(NSInteger)day;
 
 @end
