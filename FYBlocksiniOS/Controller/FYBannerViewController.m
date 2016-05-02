@@ -20,17 +20,15 @@ typedef enum : NSUInteger {
 
 @interface FYBannerViewController ()
 
-@property (nonatomic, strong) FYBanner *banner;
-@property (nonatomic, strong) FYNewBanner *newBanner;
-@property (nonatomic, strong) NSArray *imageArray;
-
+@property (nonatomic, strong) FYBanner              *banner;
+@property (nonatomic, strong) FYNewBanner           *newBanner;
+@property (nonatomic, strong) NSArray               *imageArray;
 @property (nonatomic, assign) FYContainerStatusType status;
-@property (nonatomic, strong) UIView *magicContainer;
-@property (nonatomic, strong) UIView *amazingContainer;
-
-@property (nonatomic, strong) UIButton *backBtn;
-@property (nonatomic, strong) UIButton *magicBtn;
-@property (nonatomic, strong) UIButton *amazingBtn;
+@property (nonatomic, strong) UIView                *magicContainer;
+@property (nonatomic, strong) UIView                *amazingContainer;
+@property (nonatomic, strong) UIButton              *backBtn;
+@property (nonatomic, strong) UIButton              *magicBtn;
+@property (nonatomic, strong) UIButton              *amazingBtn;
 
 @end
 
@@ -68,9 +66,29 @@ typedef enum : NSUInteger {
     
 }
 
+#pragma mark - 按钮点击事件
+
 - (void)backBtnClicked {
     
     [self dismissViewControllerAnimated:NO completion:nil];
+}
+
+- (void)magicBtnClicked {
+    
+    if (self.status == FYContainerStatusTypeSmaller) {
+        [self magicConstraints:FYContainerStatusTypeBigger];
+    } else {
+        [self magicConstraints:FYContainerStatusTypeSmaller];
+    }
+}
+
+- (void)amazingBtnClicked {
+    
+    if (self.status == FYContainerStatusTypeSmaller) {
+        [self amazingConstraints:FYContainerStatusTypeBigger];
+    } else {
+        [self amazingConstraints:FYContainerStatusTypeSmaller];
+    }
 }
 
 #pragma mark - 懒加载
@@ -144,24 +162,6 @@ typedef enum : NSUInteger {
     
 }
 
-- (void)magicBtnClicked {
-    
-    if (self.status == FYContainerStatusTypeSmaller) {
-        [self magicConstraints:FYContainerStatusTypeBigger];
-    } else {
-        [self magicConstraints:FYContainerStatusTypeSmaller];
-    }
-}
-
-- (void)amazingBtnClicked {
-    
-    if (self.status == FYContainerStatusTypeSmaller) {
-        [self magicConstraints:FYContainerStatusTypeBigger];
-    } else {
-        [self magicConstraints:FYContainerStatusTypeSmaller];
-    }
-}
-
 - (FYBanner *)banner {
     
     if (!_banner) {
@@ -177,9 +177,10 @@ typedef enum : NSUInteger {
 - (FYNewBanner *)newBanner {
     
     if (!_newBanner) {
-        _newBanner = [[FYNewBanner alloc] initWithFrame:CGRectZero responseBlock:^(NSString *url) {
+        _newBanner = [[FYNewBanner alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen ].bounds.size.width - 5 * 2, 120) responseBlock:^(NSString *url) {
             NSLog(@"%s", __FUNCTION__);
         }];
+        _newBanner.imageArray = [NSMutableArray arrayWithArray:self.imageArray];
     }
     return _newBanner;
     
@@ -188,19 +189,6 @@ typedef enum : NSUInteger {
 #pragma mark - 约束
 
 - (void)makeConstraints {
-    
-    [_magicContainer setBackgroundColor:[UIColor redColor]];
-    [_magicContainer mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_magicBtn.mas_bottom).offset(30);
-        make.left.equalTo(self.view.mas_left);
-        make.right.equalTo(self.view.mas_right);
-        make.height.mas_equalTo(105);
-    }];
-    [_banner mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.magicContainer);
-        make.center.equalTo(self.magicContainer);
-        make.size.equalTo(self.magicContainer);
-    }];
     
     [_backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.view).offset(29);
@@ -214,10 +202,34 @@ typedef enum : NSUInteger {
         make.size.mas_equalTo(CGSizeMake(100, 30));
     }];
     
+    [_magicContainer mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_magicBtn.mas_bottom).offset(30);
+        make.left.equalTo(self.view.mas_left);
+        make.right.equalTo(self.view.mas_right);
+        make.height.mas_equalTo(105);
+    }];
+    
+    [_banner mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.magicContainer);
+        make.center.equalTo(self.magicContainer);
+    }];
+    
     [_amazingBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(_banner.mas_bottom).with.offset(30);
         make.centerX.mas_equalTo(self.view.mas_centerX);
         make.size.mas_equalTo(CGSizeMake(100, 30));
+    }];
+    
+    [_amazingContainer mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(_amazingBtn.mas_bottom).offset(30);
+        make.left.equalTo(self.view.mas_left).offset(5);
+        make.right.equalTo(self.view.mas_right).offset(-5);
+        make.height.mas_equalTo(80);
+    }];
+    
+    [_newBanner mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(_amazingContainer);
+        make.center.equalTo(_amazingContainer);
     }];
     
 }
@@ -227,21 +239,6 @@ typedef enum : NSUInteger {
     self.status = status;
     if (self.status == FYContainerStatusTypeSmaller) {
         
-        [_magicContainer setBackgroundColor:[UIColor brownColor]];
-        [_magicContainer mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(_magicBtn.mas_bottom).offset(30);
-            make.left.equalTo(self.view.mas_left).offset(20);
-            make.right.equalTo(self.view.mas_right).offset(-20);
-            make.height.mas_equalTo(105);
-        }];
-        [_banner mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.edges.equalTo(self.magicContainer);
-            make.center.equalTo(self.magicContainer);
-            make.size.equalTo(self.magicContainer);
-        }];
-        
-    } else {
-        
         [_magicContainer setBackgroundColor:[UIColor redColor]];
         [_magicContainer mas_updateConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(_magicBtn.mas_bottom).offset(30);
@@ -249,11 +246,17 @@ typedef enum : NSUInteger {
             make.right.equalTo(self.view.mas_right);
             make.height.mas_equalTo(105);
         }];
-        [_banner mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.edges.equalTo(self.magicContainer);
-            make.center.equalTo(self.magicContainer);
-            make.size.equalTo(self.magicContainer);
+        
+    } else {
+        
+        [_magicContainer setBackgroundColor:[UIColor brownColor]];
+        [_magicContainer mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(_magicBtn.mas_bottom).offset(30);
+            make.left.equalTo(self.view.mas_left).offset(20);
+            make.right.equalTo(self.view.mas_right).offset(-20);
+            make.height.mas_equalTo(105);
         }];
+        
     }
 }
 
@@ -262,33 +265,22 @@ typedef enum : NSUInteger {
     self.status = status;
     if (self.status == FYContainerStatusTypeSmaller) {
         
-        [_amazingContainer setBackgroundColor:[UIColor brownColor]];
         [_amazingContainer mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(_magicBtn.mas_bottom).offset(30);
-            make.left.equalTo(self.view.mas_left).offset(20);
-            make.right.equalTo(self.view.mas_right).offset(-20);
-            make.height.mas_equalTo(105);
-        }];
-        [_newBanner mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.edges.equalTo(self.amazingContainer);
-            make.center.equalTo(self.amazingContainer);
-            make.size.equalTo(self.amazingContainer);
+            make.top.equalTo(_amazingBtn.mas_bottom).offset(30);
+            make.left.equalTo(self.view.mas_left).offset(5);
+            make.right.equalTo(self.view.mas_right).offset(-5);
+            make.height.mas_equalTo(80);
         }];
         
     } else {
         
-        [_amazingContainer setBackgroundColor:[UIColor redColor]];
         [_amazingContainer mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(_magicBtn.mas_bottom).offset(30);
-            make.left.equalTo(self.view.mas_left);
-            make.right.equalTo(self.view.mas_right);
-            make.height.mas_equalTo(105);
+            make.top.equalTo(_amazingBtn.mas_bottom).offset(30);
+            make.left.equalTo(self.view.mas_left).offset(40);
+            make.right.equalTo(self.view.mas_right).offset(-40);
+            make.height.mas_equalTo(80);
         }];
-        [_newBanner mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.edges.equalTo(self.amazingContainer);
-            make.center.equalTo(self.amazingContainer);
-            make.size.equalTo(self.amazingContainer);
-        }];
+        
     }
     
 }
