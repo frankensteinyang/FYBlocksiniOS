@@ -10,10 +10,8 @@
 #import <libextobjc/EXTScope.h>
 
 #import "FYBannerViewController.h"
-
 #import "FYBanner.h"
-
-#define kFY_SCREEN_WIDTH ([UIScreen mainScreen].bounds.size.width)
+#import "FYNewBanner.h"
 
 typedef enum : NSUInteger {
     FYContainerStatusTypeSmaller,
@@ -23,10 +21,16 @@ typedef enum : NSUInteger {
 @interface FYBannerViewController ()
 
 @property (nonatomic, strong) FYBanner *banner;
+@property (nonatomic, strong) FYNewBanner *newBanner;
 @property (nonatomic, strong) NSArray *imageArray;
 
-@property (nonatomic,assign) FYContainerStatusType status;
-@property (nonatomic,strong) UIView *container;
+@property (nonatomic, assign) FYContainerStatusType status;
+@property (nonatomic, strong) UIView *magicContainer;
+@property (nonatomic, strong) UIView *amazingContainer;
+
+@property (nonatomic, strong) UIButton *backBtn;
+@property (nonatomic, strong) UIButton *magicBtn;
+@property (nonatomic, strong) UIButton *amazingBtn;
 
 @end
 
@@ -36,39 +40,15 @@ typedef enum : NSUInteger {
     
     [self.view setBackgroundColor:[UIColor greenColor]];
     
-    @weakify(self);
-    UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    backBtn.backgroundColor = [UIColor whiteColor];
-    [backBtn setTitle:@"Back" forState:UIControlStateNormal];
-    [backBtn addTarget:self
-                action:@selector(backBtnClicked)
-      forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:backBtn];
-    [backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        @strongify(self);
-        make.top.mas_equalTo(60);
-        make.centerX.mas_equalTo(self.view.mas_centerX);
-        make.size.mas_equalTo(CGSizeMake(100, 50));
-    }];
+    [self.view addSubview:self.backBtn];
+    [self.view addSubview:self.magicBtn];
+    [self.view addSubview:self.magicContainer];
+    [_magicContainer addSubview:self.banner];
+    [self.view addSubview:self.amazingBtn];
+    [self.view addSubview:self.amazingContainer];
+    [_amazingContainer addSubview:self.newBanner];
     
-    UIButton *magicBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    magicBtn.backgroundColor = [UIColor whiteColor];
-    [magicBtn setTitle:@"Magic" forState:UIControlStateNormal];
-    [magicBtn addTarget:self
-                action:@selector(magicBtnClicked)
-      forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:magicBtn];
-    [magicBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        @strongify(self);
-        make.top.mas_equalTo(backBtn.mas_bottom).with.offset(10);
-        make.centerX.mas_equalTo(self.view.mas_centerX);
-        make.size.mas_equalTo(CGSizeMake(100, 50));
-    }];
-    
-    [self.view addSubview:self.container];
-    [_container addSubview:self.banner];
-    [self remakeConstraint:100];
-    
+    [self makeConstraints];
     
 }
 
@@ -93,24 +73,92 @@ typedef enum : NSUInteger {
     [self dismissViewControllerAnimated:NO completion:nil];
 }
 
-- (UIView *)container {
-    if (!_container) {
-        _container = [[UIView alloc] init];
-        _container.layer.cornerRadius = 4;
-        _container.clipsToBounds = YES;
-        _container.backgroundColor = [UIColor grayColor];
+#pragma mark - 懒加载
+
+
+- (UIView *)magicContainer {
+    
+    if (!_magicContainer) {
+        
+        _magicContainer = [[UIView alloc] init];
+        _magicContainer.layer.cornerRadius = 4;
+        _magicContainer.clipsToBounds = YES;
+        _magicContainer.backgroundColor = [UIColor grayColor];
         
     }
-    return _container;
+    return _magicContainer;
+    
+}
+
+- (UIView *)amazingContainer {
+    
+    if (!_amazingContainer) {
+        _amazingContainer = [[UIView alloc] init];
+        _amazingContainer.layer.cornerRadius = 8;
+        _amazingContainer.clipsToBounds = YES;
+        _amazingContainer.backgroundColor = [UIColor brownColor];
+    }
+    return _amazingContainer;
+    
+}
+
+- (UIButton *)backBtn {
+    
+    if (!_backBtn) {
+        _backBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        _backBtn.backgroundColor = [UIColor whiteColor];
+        [_backBtn setTitle:@"Back" forState:UIControlStateNormal];
+        [_backBtn addTarget:self
+                     action:@selector(backBtnClicked)
+           forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _backBtn;
+    
+}
+
+- (UIButton *)magicBtn {
+    
+    if (!_magicBtn) {
+        _magicBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        _magicBtn.backgroundColor = [UIColor whiteColor];
+        [_magicBtn setTitle:@"Magic" forState:UIControlStateNormal];
+        [_magicBtn addTarget:self
+                      action:@selector(magicBtnClicked)
+            forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _magicBtn;
+    
+}
+
+- (UIButton *)amazingBtn {
+    
+    if (!_amazingBtn) {
+        _amazingBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        _amazingBtn.backgroundColor = [UIColor whiteColor];
+        [_amazingBtn setTitle:@"Amazing" forState:UIControlStateNormal];
+        [_amazingBtn addTarget:self
+                        action:@selector(amazingBtnClicked)
+              forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _amazingBtn;
     
 }
 
 - (void)magicBtnClicked {
     
     if (self.status == FYContainerStatusTypeSmaller) {
-        [self remakeConstraint:FYContainerStatusTypeBigger];
+        [self magicConstraints:FYContainerStatusTypeBigger];
     } else {
-        [self remakeConstraint:FYContainerStatusTypeSmaller];
+        [self magicConstraints:FYContainerStatusTypeSmaller];
+    }
+}
+
+- (void)amazingBtnClicked {
+    
+    if (self.status == FYContainerStatusTypeSmaller) {
+        [self magicConstraints:FYContainerStatusTypeBigger];
+    } else {
+        [self magicConstraints:FYContainerStatusTypeSmaller];
     }
 }
 
@@ -126,42 +174,120 @@ typedef enum : NSUInteger {
     
 }
 
-- (void)remakeConstraint:(FYContainerStatusType)status {
+- (FYNewBanner *)newBanner {
     
-    @weakify(self);
+    if (!_newBanner) {
+        _newBanner = [[FYNewBanner alloc] initWithFrame:CGRectZero responseBlock:^(NSString *url) {
+            NSLog(@"%s", __FUNCTION__);
+        }];
+    }
+    return _newBanner;
+    
+}
+
+#pragma mark - 约束
+
+- (void)makeConstraints {
+    
+    [_magicContainer setBackgroundColor:[UIColor redColor]];
+    [_magicContainer mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_magicBtn.mas_bottom).offset(30);
+        make.left.equalTo(self.view.mas_left);
+        make.right.equalTo(self.view.mas_right);
+        make.height.mas_equalTo(105);
+    }];
+    [_banner mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.magicContainer);
+        make.center.equalTo(self.magicContainer);
+        make.size.equalTo(self.magicContainer);
+    }];
+    
+    [_backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.view).offset(29);
+        make.centerX.mas_equalTo(self.view.mas_centerX);
+        make.size.mas_equalTo(CGSizeMake(100, 30));
+    }];
+    
+    [_magicBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(_backBtn.mas_bottom).with.offset(5);
+        make.centerX.mas_equalTo(self.view.mas_centerX);
+        make.size.mas_equalTo(CGSizeMake(100, 30));
+    }];
+    
+    [_amazingBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(_banner.mas_bottom).with.offset(30);
+        make.centerX.mas_equalTo(self.view.mas_centerX);
+        make.size.mas_equalTo(CGSizeMake(100, 30));
+    }];
+    
+}
+
+- (void)magicConstraints:(FYContainerStatusType)status {
+    
     self.status = status;
     if (self.status == FYContainerStatusTypeSmaller) {
         
-        [_container setBackgroundColor:[UIColor brownColor]];
-        [_container mas_updateConstraints:^(MASConstraintMaker *make) {
-            @strongify(self);
-            make.top.equalTo(self.view.mas_top).offset(200);
+        [_magicContainer setBackgroundColor:[UIColor brownColor]];
+        [_magicContainer mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(_magicBtn.mas_bottom).offset(30);
             make.left.equalTo(self.view.mas_left).offset(20);
             make.right.equalTo(self.view.mas_right).offset(-20);
-            make.height.mas_equalTo(kFY_SCREEN_WIDTH - 200);
+            make.height.mas_equalTo(105);
         }];
         [_banner mas_updateConstraints:^(MASConstraintMaker *make) {
-            @strongify(self);
-            make.edges.equalTo(self.container);
-            make.center.equalTo(self.container);
-            make.size.equalTo(self.container);
+            make.edges.equalTo(self.magicContainer);
+            make.center.equalTo(self.magicContainer);
+            make.size.equalTo(self.magicContainer);
         }];
         
     } else {
         
-        [_container setBackgroundColor:[UIColor redColor]];
-        [_container mas_updateConstraints:^(MASConstraintMaker *make) {
-            @strongify(self);
-            make.top.equalTo(self.view.mas_top).with.offset(200);
-            make.left.equalTo(self.view.mas_left).with.offset(10);
-            make.right.equalTo(self.view.mas_right).with.offset(-10);
-            make.height.mas_equalTo(kFY_SCREEN_WIDTH - 200);
+        [_magicContainer setBackgroundColor:[UIColor redColor]];
+        [_magicContainer mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(_magicBtn.mas_bottom).offset(30);
+            make.left.equalTo(self.view.mas_left);
+            make.right.equalTo(self.view.mas_right);
+            make.height.mas_equalTo(105);
         }];
         [_banner mas_updateConstraints:^(MASConstraintMaker *make) {
-            @strongify(self);
-            make.edges.equalTo(self.container);
-            make.center.equalTo(self.container);
-            make.size.equalTo(self.container);
+            make.edges.equalTo(self.magicContainer);
+            make.center.equalTo(self.magicContainer);
+            make.size.equalTo(self.magicContainer);
+        }];
+    }
+}
+
+- (void)amazingConstraints:(FYContainerStatusType)status {
+    
+    self.status = status;
+    if (self.status == FYContainerStatusTypeSmaller) {
+        
+        [_amazingContainer setBackgroundColor:[UIColor brownColor]];
+        [_amazingContainer mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(_magicBtn.mas_bottom).offset(30);
+            make.left.equalTo(self.view.mas_left).offset(20);
+            make.right.equalTo(self.view.mas_right).offset(-20);
+            make.height.mas_equalTo(105);
+        }];
+        [_newBanner mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(self.amazingContainer);
+            make.center.equalTo(self.amazingContainer);
+            make.size.equalTo(self.amazingContainer);
+        }];
+        
+    } else {
+        
+        [_amazingContainer setBackgroundColor:[UIColor redColor]];
+        [_amazingContainer mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(_magicBtn.mas_bottom).offset(30);
+            make.left.equalTo(self.view.mas_left);
+            make.right.equalTo(self.view.mas_right);
+            make.height.mas_equalTo(105);
+        }];
+        [_newBanner mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(self.amazingContainer);
+            make.center.equalTo(self.amazingContainer);
+            make.size.equalTo(self.amazingContainer);
         }];
     }
     
@@ -169,7 +295,7 @@ typedef enum : NSUInteger {
 
 - (void)setNeedsUpdateConstraints {
     
-    [self remakeConstraint:212];
+    [self magicConstraints:212];
 }
 
 - (void)dealloc {

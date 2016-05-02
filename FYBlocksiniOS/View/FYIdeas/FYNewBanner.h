@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void (^FYBannerResponseBlock)(NSString *url);
+
 @interface FYNewBanner : UIView
+
+@property (nonatomic, strong) UIImage                       *bannerPlaceHolder;
+@property (nonatomic, strong) NSMutableArray                *imageArray;
+
+- (instancetype)initWithFrame:(CGRect)frame responseBlock:(FYBannerResponseBlock)block;
 
 @end
