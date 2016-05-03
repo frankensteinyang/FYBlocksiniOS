@@ -173,7 +173,7 @@
     
     CGRect rect = CGRectMake(kFY_ITEM_WIDTH * position, 0, kFY_ITEM_WIDTH, kFY_ITEM_HEIGHT);
     FYBannerItem *item = [[FYBannerItem alloc] initWithFrame:rect
-                                                placeHolderImage:_bannerPlaceHolder];
+                                            placeHolderImage:_bannerPlaceHolder];
     
     item.tag = tag;
     [self.scrollView addSubview:item];

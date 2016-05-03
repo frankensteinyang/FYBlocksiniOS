@@ -7,7 +7,6 @@
 //
 
 #import <Masonry/Masonry.h>
-#import <libextobjc/EXTScope.h>
 #import <SDWebImage/SDWebImageManager.h>
 
 #import "FYNewBanner.h"
@@ -19,10 +18,9 @@
 
 @interface FYNewBanner () <UIScrollViewDelegate>
 
-@property (nonatomic, strong) UIScrollView              *scrollView;
-@property (nonatomic, strong) FYPageControl             *pageControl;
-@property (nonatomic, copy  ) FYBannerResponseBlock     responseBlock;
-
+@property (nonatomic, strong) UIScrollView          *scrollView;
+@property (nonatomic, strong) FYPageControl         *pageControl;
+@property (nonatomic, copy  ) FYBannerResponseBlock responseBlock;
 // 用来缓存imageView
 @property (nonatomic, strong) NSMutableDictionary   *imageViewsStore;
 // 用来缓存banner图片
@@ -35,6 +33,7 @@
 @implementation FYNewBanner
 
 - (void)dealloc {
+    
     _scrollView.delegate = nil;
     _scrollView = nil;
     _pageControl = nil;
@@ -43,6 +42,7 @@
     if (_responseBlock) {
         _responseBlock = nil;
     }
+    
 }
 
 - (instancetype)initWithFrame:(CGRect)frame responseBlock:(FYBannerResponseBlock)block {
@@ -59,8 +59,8 @@
         _responseBlock = [block copy];
         
     }
-    
     return self;
+    
 }
 
 #pragma mark - 懒加载
@@ -77,38 +77,34 @@
         _scrollView.delegate = self;
         _scrollView.bounces = NO;
         _scrollView.decelerationRate = UIScrollViewDecelerationRateFast;
-        //        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self
-        //                                                                                     action:@selector(scrollViewTapped:)];
-        //        [_scrollView addGestureRecognizer:tapGesture];
+        
     }
     return _scrollView;
     
 }
 
 - (FYPageControl *)pageControl {
+    
     if (!_pageControl) {
         _pageControl = [[FYPageControl alloc] init];
         _pageControl.hidesForSinglePage = YES;
         _pageControl.currentPage = 0;
         [_pageControl setPageControlStyle:PageControlStyleRect];
     }
-    
     return _pageControl;
+    
 }
 
 #pragma mark - 约束
 
 - (void)makeConstraints {
     
-    //    @weakify(self);
     [self.scrollView mas_updateConstraints:^(MASConstraintMaker *make) {
-        //        @strongify(self);
         make.size.mas_equalTo(self);
         make.center.mas_equalTo(self);
     }];
     
     [_pageControl mas_updateConstraints:^(MASConstraintMaker *make) {
-        //        @strongify(self);
         make.right.equalTo(self.mas_right).offset(-5);
         make.left.equalTo(self.mas_left).offset(5);
         make.bottom.mas_equalTo(self.mas_bottom).offset(-5);
@@ -117,11 +113,12 @@
     
 }
 
-- (void)layoutSubviews
-{
+- (void)layoutSubviews {
+    
     [super layoutSubviews];
     
     self.scrollView.contentSize = CGSizeMake((_imageArray.count + 2) * self.scrollView.frame.size.width, self.scrollView.frame.size.height);
+    
 }
 
 #pragma mark - Setter
@@ -132,8 +129,8 @@
     }
 }
 
-- (void)resetImageViewForPageIndex:(NSInteger)pageIndex
-{
+- (void)resetImageViewForPageIndex:(NSInteger)pageIndex {
+    
     UIImageView *idleImageView = [self idleImageView];
     if (idleImageView) {
         
@@ -147,11 +144,12 @@
         [self.imageViewsStore setObject:idleImageView forKey:@(pageIndex)];
     }
 }
+
 /**
  *  翻页结束
  */
-- (void)didPaginged
-{
+- (void)didPaginged {
+    
     // 检查当前图片左侧是否有imageView
     NSInteger leftIndex = self.currentPagingIndex - 1;
     if (leftIndex >= 0) {
@@ -178,8 +176,8 @@
  *  寻找闲置的imageview
  *
  */
-- (UIImageView *)idleImageView
-{
+- (UIImageView *)idleImageView {
+    
     // 先查找左侧闲置的imageView
     NSInteger idleIndex = self.currentPagingIndex - 2;
     UIImageView *idleImageView = [self.imageViewsStore objectForKey:@(idleIndex)];
@@ -194,8 +192,8 @@
     return idleImageView;
 }
 
-- (void)initBannerItems
-{
+- (void)initBannerItems {
+    
     // 最多创建3个 (左 | 中 | 右) 当图片小于3个时，则创建图片数量个数的imageview
     NSInteger imageViewCount = self.imageArray.count > 3 ? 3 : self.imageArray.count;
     self.imageViewsStore = [[NSMutableDictionary alloc] initWithCapacity:imageViewCount];
@@ -224,24 +222,24 @@
         // 添加到scrollView中
         [self.scrollView addSubview:imageView];
     }
+    
 }
 
-- (void)setupScrollViewConntentSize
-{
+- (void)setupScrollViewConntentSize {
     self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width * self.imageArray.count,
                                              self.scrollView.frame.size.height);
 }
 
-- (void)setupScrollViewPaging
-{
+- (void)setupScrollViewPaging {
+    
     self.pageControl.hidden = NO;
     self.pageControl.numberOfPages = [self.imageArray count];
 }
 
 
 - (void)reloadImage:(UIImage *)image
-          withIndex:(NSInteger)imageIndex
-{
+          withIndex:(NSInteger)imageIndex {
+    
     UIImageView *bannerImageView = [self.imageViewsStore objectForKey:@(imageIndex)];
     if (bannerImageView) {
         bannerImageView.image = image;
@@ -283,12 +281,13 @@
         
         imageIndex ++;
     }
+    
 }
 
 
 #pragma mark - ScrollView 代理
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
-{
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    
     CGFloat contentOffsetX          = self.scrollView.contentOffset.x;
     NSInteger pageIndex             = contentOffsetX / self.scrollView.frame.size.width;
     
